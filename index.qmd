@@ -1,0 +1,6 @@
+
+# Preface {.unnumbered}
+
+This book contains all code and data used in the paper
+*HybridExpress: an R/Bioconductor package for comparative transcriptomic analyses of hybrids and their progenitors*, and it is intended to make all analyses fully reproducible.
+
