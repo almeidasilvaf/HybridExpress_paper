@@ -1,0 +1,627 @@
+---
+execute: 
+  echo: true
+  eval: true
+  warning: false
+---
+
+# Benchmark 1: allopolyploid and diploid cotton species under salt stress
+
+Here, we will use __HybridExpress__ on data from @dong2022parental.
+In this study, authors compared global transcriptomic responses to 
+modest salinity stress in two allotetraploid cotton species
+(*Gossypium hirsutum* and *G. mustelinum*, AD-genome) relative to their 
+model diploid progenitors (A-genome and D-genome).
+
+```{r here}
+#| message: false
+#| eval: true
+
+# Loading required packages
+library(HybridExpress)
+library(SummarizedExperiment)
+library(tidyverse)
+library(here)
+library(patchwork)
+library(ComplexHeatmap)
+
+set.seed(123) # for reproducibility
+```
+
+## Data description and experimental design
+
+First of all, let's load the data set we will use here and get to know it.
+The count matrix and sample metadata are stored in a `SummarizedExperiment`
+object in `data/se_cotton.rda`.
+
+```{r}
+# Load the data
+load(here("data", "se_cotton.rda"))
+
+se_cotton
+
+# Taking a look at the assay
+head(assay(se_cotton))
+
+# Taking a look at the sample metadata
+colData(se_cotton) |> as.data.frame()
+```
+
+Here, we have two hybrid triplets: AD1 (allotetraploid) and its parents 
+A2 and D5 (diploids); and AD4 (allotetraploid) and its parents A2 and D5 
+(diploids). We also have two conditions: salt stress, and control. 
+Given this experimental design, we will perform comparative transcriptomic 
+analyses for the each triplet separately. For each triplet, we will compare 
+the expression of the allotetraploid with its diploid parents for
+control and stress conditions separately. In summary, the
+comparisons will be:
+
+1. A2 <-> AD1 <-> D5, control
+2. A2 <-> AD4 <-> D5, control
+3. A2 <-> AD1 <-> D5, salt stress
+4. A2 <-> AD4 <-> D5, salt stress
+
+That said, let's create subsets of our data set accordingly:
+
+```{r}
+# Get triplets for each allotetraploid species
+se_ad1 <- se_cotton[, se_cotton$species %in% c("A2", "D5", "AD1")]
+se_ad4 <- se_cotton[, se_cotton$species %in% c("A2", "D5", "AD4")]
+```
+
+## Data processing
+
+Here, we will first remove non-expressed genes (sum of counts <10 across
+all samples). Then, we will add midparent expression values to each set, and 
+normalize count data by library size.
+
+```{r}
+# Remove non-expressed genes
+se_ad1 <- se_ad1[rowSums(assay(se_ad1)) >= 10, ]
+se_ad4 <- se_ad4[rowSums(assay(se_ad4)) >= 10, ]
+
+# Add midparent expression
+## AD1
+se_ad1 <- add_midparent_expression(
+    se_ad1,
+    coldata_column = "species",
+    parent1 = "A2",
+    parent2 = "D5"
+)
+
+## AD4
+se_ad4 <- add_midparent_expression(
+    se_ad4,
+    coldata_column = "species",
+    parent1 = "A2",
+    parent2 = "D5"
+)
+
+# Normalize data by library size
+se_ad1 <- add_size_factors(se_ad1)
+se_ad4 <- add_size_factors(se_ad4)
+```
+
+## Exploratory data analyses
+
+Now, we will perform exploratory data analyses to check if samples group
+together as expected. We will first explore sample clustering with PCA plots.
+
+```{r}
+#| fig-height: 5
+#| fig-width: 8
+
+# Plot PCA
+## AD1
+se_ad1$species[is.na(se_ad1$species)] <- "midparent"
+se_ad1$species[is.na(se_ad1$species)] <- "midparent"
+
+se_ad1$condition[is.na(se_ad1$condition)] <- "-"
+se_ad1$condition[is.na(se_ad1$condition)] <- "-"
+
+p_pca1 <- pca_plot(
+    se_ad1, color_by = "species", shape_by = "condition", add_mean = TRUE
+) + labs(
+    title = "PCA of samples - AD1",
+    color = "Species",
+    shape = "Treatment"
+)
+
+## AD4
+se_ad4$species[is.na(se_ad4$species)] <- "midparent"
+se_ad4$species[is.na(se_ad4$species)] <- "midparent"
+
+se_ad4$condition[is.na(se_ad4$condition)] <- "-"
+se_ad4$condition[is.na(se_ad4$condition)] <- "-"
+
+p_pca2 <- pca_plot(
+    se_ad4, color_by = "species", shape_by = "condition", add_mean = TRUE
+) +
+    labs(
+        title = "PCA of samples - AD4",
+        color = "Species",
+        shape = "Treatment"
+    )
+
+# Combining plots
+p_pca_combined <- patchwork::wrap_plots(
+    p_pca1 + 
+        theme(legend.position = "bottom", legend.box = "vertical"), 
+    p_pca2 + 
+        theme(legend.position = "bottom", legend.box = "vertical"),
+    nrow = 1
+)
+
+p_pca_combined
+```
+
+Now, let's visualize a heatmap of sample correlations.
+
+```{r fig.width=7, fig.height=9}
+#| fig-width: 7
+#| fig-height: 9
+
+# Heatmap of sample correlations
+## AD1
+p_hm1 <- plot_samplecor(
+    se_ad1, coldata_cols = c("species", "condition"),
+    show_rownames = FALSE
+)
+p_hm1@column_title <- "AD1"
+
+## AD4
+p_hm2 <- plot_samplecor(
+    se_ad4, coldata_cols = c("species", "condition"),
+    show_rownames = FALSE
+)
+p_hm2@column_title <- "AD4"
+
+# Combine plots - one per row
+patchwork::wrap_plots(
+    ggplotify::as.ggplot(p_hm1), 
+    ggplotify::as.ggplot(p_hm2), 
+    nrow = 2
+)
+```
+
+Both plots show that one sample - D5_CK2 - is an outlier. Let's remove this
+sample.
+
+```{r}
+# Remove sample D5_CK2 and midparent values
+fse_ad1 <- se_ad1[, colnames(se_ad1) != "D5_CK2" & se_ad1$species != "midparent"]
+fse_ad4 <- se_ad4[, colnames(se_ad4) != "D5_CK2" & se_ad4$species != "midparent"]
+```
+
+## Identifying differentially expressed genes between species pairs
+
+Here, we will identify differentially expressed genes (DEGs) between
+pairwise combinations of species in a triplet. For each hybrid, we will do this
+separately for stress and control samples. We will also recompute midparent
+values specifically for control and stress samples.
+
+```{r}
+# Get DEGs
+## AD1
+deg_ad1_control <- add_midparent_expression(
+    fse_ad1[, fse_ad1$condition == "Control"],
+    coldata_column = "species",
+    parent1 = "A2",
+    parent2 = "D5"
+) |>
+    add_size_factors() |>
+    get_deg_list(
+        coldata_column = "species",
+        parent1 = "A2",
+        parent2 = "D5",
+        offspring = "AD1",
+        lfcThreshold = 1
+    )
+
+deg_ad1_stress <- add_midparent_expression(
+    fse_ad1[, fse_ad1$condition == "Salt"],
+    coldata_column = "species",
+    parent1 = "A2",
+    parent2 = "D5"
+) |>
+    add_size_factors() |>
+    get_deg_list(
+        coldata_column = "species",
+        parent1 = "A2",
+        parent2 = "D5",
+        offspring = "AD1",
+        lfcThreshold = 1
+    )
+
+## AD4
+deg_ad4_control <- add_midparent_expression(
+    fse_ad4[, fse_ad4$condition == "Control"],
+    coldata_column = "species",
+    parent1 = "A2",
+    parent2 = "D5"
+) |>
+    add_size_factors() |>
+    get_deg_list(
+        coldata_column = "species",
+        parent1 = "A2",
+        parent2 = "D5",
+        offspring = "AD4",
+        lfcThreshold = 1
+    )
+
+deg_ad4_stress <- add_midparent_expression(
+    fse_ad4[, fse_ad4$condition == "Salt"],
+    coldata_column = "species",
+    parent1 = "A2",
+    parent2 = "D5"
+) |>
+    add_size_factors() |>
+    get_deg_list(
+        coldata_column = "species",
+        parent1 = "A2",
+        parent2 = "D5",
+        offspring = "AD4",
+        lfcThreshold = 1
+    )
+```
+
+Next, we will visualize the frequencies of DEGs with an expression triangle.
+
+```{r}
+#| fig-height: 11
+#| fig-width: 13
+#| fig-dpi: 300
+
+# Plot expression triangle
+## AD1
+p_triangle_ad1_control <- get_deg_counts(deg_ad1_control) |>
+    plot_expression_triangle(
+        box_labels = c("A2", "D5", "AD1", "Midparent")
+    ) +
+    labs(title = "Control") +
+    theme(plot.title = element_text(hjust = 0.5))
+
+p_triangle_ad1_stress <- get_deg_counts(deg_ad1_stress) |>
+    plot_expression_triangle(
+        box_labels = c("A2", "D5", "AD1", "Midparent")
+    ) +
+    labs(title = "Stress") +
+    theme(plot.title = element_text(hjust = 0.5))
+
+
+## AD4
+p_triangle_ad4_control <- get_deg_counts(deg_ad4_control) |>
+    plot_expression_triangle(
+        box_labels = c("A2", "D5", "AD4", "Midparent"),
+        palette = c("dodgerblue3", "firebrick", "darkgoldenrod", "darkgoldenrod3")
+    ) +
+    labs(title = "Control") +
+    theme(plot.title = element_text(hjust = 0.5))
+
+
+p_triangle_ad4_stress <- get_deg_counts(deg_ad4_stress) |>
+    plot_expression_triangle(
+        box_labels = c("A2", "D5", "AD4", "Midparent"),
+        palette = c("dodgerblue3", "firebrick", "darkgoldenrod", "darkgoldenrod3")
+    ) +
+    labs(title = "Stress") +
+    theme(plot.title = element_text(hjust = 0.5))
+
+
+# Combine plots
+p_triangle_all <- wrap_plots(
+    p_triangle_ad1_control,
+    p_triangle_ad1_stress,
+    p_triangle_ad4_control,
+    p_triangle_ad4_stress,
+    nrow = 2
+) +
+    plot_annotation(tag_levels = "A") &
+    theme(plot.tag = element_text(size = 16))
+
+p_triangle_all
+```
+
+The figure shows two interesting patterns:
+
+1. In both hybrids and conditions, the number of differentially expressed
+genes is greater for the hybrids and the D subgenome as compared to the hybrids
+and the A subgenome. However, such difference is greatly reduced under salt
+stress.
+
+2. Overall, salt stress induces an increase in the number of differentially
+expressed genes relative to both progenitor species.
+
+
+Next, to better understand the effect of salt stress on subgenome expression
+bias, we will check if the differentially expressed genes between the hybrids
+and the parents are the same in control and stress conditions.
+
+```{r fig.width=12, fig.height=5}
+#| fig-width: 12
+#| fig-height: 5
+
+# UpSet plot for AD1 
+ad1 <- list(
+    `A, control` = rownames(deg_ad1_control$F1_vs_P1),
+    `D, control` = rownames(deg_ad1_control$F1_vs_P2),
+    `A, stress` = rownames(deg_ad1_stress$F1_vs_P1),
+    `D, stress` = rownames(deg_ad1_stress$F1_vs_P2)
+)
+m_ad1 <- ComplexHeatmap::make_comb_mat(ad1)
+
+p_upset_ad1 <- ComplexHeatmap::UpSet(
+    m_ad1, row_title = "AD1",
+    comb_col = ggsci::pal_jama()(7)[comb_degree(m_ad1)],
+    top_annotation = upset_top_annotation(m_ad1, add_numbers = TRUE),
+    set_order = c("A, control", "A, stress", "D, control", "D, stress")
+)
+
+# UpSet plot for AD4 
+ad4 <- list(
+    `A, control` = rownames(deg_ad4_control$F1_vs_P1),
+    `D, control` = rownames(deg_ad4_control$F1_vs_P2),
+    `A, stress` = rownames(deg_ad4_stress$F1_vs_P1),
+    `D, stress` = rownames(deg_ad4_stress$F1_vs_P2)
+)
+m_ad4 <- ComplexHeatmap::make_comb_mat(ad4)
+
+p_upset_ad4 <- ComplexHeatmap::UpSet(
+    m_ad4, row_title = "AD4",
+    comb_col = ggsci::pal_jama()(7)[comb_degree(m_ad4)],
+    top_annotation = upset_top_annotation(m_ad4, add_numbers = TRUE),
+    set_order = c("A, control", "A, stress", "D, control", "D, stress")
+)
+
+# Combine UpSet plots into a single, side-by-side plot
+p_upset_all <- wrap_plots(
+    ggplotify::as.ggplot(p_upset_ad1), 
+    ggplotify::as.ggplot(p_upset_ad4),
+    nrow = 1
+) +
+    plot_annotation(
+        title = "Shared DEGs across conditions and hybrids"
+    ) &
+    theme(plot.title = element_text(hjust = 0.5))
+
+p_upset_all
+```
+
+Interestingly, a large number of genes are differentially expressed
+between the hybrid and the parental genomes for both species (N = 2203 and
+2703 for AD1 and AD4, respectively). For DEGs relative to the D subgenome,
+most of them are shared between control and stress conditions, while for DEGs
+relative to the A subgenome, most genes are only differentially expressed under
+salt stress.
+
+## Classifying genes into expression groups
+
+To understand the expression patterns of hybrids relative to their progenitors,
+we will classify genes onto expression-based categories and classes
+as in @rapp2009genomic.
+
+```{r}
+# Classify genes in expression partitions (classes and categories)
+partition_ad1_control <- expression_partitioning(deg_ad1_control)
+partition_ad4_control <- expression_partitioning(deg_ad4_control)
+
+partition_ad1_stress <- expression_partitioning(deg_ad1_stress)
+partition_ad4_stress <- expression_partitioning(deg_ad4_stress)
+```
+
+Now, let's visualize results:
+
+```{r}
+#| fig-width: 9
+#| fig-height: 5 
+
+# AD1
+p_pfreq_ad1_c <- plot_partition_frequencies(
+    partition_ad1_control, group_by = "Class", labels = c("A2", "AD1", "D5")
+)
+
+p_pfreq_ad1_s <- plot_partition_frequencies(
+    partition_ad1_stress, group_by = "Class", labels = c("A2", "AD1", "D5")
+)
+
+# AD4
+p_pfreq_ad4_c <- plot_partition_frequencies(
+    partition_ad4_control, group_by = "Class", labels = c("A2", "AD4", "D5")
+)
+
+p_pfreq_ad4_s <- plot_partition_frequencies(
+    partition_ad4_stress, group_by = "Class", labels = c("A2", "AD4", "D5")
+)
+
+# Combine plots
+## Layout: scheme + ((AD1_control + AD1_stress) / (AD4_control + AD4_stress))
+p_freq_combined <- wrap_plots(
+    p_pfreq_ad1_c[[1]],
+    wrap_plots(
+        p_pfreq_ad1_c[[2]] + labs(subtitle = "AD1, control", x = NULL), 
+        p_pfreq_ad1_s[[2]] + labs(subtitle = "AD1, stress", x = NULL),
+        p_pfreq_ad4_c[[2]] + labs(subtitle = "AD4, control", x = NULL), 
+        p_pfreq_ad4_s[[2]] + labs(subtitle = "AD4, stress", x = NULL),
+        nrow = 2, ncol = 2
+    ),
+    ncol = 2,
+    widths = c(1, 2)
+) &
+    theme(plot.margin = unit(c(1, 1, 1, 1), "pt"))
+
+p_freq_combined
+```
+
+The figure shows that most genes display expression-level dominance towards 
+the parent 1 (A2) in control and stress conditions, both for the AD1 and AD2
+allopolyploids. However, for both species, such expression-level dominance
+is reduced under salt stress.
+
+## Overrepresentation analyses
+
+Now, we will perform overrepresentation analyses of GO terms among genes 
+in each expression class in each condition and species.
+
+```{r}
+# Load GO annotation
+load(here("data", "cotton_functions.rda"))
+
+# Perform ORA
+## AD1, control
+genes_ad1_c <- split(partition_ad1_control$Gene, partition_ad1_control$Class)
+ora_ad1_c <- lapply(
+    genes_ad1_c, ora,
+    annotation = bind_rows(cotton_functions), 
+    background = rownames(se_ad1),
+    min_setsize = 1, max_setsize = 1000
+)
+
+## AD1, stress
+genes_ad1_s <- split(partition_ad1_stress$Gene, partition_ad1_stress$Class)
+ora_ad1_s <- lapply(
+    genes_ad1_s, ora,
+    annotation = bind_rows(cotton_functions), 
+    background = rownames(se_ad1),
+    min_setsize = 1, max_setsize = 1000
+)
+
+## AD4, control
+genes_ad4_c <- split(partition_ad4_control$Gene, partition_ad4_control$Class)
+ora_ad4_c <- lapply(
+    genes_ad4_c, ora,
+    annotation = bind_rows(cotton_functions), 
+    background = rownames(se_ad4),
+    min_setsize = 1, max_setsize = 1000
+)
+
+
+## AD4, stress
+genes_ad4_s <- split(partition_ad4_stress$Gene, partition_ad4_stress$Class)
+ora_ad4_s <- lapply(
+    genes_ad4_s, ora,
+    annotation = bind_rows(cotton_functions), 
+    background = rownames(se_ad4),
+    min_setsize = 1, max_setsize = 1000
+)
+
+# Checking results
+bind_rows(
+    bind_rows(ora_ad1_c, .id = "Class") |> mutate(group = "AD1_control"),
+    bind_rows(ora_ad1_s, .id = "Class") |> mutate(group = "AD1_stress"),
+    bind_rows(ora_ad4_c, .id = "Class") |> mutate(group = "AD4_control"),
+    bind_rows(ora_ad4_s, .id = "Class") |> mutate(group = "AD4_stress")
+)
+```
+
+We found no enriched terms among expression-based classes. Let's try
+the same for categories.
+
+```{r}
+# Perform ORA
+## AD1, control
+genes_ad1_c <- split(partition_ad1_control$Gene, partition_ad1_control$Category)
+ora_ad1_c <- lapply(
+    genes_ad1_c, ora,
+    annotation = bind_rows(cotton_functions), 
+    background = rownames(se_ad1),
+    min_setsize = 1, max_setsize = 1000
+)
+
+## AD1, stress
+genes_ad1_s <- split(partition_ad1_stress$Gene, partition_ad1_stress$Category)
+ora_ad1_s <- lapply(
+    genes_ad1_s, ora,
+    annotation = bind_rows(cotton_functions), 
+    background = rownames(se_ad1),
+    min_setsize = 1, max_setsize = 1000
+)
+
+## AD4, control
+genes_ad4_c <- split(partition_ad4_control$Gene, partition_ad4_control$Category)
+ora_ad4_c <- lapply(
+    genes_ad4_c, ora,
+    annotation = bind_rows(cotton_functions), 
+    background = rownames(se_ad4),
+    min_setsize = 1, max_setsize = 1000
+)
+
+
+## AD4, stress
+genes_ad4_s <- split(partition_ad4_stress$Gene, partition_ad4_stress$Category)
+ora_ad4_s <- lapply(
+    genes_ad4_s, ora,
+    annotation = bind_rows(cotton_functions), 
+    background = rownames(se_ad4),
+    min_setsize = 1, max_setsize = 1000
+)
+
+# Checking results
+bind_rows(
+    bind_rows(ora_ad1_c, .id = "Category") |> mutate(group = "AD1_control"),
+    bind_rows(ora_ad1_s, .id = "Category") |> mutate(group = "AD1_stress"),
+    bind_rows(ora_ad4_c, .id = "Category") |> mutate(group = "AD4_control"),
+    bind_rows(ora_ad4_s, .id = "Category") |> mutate(group = "AD4_stress")
+)
+```
+
+Once again, we did not find any enriched terms. This could be due to biological
+factors (e.g., genes that display expression-level dominance towards one
+of the parents do not necessarily belong to the same pathway or functional
+group), or technical (e.g., a low quality functional annotation for
+*G. raimondii*, especially considering that much of the high-quality
+functional annotation data come from experimental validation).
+
+## Saving important objects {.unnumbered}
+
+Lastly, we will save important objects to files, so that they can be reused 
+later.
+
+```{r}
+#| eval: false
+
+# Plots
+save(
+    p_freq_combined, compress = "xz",
+    file = here("products", "plots", "p_freq_combined.rda")
+)
+
+save(
+    p_upset_all, compress = "xz",
+    file = here("products", "plots", "p_upset_all.rda")
+)
+
+save(
+    p_pca_combined, compress = "xz",
+    file = here("products", "plots", "p_pca_combined.rda")
+)
+
+save(
+    p_triangle_all, compress = "xz",
+    file = here("products", "plots", "p_triangle_all.rda")
+)
+
+partition_tables <- list(
+    AD1_control = partition_ad1_control,
+    AD1_stress = partition_ad1_stress,
+    AD4_control = partition_ad4_control,
+    AD4_stress = partition_ad4_stress
+)
+
+# Objects
+save(
+    partition_tables, compress = "xz",
+    file = here("products", "result_files", "partition_tables.rda")
+)
+```
+
+## Session info {.unnumbered}
+
+This document was created under the following conditions:
+
+```{r sessioninfo}
+#| eval: true
+#| echo: false
+sessioninfo::session_info()
+```
+
+## References {.unnumbered}

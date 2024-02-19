@@ -1,0 +1,410 @@
+---
+execute: 
+  echo: true
+  eval: true
+  warning: false
+---
+
+# Benchmark 2: transcriptomic analyses of heterosis in rice root traits
+
+Here, we will use __HybridExpress__ on data from @zhai2013transcriptome.
+In this study, authors sequenced the transcriptomes of the super-hybrid
+rice variety Xieyou 9308 and its parents at tillering and heading
+stages to understand the molecular basis of heterosis (i.e., superior
+performance of hybrids compared to parents) in root traits.
+
+
+```{r here}
+#| message: false
+#| eval: true
+
+library(here)
+library(HybridExpress)
+library(SummarizedExperiment)
+library(ComplexHeatmap)
+library(tidyverse)
+library(patchwork)
+
+set.seed(123) # for reproducibility
+```
+
+## Data description and experimental design
+
+We will start by loading the data set, which is stored in 
+a `SummarizedExperiment` object with a count matrix and sample metadata.
+
+```{r}
+# Load the data
+load(here("data", "se_rice.rda"))
+
+se_rice
+
+# Taking a look at the assay
+head(assay(se_rice))
+
+# Taking a look at the sample metadata
+colData(se_rice) |> as.data.frame()
+```
+
+As we can see in the sample metadata, for each stage (tillering and heading),
+two replicates were obtained for each generation (parents and hybrid).
+Line Xieyou 9308 represents the hybrid, while lines R9308 and Xieqingzao B
+represent the parents 1 and 2, respectively. Given this experimental design,
+we will perform comparative analyses separately for each stage. Thus, our
+triplets will be:
+
+1. R9308 <-> Xieyou 9308 <-> Xieqingzao B, heading stage
+2. R9308 <-> Xieyou 9308 <-> Xieqingzao B, tillering
+
+Let's subset the data accordingly:
+
+```{r}
+# Get triplets for each stage
+se_h <- se_rice[, se_rice$Stage == "Heading"]
+se_t <- se_rice[, se_rice$Stage == "Tillering"]
+```
+
+## Data processing
+
+Here, we will first remove non-expressed genes (sum of counts <10 across
+all samples). Then, we will add midparent expression values to each set, and 
+normalize count data by library size.
+
+```{r}
+# Remove non-expressed genes
+se_h <- se_h[rowSums(assay(se_h)) >= 10, ]
+se_t <- se_t[rowSums(assay(se_t)) >= 10, ]
+
+# Add midparent expression
+se_h <- add_midparent_expression(se_h)
+se_t <- add_midparent_expression(se_t)
+
+# Normalize data by library size
+se_h <- add_size_factors(se_h)
+se_t <- add_size_factors(se_t)
+```
+
+## Exploratory data analyses
+
+Now, we will perform exploratory data analyses to check if samples group
+together as expected. We will first explore sample clustering with PCA plots.
+
+```{r}
+#| fig-height: 5
+#| fig-width: 8
+#| message: false
+
+# Plot PCA for each stage separately
+p_pca_h <- pca_plot(se_h, color_by = "Generation", add_mean = TRUE) + 
+    labs(title = "PCA of samples - Heading stage")
+
+p_pca_t <- pca_plot(se_t, color_by = "Generation", add_mean = TRUE) + 
+    labs(title = "PCA of samples - Tillering stage")
+
+# Combine plots
+p_pca_combined <- patchwork::wrap_plots(
+    p_pca_h + theme(legend.position = "bottom", legend.box = "vertical"), 
+    p_pca_t + theme(legend.position = "bottom", legend.box = "vertical"),
+    nrow = 1
+) +
+    plot_layout(guides = "collect") &
+    theme(legend.position = "bottom")
+
+p_pca_combined
+```
+
+Now, let's visualize a heatmap of sample correlations.
+
+```{r fig.width=7, fig.height=9}
+#| fig-width: 7
+#| fig-height: 9
+#| message: false
+
+# Heatmap of sample correlations
+p_hmh <- plot_samplecor(se_h, coldata_cols = "Generation", show_rownames = FALSE)
+p_hmh@column_title <- "Heading"
+
+p_hmt <- plot_samplecor(se_t, coldata_cols = "Generation", show_rownames = FALSE)
+p_hmt@column_title <- "Tillering"
+
+# Combine plots - one per row
+p_hm_combined <- patchwork::wrap_plots(
+    ggplotify::as.ggplot(p_hmh), 
+    ggplotify::as.ggplot(p_hmt), 
+    nrow = 2
+)
+
+p_hm_combined
+```
+
+In the heading stage, samples group very well by line,
+as demonstrated by both the PCA plot and the heatmap of sample correlations. 
+In the tillering stage, though, there is a lot of within-group variation
+for the hybrid samples, which is an issue that could probably be mitigated
+by including more replicates. This is something we need to keep in mind
+when interpreting results in the following sections.
+
+## Identifying differentially expressed genes in triplets
+
+Here, we will identify differentially expressed genes (DEGs) between
+pairwise combinations of lines in a triplet in the heading and tillering
+stages. 
+
+```{r}
+# Get DEGs
+deg_h <- get_deg_list(se_h, lfcThreshold = 1)
+deg_t <- get_deg_list(se_t, lfcThreshold = 1)
+```
+
+Next, we will visualize the frequencies of DEGs with an expression triangle.
+
+```{r}
+#| fig-height: 5
+#| fig-width: 15
+#| fig-dpi: 300
+
+# Plot expression triangle
+p_triangle_h <- get_deg_counts(deg_h) |>
+    plot_expression_triangle(
+        box_labels = c("R9308", "Xieqingzao B", "Xieyou 9308", "Midparent")
+    ) +
+    labs(title = "Heading") +
+    theme(plot.title = element_text(hjust = 0.5))
+
+p_triangle_t <- get_deg_counts(deg_t) |>
+    plot_expression_triangle(
+        box_labels = c("R9308", "Xieqingzao B", "Xieyou 9308", "Midparent")
+    ) +
+    labs(title = "Tillering") +
+    theme(plot.title = element_text(hjust = 0.5))
+
+# Combine plots
+p_triangle_all <- wrap_plots(
+    p_triangle_h,
+    p_triangle_t,
+    nrow = 1
+) +
+    plot_annotation(tag_levels = "A") &
+    theme(plot.tag = element_text(size = 16))
+
+p_triangle_all
+```
+
+The triangle plot shows a clear imbalance in the number of DEGs in the hybrid
+relative both parents, with much more DEGs relative to the Xieqingzao B line
+in the heading stage, and much more DEGs relative to the R9308 line in the
+tillering stage. This results suggest a developmental stage-mediated shift in
+expression-level dominance, with a bias towards parent R9308 in the heading
+stage, and a bias towards parent Xieqingzao B in the tillering stage.
+However, considering the large within-group variance
+for hybrid samples in the tillering stage, it is not clear whether such shift
+bias is due to true biological differences or an artifact resulting from 
+such large variances.
+
+
+Next, to better understand the differences and similarities between stages, 
+we will explore the overlap of DEGs between stages.
+
+```{r}
+#| fig-width: 7
+#| fig-height: 3
+
+# Create a list of DEGs for each contrast and create a combination matrix
+deg_sets <- list(
+    `R9308, heading` = rownames(deg_h$F1_vs_P1),
+    `Xieqingzao B, heading` = rownames(deg_h$F1_vs_P2),
+    `R9308, tillering` = rownames(deg_t$F1_vs_P1),
+    `Xieqingzao B, tillering` = rownames(deg_t$F1_vs_P2)
+)
+m <- ComplexHeatmap::make_comb_mat(deg_sets)
+
+# Plot UpSet
+p_upset <- ComplexHeatmap::UpSet(
+    m,
+    comb_col = ggsci::pal_jama()(7)[comb_degree(m)],
+    top_annotation = upset_top_annotation(m, add_numbers = TRUE),
+    set_order = names(deg_sets)
+)
+
+p_upset
+```
+
+The figure shows that, overall, most of the DEGs between the hybrid and parents
+are parent- and stage-specific (e.g., only differentially expressed
+relative to R9308 in the heading stage). However, we also observed a large 
+overlap in DEGs relative to both parents in each stage (N = 286 and 280 for the
+heading and tillering stages, respectively), and a similar but smaller overlap
+exists for DEGs relative to the same parent in different stages (N = 186 and
+217 for lines R9308 and Xieqingziao B, respectively).
+
+
+## Classifying genes into expression groups
+
+To understand the expression patterns of hybrids relative to their progenitors,
+we will classify genes onto expression-based categories and classes
+as in @rapp2009genomic.
+
+```{r}
+# Classify genes in expression partitions (classes and categories)
+partition_h <- expression_partitioning(deg_h)
+partition_t <- expression_partitioning(deg_t)
+```
+
+Now, let's visualize results:
+
+```{r}
+#| fig-width: 10
+#| fig-height: 5 
+
+# Get frequency of genes per class
+p_pfreq_h <- plot_partition_frequencies(partition_h, group_by = "Class")
+p_pfreq_t <- plot_partition_frequencies(partition_t, group_by = "Class")
+
+# Combine plots
+p_freq_combined <- wrap_plots(
+    p_pfreq_h[[1]],
+    p_pfreq_h[[2]] + labs(subtitle = "Heading", x = NULL), 
+    p_pfreq_t[[2]] + labs(subtitle = "Tillering", x = NULL), 
+    nrow = 1, 
+    widths = c(1, 2, 2)
+)
+
+p_freq_combined
+```
+
+The figure shows that most genes (67.51%) display expression-level dominance 
+(ELD) towards parent 1 (R9308 line) in the heading stage, which is in line
+with what we observed in the expression triangle plot. 
+However, in the tillering stage, most genes (41.24%) display ELD towards 
+parent 2 (Xieqingzao B), but large fractions of the genes also display
+ELD towards parent 1 (25.78%) and transgressive down-regulation (26.04%),
+again suggesting a dramatic shift in expression patterns in temporal scale.
+
+## Overrepresentation analyses
+
+Now, we will perform overrepresentation analyses of GO terms among genes 
+in each expression class in each stage.
+
+```{r}
+# Load GO annotation
+load(here("data", "rice_functions.rda"))
+
+# Perform ORA
+## Heading
+genes_h <- split(partition_h$Gene, partition_h$Class)
+ora_h <- lapply(
+    genes_h, ora,
+    annotation = bind_rows(rice_functions), 
+    background = rownames(se_h),
+    min_setsize = 1, max_setsize = 1000
+)
+
+## Tillering
+genes_t <- split(partition_t$Gene, partition_t$Class)
+ora_t <- lapply(
+    genes_t, ora,
+    annotation = bind_rows(rice_functions), 
+    background = rownames(se_t),
+    min_setsize = 1, max_setsize = 1000
+)
+
+# Checking results
+bind_rows(
+    bind_rows(ora_h, .id = "Class") |> mutate(group = "Heading"),
+    bind_rows(ora_t, .id = "Class") |> mutate(group = "Tillering")
+)
+```
+
+We found no enriched terms among expression-based classes. Let's try
+the same for categories.
+
+```{r}
+# Perform ORA
+## Heading
+genes_h <- split(partition_h$Gene, partition_h$Category)
+ora_h <- lapply(
+    genes_h, ora,
+    annotation = bind_rows(rice_functions), 
+    background = rownames(se_h),
+    min_setsize = 1, max_setsize = 1000
+)
+
+## Tillering
+genes_t <- split(partition_t$Gene, partition_t$Category)
+ora_t <- lapply(
+    genes_t, ora,
+    annotation = bind_rows(rice_functions), 
+    background = rownames(se_t),
+    min_setsize = 1, max_setsize = 1000
+)
+
+# Checking results
+bind_rows(
+    bind_rows(ora_h, .id = "Category") |> mutate(group = "Heading"),
+    bind_rows(ora_t, .id = "Category") |> mutate(group = "Tillering")
+)
+```
+
+Once again, we did not find any enriched terms. This could be due to biological
+factors (e.g., genes that display expression-level dominance towards one
+of the parents do not necessarily belong to the same pathway or functional
+group), or technical (e.g., a low quality functional annotation for
+rice).
+
+## Saving important objects {.unnumbered}
+
+Lastly, we will save important objects to files, so that they can be reused 
+later.
+
+```{r}
+#| eval: false
+
+# Plots
+p_freq_combined_b2 <- p_freq_combined
+save(
+    p_freq_combined_b2, compress = "xz",
+    file = here("products", "plots", "p_freq_combined_b2.rda")
+)
+
+p_upset_b2 <- p_upset
+save(
+    p_upset_b2, compress = "xz",
+    file = here("products", "plots", "p_upset_b2.rda")
+)
+
+p_pca_b2 <- p_pca_combined
+save(
+    p_pca_b2, compress = "xz",
+    file = here("products", "plots", "p_pca_b2.rda")
+)
+
+p_triangle_b2 <- p_triangle_all
+save(
+    p_triangle_b2, compress = "xz",
+    file = here("products", "plots", "p_triangle_b2.rda")
+)
+
+partition_tables_b2 <- list(
+    Heading = partition_h,
+    Tillering = partition_t
+)
+
+# Objects
+save(
+    partition_tables_b2, compress = "xz",
+    file = here("products", "result_files", "partition_tables_b2.rda")
+)
+```
+
+
+## Session info {.unnumbered}
+
+This document was created under the following conditions:
+
+```{r sessioninfo}
+#| eval: true
+#| echo: false
+sessioninfo::session_info()
+```
+
+## References {.unnumbered}

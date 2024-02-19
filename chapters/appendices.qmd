@@ -1,0 +1,244 @@
+---
+execute: 
+  echo: true
+  eval: false
+  warning: false
+---
+
+# Appendix: Data acquisition {.unnumbered}
+
+Here, you can find the code used to obtain the benchmark data.
+
+## se_cotton.rda
+
+This data set was obtained from [@dong2022parental], and it comprises 
+RNA-seq data on cotton (*Gossypium*) species of
+different ploidy levels (i.e., allopolyploids and their diploid progenitors)
+under salt stress. The `SummarizedExperiment` object was created with the
+code below:
+
+```{r}
+library(SummarizedExperiment)
+library(tidyverse)
+
+# Get count matrix
+counts <- read.table(
+    file.path(
+        "https://raw.githubusercontent.com/Wendellab",
+        "SaltStressTranscriptome/master/salt.counts"
+    ),
+    header = TRUE, sep = "\t", row.names = 1
+)[, -c(1:5)]
+names(counts) <- gsub("sort.bam", "sort.T.bam", names(counts))
+names(counts) <- gsub(".sort|.bam|_5.22|_5.23|6.11", "", names(counts))
+
+# Get subset of data for each species
+A2count <- counts[, grep("A2", names(counts))]
+A2count <- cbind(
+    A2count[, 1:5] + A2count[, 6:10], # Control 1
+    A2count[, grep("CK2", names(A2count))], # Control 2
+    A2count[, 16:20] + A2count[, 21:25], # Control 3
+    A2count[, grep("Salt1", names(A2count))], # Salt 1
+    A2count[, 31:35] + A2count[, 36:40], # Salt 2
+    A2count[, 41:45] + A2count[, 46:50] # Salt 3
+)
+
+# Combine count matrices
+c_counts <- cbind(A2count, D5count, TM1count, AD4count)
+
+# Get total counts
+diploid_total <- c_counts[, grep("A2.*T$|D5.*T$", names(c_counts))]
+TM1_total <- c_counts[, grep("TM1.*A$|TM1.*D$", names(c_counts))]
+TM1_total <- TM1_total[, seq(1, 11, by = 2)] + TM1_total[, seq(2, 12, by = 2)]
+AD4_total <- c_counts[, grep("AD4.*A$|AD4.*D$", names(c_counts))]
+AD4_total <- AD4_total[, seq(1, 11, by = 2)] + AD4_total[, seq(2, 12, by = 2)]
+counts_total <- cbind(diploid_total, TM1_total, AD4_total)
+
+# Polish column names
+names(counts_total) <- gsub("\\.T|\\.A|_\\.T|_\\.A", "", names(counts_total))
+names(counts_total) <- gsub("TM1", "AD1", names(counts_total))
+
+# Create colData
+coldata <- data.frame(
+    row.names = names(counts_total),
+    species = rep(c("A2", "D5", "AD1", "AD4"), each = 6),
+    condition = rep(rep(c("Control", "Salt"), each = 3), 4),
+    rep = rep(1:3, 8)
+) |>
+    mutate(
+        sample = paste(species, condition, sep = "_"),
+        species_name = rep(
+            c("Garboreum", "Graimondii", "Ghirsutum_TM1", "Gmustelinum"), 
+            each = 6
+        ),
+        ploidy = rep(c("di", "allo"), each = 12)
+    ) |>
+    select(species_name, species, ploidy, condition, sample, rep)
+
+
+# Creating the SummarizedExperiment object
+se_cotton <- SummarizedExperiment(
+    assays = list(counts = as.matrix(counts_total)),
+    colData = coldata
+)
+
+# Save object to file
+save(
+    se_cotton, compress = "xz",
+    file = here::here("data", "se_cotton.rda")
+)
+```
+
+## cotton_functions.rda
+
+This object contains a list of data frames with GO, InterPro, and MapMan
+annotations for genes in the *G. raimondii* genome. Data were obtained
+from PLAZA Dicots 5.0 [@van2022plaza].
+
+```{r}
+# Get data frames
+go_df <- readr::read_tsv(
+    "https://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_05/GO/go.gra.csv.gz",
+    skip = 8
+) |>
+    dplyr::select(gene = `#gene_id`, description)
+
+interpro_df <- readr::read_tsv(
+    "https://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_05/InterPro/interpro.gra.csv.gz",
+    skip = 8
+) |>
+    dplyr::select(gene = `#gene_id`, description)
+
+mapman_df <- readr::read_tsv(
+    "https://ftp.psb.ugent.be/pub/plaza/plaza_public_dicots_05/MapMan/mapman.gra.csv.gz",
+    skip = 8
+) |>
+    dplyr::select(gene = gene_id, description = desc)
+
+# Create list
+cotton_functions <- list(
+    GO = go_df,
+    InterPro = interpro_df,
+    MapMan = mapman_df
+)
+
+# Save object to .rda file
+save(
+    cotton_functions, compress = "xz", 
+    file = here("data", "cotton_functions.rda")
+)
+```
+
+## se_rice.rda
+
+This file contains a `SummarizedExperiment` object with data from
+@zhai2013transcriptome, obtained from GEO under accession number GSE41797.
+
+```{r}
+# Read data set from GEO
+rice <- readr::read_tsv(
+    "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE41nnn/GSE41797/suppl/GSE41797%5Frice%5Fall%5Fresults.txt.gz"
+)
+
+# Get count matrix
+rice_exp <- rice |>
+    dplyr::select(
+        Gene_id, R1, R2, R3, R4, X1, X2, X3, X4, F1, F2, F3, F4
+    ) |>
+    tibble::column_to_rownames("Gene_id") |>
+    as.matrix()
+
+# Get sample metadata
+rice_coldata <- data.frame(
+    row.names = colnames(rice_exp),
+    Line = c(
+        rep("R9308", 4), rep("Xieqingzao B", 4), rep("Xieyou 9308", 4)
+    ),
+    Stage = rep(c("Tillering", "Tillering", "Heading", "Heading"), 3),
+    Generation = c(
+        rep("P1", 4), rep("P2", 4), rep("F1", 4)
+    )
+)
+
+# Create SummarizedExperiment object
+se_rice <- SummarizedExperiment::SummarizedExperiment(
+    assays = list(counts = rice_exp),
+    colData = rice_coldata
+)
+
+# Save object to file
+save(
+    se_rice, compress = "xz",
+    file = here::here("data", "se_rice.rda")
+)
+```
+
+## rice_functions.rda
+
+This object contains a list of 2-column data frames with functional annotation
+for rice (*Oryza sativa* ssp. japonica). List names are `GO`, `InterPro`,
+and `MapMan`, and each table has columns named `gene` (gene id as in the
+count matrix in `se_rice`), and `description` (term description).
+
+```{r}
+# Get a table of tx-to-gene mapping
+tx2gene <- readr::read_tsv(
+    "https://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_05/IdConversion/id_conversion.osa.csv.gz",
+    skip = 8, show_col_types = FALSE
+) |>
+    dplyr::filter(id_type == "tid") |>
+    dplyr::select(tx = id, gene = `#gene_id`)
+
+# Get functional annotation
+## GO
+go_df <- readr::read_tsv(
+    "https://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_05/GO/go.osa.csv.gz",
+    skip = 8, show_col_types = FALSE
+) |>
+    dplyr::select(gene = `#gene_id`, description) |>
+    inner_join(tx2gene) |>
+    dplyr::select(gene = tx, description)
+
+## InterPro
+interpro_df <- readr::read_tsv(
+    "https://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_05/InterPro/interpro.osa.csv.gz",
+    skip = 8, show_col_types = FALSE
+) |>
+    dplyr::select(gene = `#gene_id`, description) |>
+    inner_join(tx2gene) |>
+    dplyr::select(gene = tx, description)
+
+## MapMan
+mapman_df <- readr::read_tsv(
+    "https://ftp.psb.ugent.be/pub/plaza/plaza_public_monocots_05/MapMan/mapman.osa.csv.gz",
+    skip = 8, show_col_types = FALSE
+) |>
+    dplyr::select(gene = gene_id, description = desc) |>
+    inner_join(tx2gene) |>
+    dplyr::select(gene = tx, description)
+
+# Create list
+rice_functions <- list(
+    GO = go_df,
+    InterPro = interpro_df,
+    MapMan = mapman_df
+)
+
+# Save object to file
+save(
+    rice_functions, compress = "xz",
+    file = here::here("data", "rice_functions.rda")
+)
+```
+
+## Session info {.unnumbered}
+
+This document was created under the following conditions:
+
+```{r sessioninfo}
+#| eval: true
+#| echo: false
+sessioninfo::session_info()
+```
+
+## References {.unnumbered}
