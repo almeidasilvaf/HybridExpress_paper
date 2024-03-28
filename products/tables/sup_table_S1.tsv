@@ -1,0 +1,865 @@
+class	group	term	genes	all	padj
+UP	AD1_control	Bet v I/Major latex protein	10	44	0.016180189860213055
+UP	AD1_control	endonuclease activity	23	170	0.002076255503097346
+UP	AD1_control	endonuclease activity, active with either ribo- or deoxyribonucleic acids and producing 5'-phosphomonoesters	18	112	0.002076255503097346
+UP	AD1_control	endoribonuclease activity	22	136	2.668967513705504e-4
+UP	AD1_control	endoribonuclease activity, producing 5'-phosphomonoesters	18	109	0.00199682657369577
+UP	AD1_control	Glycoside hydrolase family 18, catalytic domain	7	21	0.018127259583802853
+UP	AD1_control	hAT-like transposase, RNase-H fold	8	31	0.030236506431558053
+UP	AD1_control	HAT, C-terminal dimerisation domain	9	41	0.037546602871450764
+UP	AD1_control	L10-interacting MYB domain-containing protein	17	60	2.2919802235058974e-6
+UP	AD1_control	Myb/SANT-like domain	19	72	1.6140438613313825e-6
+UP	AD1_control	nuclease activity	30	271	0.002816709536605631
+UP	AD1_control	ribonuclease activity	27	190	2.0391127387394106e-4
+UP	AD1_control	Ribonuclease H domain	14	75	0.0041088122523419285
+UP	AD1_control	Ribonuclease H-like domain, plant type	10	49	0.030236506431558053
+UP	AD1_control	Ribonuclease H-like superfamily	20	161	0.018127259583802853
+UP	AD1_control	RNA-DNA hybrid ribonuclease activity	16	80	6.632268809396116e-4
+UP	AD1_control	SNase-like, OB-fold superfamily	5	9	0.018127259583802853
+UP	AD1_control	Uncharacterized protein At4g02000-like	8	30	0.026207552484827944
+UP	AD1_control	Zinc knuckle CX2CX4HX4C	7	15	0.002076255503097346
+DOWN	AD1_control	active transmembrane transporter activity	33	548	0.015412383024471529
+DOWN	AD1_control	ADP binding	26	359	0.004856115100363768
+DOWN	AD1_control	aerobic respiration	13	110	0.004133397323818855
+DOWN	AD1_control	Apoptotic protease-activating factors, helical domain	22	244	8.269897778319834e-4
+DOWN	AD1_control	ATP biosynthetic process	19	85	1.2047073737172242e-8
+DOWN	AD1_control	ATP metabolic process	26	203	3.297924506904628e-7
+DOWN	AD1_control	ATP synthesis coupled proton transport	19	85	1.2047073737172242e-8
+DOWN	AD1_control	ATPase, F1/V1/A1 complex, alpha/beta subunit, N-terminal domain superfamily	4	10	0.021510301684212873
+DOWN	AD1_control	carbohydrate derivative biosynthetic process	34	496	0.001188433618573949
+DOWN	AD1_control	cation channel activity	17	119	3.046152385740836e-5
+DOWN	AD1_control	cation transmembrane transport	25	324	0.0026302961688104446
+DOWN	AD1_control	cation transmembrane transporter activity	38	531	1.556515163815098e-4
+DOWN	AD1_control	cation transport	38	527	1.3399049243723775e-4
+DOWN	AD1_control	cellular respiration	17	155	7.950397718607761e-4
+DOWN	AD1_control	channel activity	24	266	3.482872261025687e-4
+DOWN	AD1_control	chlorophyll binding	9	30	4.453802283395338e-5
+DOWN	AD1_control	chloroplast thylakoid	34	531	0.004182168473089454
+DOWN	AD1_control	chloroplast thylakoid membrane	28	421	0.009881632555597514
+DOWN	AD1_control	Cytochrome b/b6, C-terminal	3	4	0.015971891216675946
+DOWN	AD1_control	Disease resistance protein, plants	19	251	0.027344481961082384
+DOWN	AD1_control	DNA-directed RNA polymerases I and III subunit AC19	3	5	0.03756690193099298
+DOWN	AD1_control	electron transfer activity	27	172	5.1715581109535535e-9
+DOWN	AD1_control	electron transport chain	27	199	5.657715224830977e-8
+DOWN	AD1_control	electron transporter, transferring electrons within the cyclic electron transport pathway of photosynthesis activity	8	24	8.477557812085002e-5
+DOWN	AD1_control	energy derivation by oxidation of organic compounds	19	186	6.381960385045041e-4
+DOWN	AD1_control	generation of precursor metabolites and energy	49	523	5.1715581109535535e-9
+DOWN	AD1_control	inorganic cation transmembrane transport	25	320	0.0022394514087366066
+DOWN	AD1_control	inorganic cation transmembrane transporter activity	37	497	9.230214333554265e-5
+DOWN	AD1_control	inorganic ion transmembrane transport	28	345	3.835499629310774e-4
+DOWN	AD1_control	ion channel activity	22	212	1.0587443016878821e-4
+DOWN	AD1_control	ion transmembrane transport	33	451	4.506864852406692e-4
+DOWN	AD1_control	large ribosomal subunit	20	244	0.006799324913618613
+DOWN	AD1_control	membrane protein complex	58	657	2.0586975273424667e-9
+DOWN	AD1_control	mitochondrial ATP synthesis coupled proton transport	4	4	2.045065701907063e-4
+DOWN	AD1_control	mitochondrial large ribosomal subunit	5	12	0.0029035533233114502
+DOWN	AD1_control	mitochondrial matrix	9	51	0.003086467132212156
+DOWN	AD1_control	mitochondrial protein-containing complex	23	210	2.8504025338349085e-5
+DOWN	AD1_control	mitochondrial ribosome	8	17	5.256825141231306e-6
+DOWN	AD1_control	mitochondrial small ribosomal subunit	4	5	8.269897778319834e-4
+DOWN	AD1_control	NAD(P)H dehydrogenase (quinone) activity	10	45	1.6321676003588258e-4
+DOWN	AD1_control	NADH dehydrogenase (quinone) activity	10	35	1.9403374852248746e-5
+DOWN	AD1_control	NADH dehydrogenase activity	11	50	5.759900150886801e-5
+DOWN	AD1_control	NB-ARC	25	286	3.711255075820912e-4
+DOWN	AD1_control	nucleobase-containing small molecule metabolic process	30	448	0.005245976584160624
+DOWN	AD1_control	nucleoside phosphate biosynthetic process	22	225	2.5449126067136966e-4
+DOWN	AD1_control	nucleoside phosphate metabolic process	26	342	0.002339295708269851
+DOWN	AD1_control	nucleoside triphosphate biosynthetic process	19	102	1.4184042175566363e-7
+DOWN	AD1_control	nucleoside triphosphate metabolic process	19	108	3.297924506904628e-7
+DOWN	AD1_control	nucleotide biosynthetic process	22	223	2.2246210229728882e-4
+DOWN	AD1_control	nucleotide metabolic process	26	334	0.0016223878525672428
+DOWN	AD1_control	organellar large ribosomal subunit	8	35	0.0013764394962373328
+DOWN	AD1_control	organellar ribosome	16	62	3.559329180667266e-8
+DOWN	AD1_control	organellar small ribosomal subunit	13	35	2.1021933808097476e-8
+DOWN	AD1_control	organophosphate biosynthetic process	29	420	0.0041976539604538085
+DOWN	AD1_control	oxidative phosphorylation	9	51	0.003086467132212156
+DOWN	AD1_control	oxidoreductase activity, acting on NAD(P)H	14	119	0.002285931884580087
+DOWN	AD1_control	oxidoreductase activity, acting on NAD(P)H, quinone or similar compound as acceptor	11	53	1.0220638971157634e-4
+DOWN	AD1_control	oxidoreduction-driven active transmembrane transporter activity	13	47	5.0598175866606e-7
+DOWN	AD1_control	photosynthesis	41	365	2.0586975273424667e-9
+DOWN	AD1_control	photosynthesis, light reaction	28	227	1.804226571204881e-7
+DOWN	AD1_control	Photosynthesis.photophosphorylation.ATP synthase complex.membrane CF0 subcomplex.subunit b	4	6	0.0022418962524248924
+DOWN	AD1_control	photosynthetic electron transport chain	19	124	2.4538968316636554e-6
+DOWN	AD1_control	photosynthetic electron transport in photosystem II	6	24	0.009079246517979873
+DOWN	AD1_control	photosynthetic membrane	38	500	4.2937155111885195e-5
+DOWN	AD1_control	Photosynthetic reaction centre, L/M	5	14	0.006086735463949876
+DOWN	AD1_control	photosystem	18	115	3.8581212614060425e-6
+DOWN	AD1_control	Photosystem antenna protein-like	6	15	6.03930557594982e-4
+DOWN	AD1_control	Photosystem antenna protein-like superfamily	6	15	6.03930557594982e-4
+DOWN	AD1_control	Photosystem I PsaA	4	8	0.008004573071169049
+DOWN	AD1_control	Photosystem II protein D1/D2 superfamily	5	14	0.006086735463949876
+DOWN	AD1_control	plastid ribosome	12	54	1.9403374852248746e-5
+DOWN	AD1_control	plastid small ribosomal subunit	9	30	4.453802283395338e-5
+DOWN	AD1_control	plastid thylakoid	34	536	0.004886079675000191
+DOWN	AD1_control	plastid thylakoid membrane	28	429	0.013513846300168277
+DOWN	AD1_control	primary active transmembrane transporter activity	23	293	0.004133397323818855
+DOWN	AD1_control	proton channel activity	13	40	8.053395895454621e-8
+DOWN	AD1_control	proton transmembrane transport	22	170	3.590885062353824e-6
+DOWN	AD1_control	proton transmembrane transporter activity	27	229	7.29964536266837e-7
+DOWN	AD1_control	proton-transporting ATP synthase activity, rotational mechanism	12	38	4.4093776203773554e-7
+DOWN	AD1_control	proton-transporting ATP synthase complex	18	80	2.933435308580824e-8
+DOWN	AD1_control	proton-transporting ATP synthase complex, catalytic core F(1)	8	30	4.43826732344239e-4
+DOWN	AD1_control	proton-transporting ATP synthase complex, coupling factor F(o)	10	44	1.351056895989442e-4
+DOWN	AD1_control	proton-transporting two-sector ATPase complex	18	121	8.259205222618008e-6
+DOWN	AD1_control	proton-transporting two-sector ATPase complex, catalytic domain	8	44	0.006460081322282108
+DOWN	AD1_control	proton-transporting two-sector ATPase complex, proton-transporting domain	10	69	0.005769776065601155
+DOWN	AD1_control	purine nucleoside triphosphate biosynthetic process	19	93	3.559329180667266e-8
+DOWN	AD1_control	purine nucleotide biosynthetic process	22	162	1.6904930961691255e-6
+DOWN	AD1_control	purine nucleotide metabolic process	26	265	3.572757531254842e-5
+DOWN	AD1_control	purine ribonucleoside triphosphate biosynthetic process	19	93	3.559329180667266e-8
+DOWN	AD1_control	purine ribonucleotide biosynthetic process	22	153	6.625717491817786e-7
+DOWN	AD1_control	purine ribonucleotide metabolic process	26	249	1.2827817670949322e-5
+DOWN	AD1_control	purine-containing compound biosynthetic process	22	171	3.8581212614060425e-6
+DOWN	AD1_control	purine-containing compound metabolic process	26	291	1.648709950023603e-4
+DOWN	AD1_control	ribonucleoprotein complex	40	544	4.5250562750577165e-5
+DOWN	AD1_control	ribonucleoside triphosphate biosynthetic process	19	100	1.0610284120220143e-7
+DOWN	AD1_control	ribonucleotide biosynthetic process	22	168	2.9767635434338435e-6
+DOWN	AD1_control	ribonucleotide metabolic process	26	265	3.572757531254842e-5
+DOWN	AD1_control	Ribosomal protein S5/S7	7	14	2.207602595901547e-5
+DOWN	AD1_control	Ribosomal protein S7 domain	7	14	2.207602595901547e-5
+DOWN	AD1_control	Ribosomal protein S7 domain superfamily	7	14	2.207602595901547e-5
+DOWN	AD1_control	ribosomal subunit	37	399	6.895198229637734e-7
+DOWN	AD1_control	small ribosomal subunit	22	165	2.28019525808983e-6
+DOWN	AD1_control	structural constituent of ribosome	50	673	1.6904930961691255e-6
+DOWN	AD1_control	structural molecule activity	51	780	4.147820566954036e-5
+DOWN	AD1_control	tetrapyrrole binding	30	510	0.044153606337270175
+DOWN	AD1_control	thylakoid membrane	29	465	0.021510301684212873
+ADD	AD1_control	ADP binding	35	359	0.01965365706795158
+ADD	AD1_control	Cytochrome P450 superfamily	38	329	4.5046290603415796e-4
+ADD	AD1_control	heme binding	45	477	0.00623349579398363
+ADD	AD1_control	hydrolase activity, hydrolyzing N-glycosyl compounds	14	74	0.008908064222024397
+ADD	AD1_control	iron ion binding	41	433	0.008908064222024397
+ADD	AD1_control	monooxygenase activity	40	400	0.00623349579398363
+ADD	AD1_control	NAD+ nucleosidase activity	13	44	2.8608608331556437e-4
+ADD	AD1_control	oxidoreductase activity, acting on paired donors, with incorporation or reduction of molecular oxygen	44	470	0.008220033961175913
+ADD	AD1_control	secondary metabolite biosynthetic process	22	177	0.01965365706795158
+ADD	AD1_control	tetrapyrrole binding	46	510	0.008908064222024397
+ADD	AD1_control	UDP-glucuronosyl/UDP-glucosyltransferase	24	144	2.8608608331556437e-4
+ADD	AD1_control	UDP-glycosyltransferase activity	35	371	0.03456229953322207
+ELD_P1	AD1_control	apoplast	110	369	5.101630028098298e-5
+ELD_P1	AD1_control	carboxylic acid biosynthetic process	140	522	6.656189649267137e-4
+ELD_P1	AD1_control	cellular amino acid catabolic process	27	72	0.03548536443069714
+ELD_P1	AD1_control	chlorophyll metabolic process	35	94	0.006189418755536105
+ELD_P1	AD1_control	chloroplast envelope	259	760	1.7840074401005907e-22
+ELD_P1	AD1_control	chloroplast organization	74	227	1.5105636549939976e-4
+ELD_P1	AD1_control	chloroplast stroma	307	864	7.211989493275807e-30
+ELD_P1	AD1_control	chloroplast thylakoid	210	531	5.081771076776891e-27
+ELD_P1	AD1_control	chloroplast thylakoid membrane	171	421	1.8950336489820055e-23
+ELD_P1	AD1_control	chloroplast thylakoid membrane protein complex	19	30	6.330140187745853e-5
+ELD_P1	AD1_control	circadian rhythm	72	208	1.725136097909457e-5
+ELD_P1	AD1_control	DNA-directed RNA polymerase, insert domain superfamily	11	17	0.013483028606824037
+ELD_P1	AD1_control	extracellular region	131	487	0.0011834802166158368
+ELD_P1	AD1_control	generation of precursor metabolites and energy	135	523	0.006189418755536105
+ELD_P1	AD1_control	glycine catabolic process	8	9	0.005392769239603056
+ELD_P1	AD1_control	glycine metabolic process	16	24	2.239103595067741e-4
+ELD_P1	AD1_control	Haloacid dehalogenase-like hydrolase	11	16	0.00665434522578446
+ELD_P1	AD1_control	monocarboxylic acid metabolic process	133	541	0.04951826870397175
+ELD_P1	AD1_control	NAD(P)-binding domain superfamily	121	464	0.009212911204867995
+ELD_P1	AD1_control	organic acid biosynthetic process	146	575	0.00665434522578446
+ELD_P1	AD1_control	Phosphoglycolate phosphatase-like, domain 2	9	12	0.012833807973968546
+ELD_P1	AD1_control	Phosphotransferase KptA/Tpt1	8	11	0.041075811301492
+ELD_P1	AD1_control	photosynthesis	112	365	7.763855099877714e-6
+ELD_P1	AD1_control	photosynthesis, light reaction	72	227	5.811906631149402e-4
+ELD_P1	AD1_control	photosynthetic membrane	193	500	1.8950336489820055e-23
+ELD_P1	AD1_control	photosystem II	26	68	0.034820651807692206
+ELD_P1	AD1_control	photosystem II oxygen evolving complex	14	28	0.04636036689403291
+ELD_P1	AD1_control	pigment biosynthetic process	51	163	0.018065546569763287
+ELD_P1	AD1_control	pigment metabolic process	66	202	5.330473044254438e-4
+ELD_P1	AD1_control	plastid membrane	210	583	2.966212070835687e-21
+ELD_P1	AD1_control	plastid membrane organization	23	57	0.03401195349108545
+ELD_P1	AD1_control	plastid organization	107	316	4.479152149297753e-8
+ELD_P1	AD1_control	plastid thylakoid	213	536	1.3014098611358064e-27
+ELD_P1	AD1_control	plastid thylakoid membrane	175	429	3.508670018790092e-24
+ELD_P1	AD1_control	plastoglobule	36	96	0.004420082480867694
+ELD_P1	AD1_control	porphyrin-containing compound biosynthetic process	31	87	0.03548536443069714
+ELD_P1	AD1_control	porphyrin-containing compound metabolic process	43	124	0.005878058212966529
+ELD_P1	AD1_control	protein domain specific binding	39	97	3.3483968439627405e-4
+ELD_P1	AD1_control	response to bacterium	156	646	0.039466477876814496
+ELD_P1	AD1_control	response to cold	178	615	9.463527995921188e-8
+ELD_P1	AD1_control	response to wounding	86	298	0.003424830883576461
+ELD_P1	AD1_control	RNA 2'-phosphotransferase, C-terminal domain	8	11	0.041075811301492
+ELD_P1	AD1_control	RNA modification	59	192	0.009463522744419877
+ELD_P1	AD1_control	serine family amino acid metabolic process	26	63	0.009044345283472244
+ELD_P1	AD1_control	small molecule biosynthetic process	180	711	0.0011834802166158368
+ELD_P1	AD1_control	small molecule catabolic process	61	210	0.03548536443069714
+ELD_P1	AD1_control	stromule	31	56	7.39334195609564e-7
+ELD_P1	AD1_control	tetrapyrrole biosynthetic process	33	93	0.025902257334241084
+ELD_P1	AD1_control	tetrapyrrole metabolic process	45	127	0.00223315805089977
+ELD_P1	AD1_control	thylakoid lumen	34	64	5.282012950202312e-7
+ELD_P1	AD1_control	thylakoid membrane	190	465	1.8634867794883242e-26
+UP	AD1_stress	ABC transporter-like, ATP-binding domain	24	157	0.018331158623888465
+UP	AD1_stress	ABC-transporter, N-terminal domain	8	25	0.027323721224542664
+UP	AD1_stress	ABC-type transporter activity	21	139	0.04893621056244043
+UP	AD1_stress	abscisic acid binding	12	32	2.3998068065650093e-4
+UP	AD1_stress	alcohol binding	12	34	4.2411304118515115e-4
+UP	AD1_stress	amino sugar catabolic process	7	19	0.0271718246988754
+UP	AD1_stress	ATP-binding cassette transporter, PDR-like subfamily G, domain 1	7	21	0.04893621056244043
+UP	AD1_stress	ATP-binding cassette transporter, PDR-like subfamily G, domain 2	9	28	0.012697861621937208
+UP	AD1_stress	Berberine/berberine-like	13	29	8.992329123647486e-6
+UP	AD1_stress	Bet v I type allergen	12	24	7.673569165358804e-6
+UP	AD1_stress	Bet v I/Major latex protein	18	44	1.661868614572764e-7
+UP	AD1_stress	Bulb-type lectin domain	28	94	4.205874838544619e-8
+UP	AD1_stress	Bulb-type lectin domain superfamily	28	98	4.205874838544619e-8
+UP	AD1_stress	carbohydrate binding	39	319	0.02400759796366227
+UP	AD1_stress	cell recognition	29	107	5.990033076716112e-8
+UP	AD1_stress	chitin binding	11	38	0.006236049173237297
+UP	AD1_stress	Cytochrome P450 superfamily	44	329	0.0018315806309965718
+UP	AD1_stress	endonuclease activity, active with either ribo- or deoxyribonucleic acids and producing 5'-phosphomonoesters	19	112	0.02394992890208107
+UP	AD1_stress	endoribonuclease activity	22	136	0.01625466780148149
+UP	AD1_stress	endoribonuclease activity, producing 5'-phosphomonoesters	19	109	0.017293251336476946
+UP	AD1_stress	Enzyme classification.EC_1 oxidoreductases.EC_1.1 oxidoreductase acting on CH-OH group of donor	27	112	3.357171044197281e-6
+UP	AD1_stress	Enzyme classification.EC_1 oxidoreductases.EC_1.14 oxidoreductase acting on paired donor with incorporation or reduction of molecular oxygen	52	354	2.596704798406426e-5
+UP	AD1_stress	Enzyme classification.EC_2 transferases.EC_2.7 transferase transferring phosphorus-containing group	35	269	0.016894436799991884
+UP	AD1_stress	FAD linked oxidase, N-terminal	16	52	8.642105232742307e-5
+UP	AD1_stress	FAD-binding, type PCMH-like superfamily	17	59	8.695061430663162e-5
+UP	AD1_stress	FAD-binding, type PCMH, subdomain 1	16	52	8.642105232742307e-5
+UP	AD1_stress	FAD-binding, type PCMH, subdomain 2	17	59	8.695061430663162e-5
+UP	AD1_stress	flavin adenine dinucleotide binding	32	189	3.1998415891338076e-4
+UP	AD1_stress	glucosamine-containing compound metabolic process	7	21	0.04893621056244043
+UP	AD1_stress	glutathione metabolic process	16	89	0.03785558081024621
+UP	AD1_stress	Glutathione S-transferase Omega/Tau-like	11	33	0.0018315806309965718
+UP	AD1_stress	Glutathione S-transferase, C-terminal	10	41	0.0470680277421753
+UP	AD1_stress	Glutathione S-transferase, C-terminal domain superfamily	15	81	0.04163056106977572
+UP	AD1_stress	Glutathione S-transferase, N-terminal	13	61	0.027090793264607938
+UP	AD1_stress	Glutathione S-transferases Tau, C-terminal alpha helical domain, plant	13	39	3.2491114508975016e-4
+UP	AD1_stress	glutathione transferase activity	13	51	0.005280340018760695
+UP	AD1_stress	Glycoside hydrolase family 18, catalytic domain	7	21	0.04893621056244043
+UP	AD1_stress	Glycoside hydrolase, family 19	7	17	0.01395384771684797
+UP	AD1_stress	Glycoside hydrolase, family 19, catalytic	7	17	0.01395384771684797
+UP	AD1_stress	Gnk2-homologous domain	18	71	2.625346755347073e-4
+UP	AD1_stress	Gnk2-homologous domain superfamily	18	71	2.625346755347073e-4
+UP	AD1_stress	heme binding	56	477	0.004200482886587005
+UP	AD1_stress	hormone binding	12	49	0.01395384771684797
+UP	AD1_stress	iron ion binding	53	433	0.002397058505578277
+UP	AD1_stress	Isopenicillin N synthase-like superfamily	28	178	0.004142455334034588
+UP	AD1_stress	Isopenicillin N synthase-like, Fe(2+) 2OG dioxygenase domain	27	163	0.002391769689913708
+UP	AD1_stress	isoprenoid binding	12	39	0.0018315806309965718
+UP	AD1_stress	L10-interacting MYB domain-containing protein	19	60	4.813730541368025e-6
+UP	AD1_stress	Lysozyme-like domain superfamily	7	20	0.03785558081024621
+UP	AD1_stress	molecular transducer activity	24	133	0.0018484661118463776
+UP	AD1_stress	monocarboxylic acid binding	14	64	0.013578970933839918
+UP	AD1_stress	monooxygenase activity	51	400	0.0014725980418136804
+UP	AD1_stress	Myb/SANT-like domain	21	72	4.718892652815902e-6
+UP	AD1_stress	Non-haem dioxygenase N-terminal domain	24	161	0.02583220553353222
+UP	AD1_stress	oxidoreductase activity, acting on paired donors, with incorporation or reduction of molecular oxygen	54	470	0.009406674588019349
+UP	AD1_stress	PAN/Apple domain	17	59	8.695061430663162e-5
+UP	AD1_stress	phosphatase inhibitor activity	12	39	0.0018315806309965718
+UP	AD1_stress	Plant PDR ABC transporter associated	9	28	0.012697861621937208
+UP	AD1_stress	pollen-pistil interaction	29	126	3.0778374507849057e-6
+UP	AD1_stress	polysaccharide binding	23	129	0.0031505799070616195
+UP	AD1_stress	positive regulation of DNA-binding transcription factor activity	4	5	0.02061463594711068
+UP	AD1_stress	Protein modification.phosphorylation.TKL protein kinase superfamily.G-Lectin protein kinase families.protein kinase (SD-1)	14	33	6.645196796681786e-6
+UP	AD1_stress	Protein modification.phosphorylation.TKL protein kinase superfamily.protein kinase (DUF26)	15	37	4.761064109038737e-6
+UP	AD1_stress	Protein modification.phosphorylation.TKL protein kinase superfamily.protein kinase (LRR-XII)	14	66	0.017293251336476946
+UP	AD1_stress	protein serine/threonine kinase activity	46	367	0.004649963212272764
+UP	AD1_stress	recognition of pollen	29	104	4.205874838544619e-8
+UP	AD1_stress	Redox homeostasis.glutathione-based redox regulation.glutathione S-transferase activities.class tau glutathione S-transferase	11	33	0.0018315806309965718
+UP	AD1_stress	response to salicylic acid	33	220	0.002251064119556664
+UP	AD1_stress	ribonuclease activity	26	190	0.04893621056244043
+UP	AD1_stress	Ribonuclease H domain	16	75	0.0062411263867205935
+UP	AD1_stress	RNA-DNA hybrid ribonuclease activity	17	80	0.004155353926029397
+UP	AD1_stress	S-locus glycoprotein domain	24	73	4.205874838544619e-8
+UP	AD1_stress	S-receptor-like serine/threonine-protein kinase	25	77	4.205874838544619e-8
+UP	AD1_stress	Serine-threonine/tyrosine-protein kinase, catalytic domain	62	518	0.0011722509091526031
+UP	AD1_stress	signaling receptor activity	22	117	0.0022326561859730624
+UP	AD1_stress	START-like domain superfamily	22	128	0.007347603454754152
+UP	AD1_stress	tetrapyrrole binding	57	510	0.012362073233898565
+UP	AD1_stress	VQ	14	43	2.0364753227622106e-4
+UP	AD1_stress	Wall-associated receptor kinase, galacturonan-binding domain	22	106	5.22535337227249e-4
+UP	AD1_stress	Zinc knuckle CX2CX4HX4C	7	15	0.006236049173237297
+DOWN	AD1_stress	5'-3' RNA polymerase activity	23	121	5.7616413795205246e-5
+DOWN	AD1_stress	aerobic respiration	16	110	0.044376445302495876
+DOWN	AD1_stress	anchored component of membrane	28	192	7.028155311284902e-4
+DOWN	AD1_stress	apoplast	39	369	0.014771246727087082
+DOWN	AD1_stress	ATP biosynthetic process	25	85	2.4760357866869325e-9
+DOWN	AD1_stress	ATP metabolic process	37	203	9.003185771236484e-8
+DOWN	AD1_stress	ATP synthase, F0 complex, subunit b/b', bacterial/chloroplast	4	6	0.018374443217956754
+DOWN	AD1_stress	ATP synthesis coupled proton transport	25	85	2.4760357866869325e-9
+DOWN	AD1_stress	carbohydrate derivative biosynthetic process	47	496	0.03439392077049369
+DOWN	AD1_stress	cation channel activity	18	119	0.015216508679092893
+DOWN	AD1_stress	cation transmembrane transport	37	324	0.0049279967594269575
+DOWN	AD1_stress	cation transmembrane transporter activity	51	531	0.016586249316582164
+DOWN	AD1_stress	cation transport	50	527	0.022767067491173177
+DOWN	AD1_stress	Cell wall organisation.cell wall proteins.hydroxyproline-rich glycoprotein activities.arabinogalactan-protein activities.Fasciclin-type arabinogalactan protein (FLA)	9	22	3.246781991889246e-4
+DOWN	AD1_stress	cellular component assembly	67	788	0.044922702275523765
+DOWN	AD1_stress	cellular protein-containing complex assembly	39	375	0.018992644644272257
+DOWN	AD1_stress	cellular respiration	23	155	0.0030965595202156184
+DOWN	AD1_stress	Chlorophyll A-B binding protein	9	33	0.009148673128544216
+DOWN	AD1_stress	Chlorophyll A-B binding protein, plant and chromista	8	27	0.011711845490111986
+DOWN	AD1_stress	Chlorophyll a/b binding domain superfamily	9	32	0.007138788937452887
+DOWN	AD1_stress	chlorophyll binding	9	30	0.004242067771365753
+DOWN	AD1_stress	chloroplast envelope	105	760	8.727724538304677e-15
+DOWN	AD1_stress	chloroplast nucleoid	13	51	7.041045332576003e-4
+DOWN	AD1_stress	chloroplast organization	32	227	3.246781991889246e-4
+DOWN	AD1_stress	chloroplast stroma	137	864	9.713996420182111e-25
+DOWN	AD1_stress	chloroplast thylakoid	97	531	1.1081624558245718e-21
+DOWN	AD1_stress	chloroplast thylakoid membrane	80	421	5.564008411923904e-19
+DOWN	AD1_stress	cytochrome complex assembly	10	34	0.0020905508628201635
+DOWN	AD1_stress	cytoplasmic chromosome	6	19	0.048311305147349874
+DOWN	AD1_stress	Di-haem cytochrome, transmembrane	4	7	0.035158495988017686
+DOWN	AD1_stress	DNA-directed 5'-3' RNA polymerase activity	23	114	1.9754844904950505e-5
+DOWN	AD1_stress	DNA-directed RNA polymerase, alpha subunit	4	6	0.018374443217956754
+DOWN	AD1_stress	DNA-directed RNA polymerase, subunit 2	7	22	0.018374443217956754
+DOWN	AD1_stress	electron transfer activity	39	172	3.865552279592186e-11
+DOWN	AD1_stress	electron transport chain	41	199	2.488158954769497e-10
+DOWN	AD1_stress	electron transporter, transferring electrons within the cyclic electron transport pathway of photosynthesis activity	10	24	7.370317210286623e-5
+DOWN	AD1_stress	energy derivation by oxidation of organic compounds	25	186	0.006649809901832372
+DOWN	AD1_stress	FAS1 domain	9	25	9.774737495787194e-4
+DOWN	AD1_stress	FAS1 domain superfamily	9	26	0.0013665317079730177
+DOWN	AD1_stress	Fasciclin-like arabinogalactan protein 15/16/17/18	3	3	0.022767067491173177
+DOWN	AD1_stress	galacturonan metabolic process	12	67	0.035158495988017686
+DOWN	AD1_stress	generation of precursor metabolites and energy	80	523	2.390495609864534e-13
+DOWN	AD1_stress	inorganic cation transmembrane transport	37	320	0.0038787223186963473
+DOWN	AD1_stress	inorganic cation transmembrane transporter activity	48	497	0.020902235226651654
+DOWN	AD1_stress	inorganic ion transmembrane transport	40	345	0.0019588414226377623
+DOWN	AD1_stress	ion transmembrane transport	48	451	0.0026648820381636835
+DOWN	AD1_stress	large ribosomal subunit	33	244	5.405823054683265e-4
+DOWN	AD1_stress	membrane protein complex	77	657	2.8593233889923445e-7
+DOWN	AD1_stress	microtubule cytoskeleton	29	266	0.04891635953165714
+DOWN	AD1_stress	mitochondrial ATP synthesis coupled proton transport	4	4	0.0019417671483628822
+DOWN	AD1_stress	mitochondrial large ribosomal subunit	6	12	0.003622038312929302
+DOWN	AD1_stress	mitochondrial matrix	10	51	0.04891635953165714
+DOWN	AD1_stress	mitochondrial protein-containing complex	26	210	0.01678792498731076
+DOWN	AD1_stress	mitochondrial ribosome	9	17	2.424168054170811e-5
+DOWN	AD1_stress	mitochondrial small ribosomal subunit	4	5	0.007422578966555349
+DOWN	AD1_stress	NAD(P)H dehydrogenase (quinone) activity	13	45	1.7180014617186422e-4
+DOWN	AD1_stress	NAD(P)H dehydrogenase complex (plastoquinone)	7	13	5.104716868257995e-4
+DOWN	AD1_stress	NAD(P)H dehydrogenase complex assembly	5	12	0.03581001753650716
+DOWN	AD1_stress	NADH dehydrogenase (quinone) activity	13	35	7.320073352709469e-6
+DOWN	AD1_stress	NADH dehydrogenase activity	16	50	2.563220017236247e-6
+DOWN	AD1_stress	NB-ARC	31	286	0.036579912198462516
+DOWN	AD1_stress	nucleoid	13	59	0.0031713777813640476
+DOWN	AD1_stress	nucleoside binding	7	22	0.018374443217956754
+DOWN	AD1_stress	nucleoside phosphate biosynthetic process	29	225	0.003946182949251753
+DOWN	AD1_stress	nucleoside phosphate metabolic process	35	342	0.04563650728789423
+DOWN	AD1_stress	nucleoside triphosphate biosynthetic process	26	102	2.540220284727801e-8
+DOWN	AD1_stress	nucleoside triphosphate metabolic process	26	108	9.003185771236484e-8
+DOWN	AD1_stress	nucleotide biosynthetic process	29	223	0.0034813620794183534
+DOWN	AD1_stress	nucleotide metabolic process	35	334	0.03199346017051072
+DOWN	AD1_stress	nucleotidyltransferase activity	28	228	0.011309956715361452
+DOWN	AD1_stress	organellar large ribosomal subunit	13	35	7.320073352709469e-6
+DOWN	AD1_stress	organellar ribosome	24	62	8.793602772388997e-12
+DOWN	AD1_stress	organellar small ribosomal subunit	17	35	6.73383940981278e-10
+DOWN	AD1_stress	organophosphate biosynthetic process	42	420	0.023465071181830804
+DOWN	AD1_stress	oxidative phosphorylation	12	51	0.0032467675414849678
+DOWN	AD1_stress	oxidoreductase activity, acting on NAD(P)H	26	119	7.128333495746687e-7
+DOWN	AD1_stress	oxidoreductase activity, acting on NAD(P)H, quinone or similar compound as acceptor	16	53	6.133717063931559e-6
+DOWN	AD1_stress	oxidoreduction-driven active transmembrane transporter activity	16	47	1.000727631357153e-6
+DOWN	AD1_stress	pectin metabolic process	12	64	0.023465071181830804
+DOWN	AD1_stress	photosynthesis	76	365	2.4326899872361107e-20
+DOWN	AD1_stress	photosynthesis, light harvesting	13	55	0.0015412859424950283
+DOWN	AD1_stress	photosynthesis, light harvesting in photosystem I	5	11	0.023465071181830804
+DOWN	AD1_stress	photosynthesis, light harvesting in photosystem II	6	14	0.009262671517221946
+DOWN	AD1_stress	photosynthesis, light reaction	48	227	9.758641379543578e-13
+DOWN	AD1_stress	Photosynthesis.photophosphorylation.ATP synthase complex.membrane CF0 subcomplex.subunit b	5	6	7.041045332576003e-4
+DOWN	AD1_stress	photosynthetic electron transport chain	26	124	1.6199375327592464e-6
+DOWN	AD1_stress	photosynthetic electron transport in photosystem I	9	22	3.246781991889246e-4
+DOWN	AD1_stress	photosynthetic electron transport in photosystem II	8	24	0.004997717674118977
+DOWN	AD1_stress	photosynthetic membrane	95	500	2.5127824205022064e-22
+DOWN	AD1_stress	Photosynthetic reaction centre, L/M	6	14	0.009262671517221946
+DOWN	AD1_stress	photosystem	28	115	1.6267445612660372e-8
+DOWN	AD1_stress	photosystem I	9	37	0.020481229266319904
+DOWN	AD1_stress	photosystem II	18	68	7.320073352709469e-6
+DOWN	AD1_stress	Photosystem II protein D1/D2 superfamily	6	14	0.009262671517221946
+DOWN	AD1_stress	plastid chromosome	6	18	0.03593691485008777
+DOWN	AD1_stress	plastid large ribosomal subunit	7	23	0.0233534690703568
+DOWN	AD1_stress	plastid membrane	91	583	6.032374240907634e-16
+DOWN	AD1_stress	plastid nucleoid	13	58	0.002665574317274245
+DOWN	AD1_stress	plastid organization	41	316	1.1837848785591018e-4
+DOWN	AD1_stress	plastid ribosome	20	54	2.8695439306094037e-9
+DOWN	AD1_stress	plastid small ribosomal subunit	13	30	1.000727631357153e-6
+DOWN	AD1_stress	plastid thylakoid	97	536	1.7268052318227884e-21
+DOWN	AD1_stress	plastid thylakoid membrane	81	429	5.312902494097722e-19
+DOWN	AD1_stress	plastoglobule	17	96	0.003622038312929302
+DOWN	AD1_stress	protein domain specific binding	23	97	1.0602436489515689e-6
+DOWN	AD1_stress	Protein modification.phosphorylation.TKL protein kinase superfamily.receptor-like protein kinase (RLCK-V)	6	14	0.009262671517221946
+DOWN	AD1_stress	Protein TIC214	11	16	3.087356131189185e-8
+DOWN	AD1_stress	protein-containing complex assembly	46	484	0.03579697330177044
+DOWN	AD1_stress	proton channel activity	15	40	7.128333495746687e-7
+DOWN	AD1_stress	proton transmembrane transport	33	170	1.4257955528207134e-7
+DOWN	AD1_stress	proton transmembrane transporter activity	36	229	6.328264529545223e-6
+DOWN	AD1_stress	proton-transporting ATP synthase activity, rotational mechanism	14	38	2.771952636124247e-6
+DOWN	AD1_stress	proton-transporting ATP synthase complex	22	80	1.3535757244060097e-7
+DOWN	AD1_stress	proton-transporting ATP synthase complex, catalytic core F(1)	8	30	0.022767067491173177
+DOWN	AD1_stress	proton-transporting ATP synthase complex, coupling factor F(o)	14	44	1.8960354137744572e-5
+DOWN	AD1_stress	proton-transporting two-sector ATPase complex	25	121	4.0858179875659875e-6
+DOWN	AD1_stress	proton-transporting two-sector ATPase complex, proton-transporting domain	16	69	2.3943503201287176e-4
+DOWN	AD1_stress	purine nucleoside triphosphate biosynthetic process	26	93	2.903829730910571e-9
+DOWN	AD1_stress	purine nucleotide biosynthetic process	28	162	2.4950340918203207e-5
+DOWN	AD1_stress	purine nucleotide metabolic process	34	265	0.0010995701698983651
+DOWN	AD1_stress	purine ribonucleoside triphosphate biosynthetic process	26	93	2.903829730910571e-9
+DOWN	AD1_stress	purine ribonucleotide biosynthetic process	28	153	7.857693619619197e-6
+DOWN	AD1_stress	purine ribonucleotide metabolic process	33	249	7.97857719681948e-4
+DOWN	AD1_stress	purine-containing compound biosynthetic process	30	171	7.320073352709469e-6
+DOWN	AD1_stress	purine-containing compound metabolic process	36	291	0.00134136319126645
+DOWN	AD1_stress	respiratory electron transport chain	13	62	0.004997717674118977
+DOWN	AD1_stress	ribonucleoprotein complex	63	544	1.068439584728987e-5
+DOWN	AD1_stress	ribonucleoside triphosphate biosynthetic process	26	100	1.628346348142954e-8
+DOWN	AD1_stress	ribonucleotide biosynthetic process	28	168	5.39377119021873e-5
+DOWN	AD1_stress	ribonucleotide metabolic process	33	265	0.0025868528090778106
+DOWN	AD1_stress	Ribosomal protein S2, bacteria/mitochondria/plastid	4	7	0.035158495988017686
+DOWN	AD1_stress	Ribosomal protein S5/S7	7	14	8.666779233294119e-4
+DOWN	AD1_stress	Ribosomal protein S6	3	3	0.022767067491173177
+DOWN	AD1_stress	Ribosomal protein S6 superfamily	3	3	0.022767067491173177
+DOWN	AD1_stress	Ribosomal protein S7 domain	7	14	8.666779233294119e-4
+DOWN	AD1_stress	Ribosomal protein S7 domain superfamily	7	14	8.666779233294119e-4
+DOWN	AD1_stress	ribosomal subunit	56	399	1.0324463511837728e-7
+DOWN	AD1_stress	Ribulose bisphosphate carboxylase, large subunit, C-terminal	4	6	0.018374443217956754
+DOWN	AD1_stress	Ribulose bisphosphate carboxylase, large subunit, C-terminal domain superfamily	4	6	0.018374443217956754
+DOWN	AD1_stress	ribulose-bisphosphate carboxylase activity	4	7	0.035158495988017686
+DOWN	AD1_stress	small ribosomal subunit	29	165	1.0872486431636561e-5
+DOWN	AD1_stress	structural constituent of ribosome	103	673	1.415227051559168e-17
+DOWN	AD1_stress	structural molecule activity	112	780	4.009204853567609e-17
+DOWN	AD1_stress	thylakoid lumen	15	64	4.241809803628582e-4
+DOWN	AD1_stress	thylakoid membrane	89	465	2.2496884357900526e-21
+ADD	AD1_stress	NAD+ nucleosidase activity	11	44	0.016496393997222254
+ELD_P2	AD1_stress	Alcohol dehydrogenase, N-terminal	18	59	0.02725605439923262
+ELD_P2	AD1_stress	amine metabolic process	32	136	0.02484039507148301
+ELD_P2	AD1_stress	ammonia-lyase activity	7	11	0.02725605439923262
+ELD_P2	AD1_stress	AP2/ERF domain superfamily	43	213	0.03979172505432175
+ELD_P2	AD1_stress	aromatic amino acid family metabolic process	25	96	0.02725605439923262
+ELD_P2	AD1_stress	Aromatic amino acid lyase	6	7	0.013808960581178083
+ELD_P2	AD1_stress	cellular amine metabolic process	22	82	0.033909003317338406
+ELD_P2	AD1_stress	cellular biogenic amine metabolic process	21	74	0.02725605439923262
+ELD_P2	AD1_stress	coumarin biosynthetic process	6	8	0.02725605439923262
+ELD_P2	AD1_stress	coumarin metabolic process	7	10	0.019940780228662663
+ELD_P2	AD1_stress	Cytochrome P450 superfamily	65	329	0.005168234456012402
+ELD_P2	AD1_stress	Enzyme classification.EC_2 transferases.EC_2.7 transferase transferring phosphorus-containing group	51	269	0.04605365981449283
+ELD_P2	AD1_stress	Ethylene-responsive transcription factor	16	52	0.04947268678544291
+ELD_P2	AD1_stress	heme binding	86	477	0.0061682108322711005
+ELD_P2	AD1_stress	monooxygenase activity	76	400	0.004191208873553345
+ELD_P2	AD1_stress	NAD(P)-binding domain superfamily	81	464	0.02351704690358794
+ELD_P2	AD1_stress	oxidoreductase activity, acting on paired donors, with incorporation or reduction of molecular oxygen	82	470	0.022763621417782147
+ELD_P2	AD1_stress	Phenylalanine ammonia-lyase	6	7	0.013808960581178083
+ELD_P2	AD1_stress	phenylalanine ammonia-lyase activity	5	6	0.045416167185001674
+ELD_P2	AD1_stress	Phenylalanine ammonia-lyase, shielding domain superfamily	6	7	0.013808960581178083
+ELD_P2	AD1_stress	phenylpropanoid biosynthetic process	27	105	0.02276125842411675
+ELD_P2	AD1_stress	phenylpropanoid metabolic process	40	189	0.02725605439923262
+ELD_P2	AD1_stress	Protein of unknown function DUF247, plant	18	45	0.0012971438035916795
+ELD_P2	AD1_stress	regulation of defense response	64	351	0.02725605439923262
+ELD_P2	AD1_stress	response to chitin	43	156	4.512033171797079e-5
+ELD_P2	AD1_stress	response to nitrogen compound	67	316	3.8308912434512993e-4
+ELD_P2	AD1_stress	response to organonitrogen compound	56	245	3.538878053156031e-4
+ELD_P2	AD1_stress	response to water deprivation	103	643	0.045055563255327814
+ELD_P2	AD1_stress	response to wounding	60	298	0.005897216012955646
+ELD_P2	AD1_stress	RNA biosynthesis.transcriptional regulation.WRKY transcription factor activity.transcription factor (WRKY)	42	118	1.1469130963866792e-8
+ELD_P2	AD1_stress	secondary metabolite biosynthetic process	38	177	0.027611545484357645
+ELD_P2	AD1_stress	tetrapyrrole binding	87	510	0.026265869841860124
+ELD_P2	AD1_stress	UDP-glucuronosyl/UDP-glucosyltransferase	33	144	0.02725605439923262
+ELD_P2	AD1_stress	WRKY domain	42	118	1.1469130963866792e-8
+ELD_P2	AD1_stress	WRKY transcription factor, plant	42	117	1.1469130963866792e-8
+UP	AD4_control	abscisic acid binding	8	31	0.048579980744292775
+UP	AD4_control	ADP binding	42	357	0.0010371273722022656
+UP	AD4_control	Apoptotic protease-activating factors, helical domain	29	243	0.014201146868583805
+UP	AD4_control	Bet v I type allergen	8	24	0.011459899734774558
+UP	AD4_control	Bet v I/Major latex protein	16	44	1.9189222748754336e-6
+UP	AD4_control	Bulb-type lectin domain	17	95	0.006117455634231516
+UP	AD4_control	Bulb-type lectin domain superfamily	17	100	0.010070061001448484
+UP	AD4_control	carbon-oxygen lyase activity, acting on phosphates	12	65	0.04164085366649326
+UP	AD4_control	Cathepsin propeptide inhibitor domain (I29)	9	37	0.0336930989185052
+UP	AD4_control	cysteine-type peptidase activity	21	152	0.017669480172662344
+UP	AD4_control	Cytochrome P450 superfamily	40	320	5.88270142242084e-4
+UP	AD4_control	Enzyme classification.EC_1 oxidoreductases.EC_1.14 oxidoreductase acting on paired donor with incorporation or reduction of molecular oxygen	54	349	7.750707847276516e-9
+UP	AD4_control	Enzyme classification.EC_2 transferases.EC_2.7 transferase transferring phosphorus-containing group	36	270	5.88270142242084e-4
+UP	AD4_control	Glycoside hydrolase family 18, catalytic domain	7	21	0.02477243733744488
+UP	AD4_control	heme binding	50	467	0.001460832458280914
+UP	AD4_control	iron ion binding	45	423	0.004258822466435414
+UP	AD4_control	Isopenicillin N synthase-like superfamily	24	178	0.011007786265597267
+UP	AD4_control	Isopenicillin N synthase-like, Fe(2+) 2OG dioxygenase domain	23	163	0.00892229874914386
+UP	AD4_control	L10-interacting MYB domain-containing protein	11	57	0.048579980744292775
+UP	AD4_control	Leucine-rich repeat-containing N-terminal, plant-type	43	420	0.011007786265597267
+UP	AD4_control	Malectin domain	9	32	0.014201146868583805
+UP	AD4_control	monooxygenase activity	47	391	3.54775680208354e-4
+UP	AD4_control	NB-ARC	32	284	0.01677363028232866
+UP	AD4_control	Non-haem dioxygenase N-terminal domain	22	162	0.01677363028232866
+UP	AD4_control	oxidoreductase activity, acting on paired donors, with incorporation or reduction of molecular oxygen	50	459	0.0010371273722022656
+UP	AD4_control	Papain-like cysteine endopeptidase	11	42	0.006117455634231516
+UP	AD4_control	Peptidase C1A, papain C-terminal	12	46	0.0031354742298706235
+UP	AD4_control	polysaccharide binding	19	130	0.01794850697525056
+UP	AD4_control	Protein homeostasis.proteolysis.cysteine-type peptidase activities.C1-class protease (Papain)	10	35	0.006414663984656841
+UP	AD4_control	Protein modification.phosphorylation.TKL protein kinase superfamily.LRR-VIII protein kinase families.protein kinase (LRR-VIII-2)	8	27	0.020085200698858063
+UP	AD4_control	Protein modification.phosphorylation.TKL protein kinase superfamily.protein kinase (LRR-XII)	14	65	0.0047913047295499505
+UP	AD4_control	recognition of pollen	16	108	0.048579980744292775
+UP	AD4_control	RNA biosynthesis.transcriptional regulation.WRKY transcription factor activity.transcription factor (WRKY)	18	118	0.01708805844713994
+UP	AD4_control	S-receptor-like serine/threonine-protein kinase	16	77	0.0022897788397847367
+UP	AD4_control	Secondary metabolism.terpenoids.terpene biosynthesis.mono-/sesquiterpene-/diterpene synthase	10	44	0.0262158296472668
+UP	AD4_control	Serine-threonine/tyrosine-protein kinase, catalytic domain	56	523	5.88270142242084e-4
+UP	AD4_control	START-like domain superfamily	20	128	0.007463455348026404
+UP	AD4_control	terpene synthase activity	12	55	0.011966278706697019
+UP	AD4_control	Terpene synthase, metal-binding domain	11	51	0.02011336026644101
+UP	AD4_control	Terpene synthase, N-terminal domain	10	48	0.048579980744292775
+UP	AD4_control	Terpene synthase, N-terminal domain superfamily	10	48	0.048579980744292775
+UP	AD4_control	tetrapyrrole binding	54	500	5.88270142242084e-4
+UP	AD4_control	Wall-associated receptor kinase, galacturonan-binding domain	19	107	0.0028471291177708915
+UP	AD4_control	WRKY domain	18	118	0.01708805844713994
+UP	AD4_control	WRKY transcription factor, plant	18	117	0.01677363028232866
+UP	AD4_control	Zinc knuckle CX2CX4HX4C	6	14	0.01794850697525056
+DOWN	AD4_control	ADP binding	37	357	8.924323713713467e-4
+DOWN	AD4_control	Apoptotic protease-activating factors, helical domain	28	243	0.001949455239782652
+DOWN	AD4_control	cell wall organization or biogenesis	46	544	0.008653650537164848
+DOWN	AD4_control	chlorophyll binding	12	30	6.7034734130647365e-6
+DOWN	AD4_control	Disease resistance protein, plants	25	250	0.04206269090246115
+DOWN	AD4_control	electron transfer activity	27	172	1.8552270124213218e-5
+DOWN	AD4_control	electron transport chain	29	197	1.8808792931510274e-5
+DOWN	AD4_control	electron transporter, transferring electrons within the cyclic electron transport pathway of photosynthesis activity	7	24	0.023641159833263873
+DOWN	AD4_control	Enzyme classification.EC_2 transferases.EC_2.4 glycosyltransferase	20	167	0.019841759568430765
+DOWN	AD4_control	etioplast	5	12	0.04198584669877807
+DOWN	AD4_control	external encapsulating structure	50	639	0.022706249525417672
+DOWN	AD4_control	generation of precursor metabolites and energy	44	519	0.011503365206659915
+DOWN	AD4_control	membrane protein complex	55	654	0.0018945465758480743
+DOWN	AD4_control	mitochondrial large ribosomal subunit	6	12	0.00326481792342315
+DOWN	AD4_control	mitochondrial ribosome	9	17	1.8808792931510274e-5
+DOWN	AD4_control	mitochondrial small ribosomal subunit	4	5	0.010207997481000689
+DOWN	AD4_control	NB-ARC	33	284	3.5377052852372933e-4
+DOWN	AD4_control	organellar large ribosomal subunit	9	34	0.006667180730567391
+DOWN	AD4_control	organellar ribosome	17	61	4.280162374682206e-6
+DOWN	AD4_control	organellar small ribosomal subunit	14	35	1.222242758568558e-6
+DOWN	AD4_control	oxidoreduction-driven active transmembrane transporter activity	10	47	0.014545735337209362
+DOWN	AD4_control	photosynthesis	36	364	0.0028664231312230566
+DOWN	AD4_control	photosynthesis, light reaction	27	226	0.0016937253693901934
+DOWN	AD4_control	Photosynthesis.photophosphorylation.linear electron flow.ferredoxin electron carrier activities.NADP-reduction-targeted ferredoxin (Fd)	4	7	0.04733401465065211
+DOWN	AD4_control	photosynthetic electron transport chain	21	122	1.0434530311447335e-4
+DOWN	AD4_control	photosystem	18	115	0.0018325677102158503
+DOWN	AD4_control	Photosystem antenna protein-like	9	15	6.7034734130647365e-6
+DOWN	AD4_control	Photosystem antenna protein-like superfamily	9	15	6.7034734130647365e-6
+DOWN	AD4_control	plastid ribosome	13	53	3.5377052852372933e-4
+DOWN	AD4_control	plastid small ribosomal subunit	10	30	3.5377052852372933e-4
+DOWN	AD4_control	ribonucleoprotein complex	45	546	0.01676373038163767
+DOWN	AD4_control	Ribosomal protein S5/S7	7	14	7.06688985605672e-4
+DOWN	AD4_control	Ribosomal protein S7 domain	7	14	7.06688985605672e-4
+DOWN	AD4_control	Ribosomal protein S7 domain superfamily	7	14	7.06688985605672e-4
+DOWN	AD4_control	ribosomal subunit	42	400	1.9446303717313778e-4
+DOWN	AD4_control	small ribosomal subunit	25	167	1.0434530311447335e-4
+DOWN	AD4_control	structural constituent of ribosome	53	673	0.013035896432005626
+DOWN	AD4_control	structural molecule activity	58	779	0.02315642081264905
+ADD	AD4_control	UDP-glucuronosyl/UDP-glucosyltransferase	20	144	0.02582075557654549
+ELD_P1	AD4_control	apoplast	113	367	3.745170036141344e-5
+ELD_P1	AD4_control	carbohydrate biosynthetic process	108	409	0.04130627148254075
+ELD_P1	AD4_control	cellular carbohydrate metabolic process	132	505	0.017150411536409872
+ELD_P1	AD4_control	cellular glucan metabolic process	80	288	0.049418476238788304
+ELD_P1	AD4_control	cellular polysaccharide metabolic process	100	373	0.04130627148254075
+ELD_P1	AD4_control	chloroplast envelope	227	757	2.2324401866205086e-10
+ELD_P1	AD4_control	chloroplast organization	68	227	0.0200612178324301
+ELD_P1	AD4_control	chloroplast stroma	277	863	2.081322168887704e-17
+ELD_P1	AD4_control	chloroplast thylakoid	162	531	1.0121487504093769e-7
+ELD_P1	AD4_control	chloroplast thylakoid membrane	124	421	7.162250114303665e-5
+ELD_P1	AD4_control	circadian rhythm	68	208	0.0010567992810763898
+ELD_P1	AD4_control	DYW domain	52	105	5.0311469251029945e-9
+ELD_P1	AD4_control	extracellular region	132	484	0.00203117042823579
+ELD_P1	AD4_control	glycine metabolic process	13	24	0.049418476238788304
+ELD_P1	AD4_control	hydrogen peroxide biosynthetic process	13	23	0.04033804810052468
+ELD_P1	AD4_control	photosynthetic membrane	137	500	0.0011251826772237612
+ELD_P1	AD4_control	plastid membrane	163	581	3.755199343844185e-5
+ELD_P1	AD4_control	plastid organization	100	316	3.755199343844185e-5
+ELD_P1	AD4_control	plastid thylakoid	164	536	7.446385149795966e-8
+ELD_P1	AD4_control	plastid thylakoid membrane	127	429	3.911146114947693e-5
+ELD_P1	AD4_control	polysaccharide metabolic process	112	426	0.04130627148254075
+ELD_P1	AD4_control	PORR family	10	15	0.04033804810052468
+ELD_P1	AD4_control	pyrimidine-containing compound biosynthetic process	22	52	0.04130627148254075
+ELD_P1	AD4_control	pyrimidine-containing compound metabolic process	25	63	0.04335284982931365
+ELD_P1	AD4_control	reactive oxygen species biosynthetic process	17	32	0.010536596497259488
+ELD_P1	AD4_control	response to acid chemical	166	672	0.04033804810052468
+ELD_P1	AD4_control	response to cadmium ion	117	433	0.010536596497259488
+ELD_P1	AD4_control	response to cold	170	610	3.74743156513673e-5
+ELD_P1	AD4_control	response to water	163	659	0.04130627148254075
+ELD_P1	AD4_control	response to water deprivation	158	639	0.04335284982931365
+ELD_P1	AD4_control	ribonucleoprotein complex biogenesis	78	251	0.001515164319564077
+ELD_P1	AD4_control	ribosome biogenesis	70	215	9.359517005299275e-4
+ELD_P1	AD4_control	RNA modification	66	192	2.2402824442235606e-4
+ELD_P1	AD4_control	small molecule biosynthetic process	173	708	0.042948789386804624
+ELD_P1	AD4_control	stromule	29	56	3.911146114947693e-5
+ELD_P1	AD4_control	thylakoid membrane	137	465	3.160341221127092e-5
+ELD_P2	AD4_control	ADP binding	54	357	0.0040901579446265485
+ELD_P2	AD4_control	Apoptotic protease-activating factors, helical domain	38	243	0.03513071906336835
+ELD_P2	AD4_control	Cytochrome P450 superfamily	52	320	0.003071544647590999
+ELD_P2	AD4_control	Enzyme classification.EC_1 oxidoreductases.EC_1.14 oxidoreductase acting on paired donor with incorporation or reduction of molecular oxygen	53	349	0.0040901579446265485
+ELD_P2	AD4_control	heme binding	65	467	0.005274244089119125
+ELD_P2	AD4_control	iron ion binding	60	423	0.005995717989330291
+ELD_P2	AD4_control	monooxygenase activity	58	391	0.0040901579446265485
+ELD_P2	AD4_control	Protein of unknown function DUF247, plant	15	45	0.0040901579446265485
+ELD_P2	AD4_control	tetrapyrrole binding	65	500	0.03513071906336835
+UP	AD4_stress	ABC-type transporter activity	25	140	0.015111722027133232
+UP	AD4_stress	abscisic acid binding	12	31	5.615901580009207e-4
+UP	AD4_stress	ADP binding	52	357	0.0028366293471125724
+UP	AD4_stress	alcohol binding	12	33	0.0010577930835743666
+UP	AD4_stress	Alcohol dehydrogenase, N-terminal	14	59	0.022750223931487266
+UP	AD4_stress	amino sugar catabolic process	10	19	1.7840354534703724e-4
+UP	AD4_stress	Apoptotic protease-activating factors, helical domain	39	243	0.0036837019024753307
+UP	AD4_stress	ATP-binding cassette transporter, PDR-like subfamily G, domain 2	9	28	0.02782044509379045
+UP	AD4_stress	Berberine/berberine-like	12	28	2.0041513173907146e-4
+UP	AD4_stress	Bet v I type allergen	11	24	2.3544277971712915e-4
+UP	AD4_stress	Bet v I/Major latex protein	19	44	1.6677647648479122e-7
+UP	AD4_stress	Bulb-type lectin domain	36	95	2.079440659717056e-12
+UP	AD4_stress	Bulb-type lectin domain superfamily	36	100	9.260628924240276e-12
+UP	AD4_stress	carbohydrate binding	54	316	2.498247777354773e-5
+UP	AD4_stress	carbohydrate derivative catabolic process	14	56	0.01450720661414504
+UP	AD4_stress	cell recognition	35	111	8.059997039356319e-10
+UP	AD4_stress	cell wall macromolecule catabolic process	12	36	0.002762108967783465
+UP	AD4_stress	chitin binding	17	38	7.300934696727101e-7
+UP	AD4_stress	Chitin-binding, type 1	8	12	2.0240273352726954e-4
+UP	AD4_stress	chitinase activity	11	22	9.916593152931078e-5
+UP	AD4_stress	Cytochrome P450 superfamily	53	320	8.819455147020697e-5
+UP	AD4_stress	defense response to bacterium	66	528	0.019811061708287014
+UP	AD4_stress	defense response to fungus	62	413	2.3497006226309725e-4
+UP	AD4_stress	Disease resistance protein, plants	37	250	0.022262318229115938
+UP	AD4_stress	endochitinase activity	4	5	0.026112130567698795
+UP	AD4_stress	Endochitinase-like superfamily	8	12	2.0240273352726954e-4
+UP	AD4_stress	Enzyme classification.EC_1 oxidoreductases.EC_1.1 oxidoreductase acting on CH-OH group of donor	24	110	0.0010120949679004495
+UP	AD4_stress	Enzyme classification.EC_1 oxidoreductases.EC_1.14 oxidoreductase acting on paired donor with incorporation or reduction of molecular oxygen	64	349	1.38345155346137e-7
+UP	AD4_stress	Enzyme classification.EC_2 transferases.EC_2.7 transferase transferring phosphorus-containing group	55	270	5.40769765676291e-8
+UP	AD4_stress	enzyme inhibitor activity	29	182	0.028538611288684252
+UP	AD4_stress	ethylene-activated signaling pathway	27	165	0.029608335477070567
+UP	AD4_stress	FAD linked oxidase, N-terminal	13	51	0.01932541650301514
+UP	AD4_stress	FAD-binding, type PCMH, subdomain 1	13	51	0.01932541650301514
+UP	AD4_stress	glucosamine-containing compound metabolic process	10	21	4.5626497880180616e-4
+UP	AD4_stress	glutathione metabolic process	18	88	0.022246777503084392
+UP	AD4_stress	Glutathione S-transferase Omega/Tau-like	11	32	0.00434120964769356
+UP	AD4_stress	Glutathione S-transferase, N-terminal	15	60	0.009242729725768537
+UP	AD4_stress	Glutathione S-transferases Tau, C-terminal alpha helical domain, plant	13	38	9.578834795545497e-4
+UP	AD4_stress	glutathione transferase activity	14	50	0.0046150429387197146
+UP	AD4_stress	Glycoside hydrolase, family 19	9	17	4.8431146064429334e-4
+UP	AD4_stress	Glycoside hydrolase, family 19, catalytic	9	17	4.8431146064429334e-4
+UP	AD4_stress	Gnk2-homologous domain	22	72	9.470296676984058e-6
+UP	AD4_stress	Gnk2-homologous domain superfamily	22	72	9.470296676984058e-6
+UP	AD4_stress	GroES-like superfamily	16	73	0.02221704056170314
+UP	AD4_stress	heme binding	66	467	7.283009933928241e-4
+UP	AD4_stress	hormone binding	13	48	0.011011153870147687
+UP	AD4_stress	immune response-regulating signaling pathway	14	58	0.019811061708287014
+UP	AD4_stress	innate immune response	42	237	2.0240273352726954e-4
+UP	AD4_stress	Ionotropic glutamate receptor	9	23	0.007077131930112651
+UP	AD4_stress	IQ domain-containing protein IQM	7	17	0.026112130567698795
+UP	AD4_stress	iron ion binding	58	423	0.0052816184326629975
+UP	AD4_stress	Isopenicillin N synthase-like superfamily	38	178	7.857901545230679e-6
+UP	AD4_stress	Isopenicillin N synthase-like, Fe(2+) 2OG dioxygenase domain	35	163	2.0132087334713852e-5
+UP	AD4_stress	isoprenoid binding	13	38	9.578834795545497e-4
+UP	AD4_stress	L10-interacting MYB domain-containing protein	17	57	3.563250882827472e-4
+UP	AD4_stress	Leucine-rich repeat-containing N-terminal, plant-type	79	420	6.668954193431599e-10
+UP	AD4_stress	ligand-gated channel activity	10	34	0.028034372347480595
+UP	AD4_stress	Lysozyme-like domain superfamily	9	20	0.0021795740466786866
+UP	AD4_stress	molecular transducer activity	29	133	1.701531920110807e-4
+UP	AD4_stress	monocarboxylic acid binding	15	63	0.014589385329418655
+UP	AD4_stress	monooxygenase activity	60	391	1.8895445266739315e-4
+UP	AD4_stress	Multi-process regulation.calcium-dependent signalling.calcium sensor (CML)	19	92	0.01450720661414504
+UP	AD4_stress	Myb/SANT-like domain	16	68	0.010787189850277797
+UP	AD4_stress	NAC domain	26	131	0.0023553456440164903
+UP	AD4_stress	NAC domain superfamily	26	131	0.0023553456440164903
+UP	AD4_stress	NB-ARC	42	284	0.010385963845661908
+UP	AD4_stress	Non-haem dioxygenase N-terminal domain	34	162	5.281063678153634e-5
+UP	AD4_stress	oxidoreductase activity, acting on paired donors, with incorporation or reduction of molecular oxygen	62	459	0.004611641719759133
+UP	AD4_stress	PAN/Apple domain	23	61	6.593124758360718e-8
+UP	AD4_stress	Papain-like cysteine endopeptidase	11	42	0.03975263692124489
+UP	AD4_stress	pattern recognition receptor signaling pathway	9	24	0.009646785041452137
+UP	AD4_stress	Periplasmic binding protein-like I	7	18	0.03597747267757541
+UP	AD4_stress	PGG domain	18	85	0.015228233075629115
+UP	AD4_stress	phosphatase inhibitor activity	13	38	9.578834795545497e-4
+UP	AD4_stress	Phytohormone action.signalling peptides.NCRP (non-cysteine-rich-peptide) category.PIP/PIPL-peptide activity.PIP/PIPL-precursor polypeptide	6	13	0.03344373522061306
+UP	AD4_stress	Plant PDR ABC transporter associated	9	28	0.02782044509379045
+UP	AD4_stress	plant-type hypersensitive response	17	81	0.023582862696174517
+UP	AD4_stress	pollen-pistil interaction	36	131	2.117587855233197e-8
+UP	AD4_stress	Polyketide synthase, enoylreductase domain	12	44	0.017733245309460997
+UP	AD4_stress	polysaccharide binding	35	130	6.130823193409724e-8
+UP	AD4_stress	positive regulation of DNA-binding transcription factor activity	4	5	0.026112130567698795
+UP	AD4_stress	programmed cell death induced by symbiont	17	84	0.03344373522061306
+UP	AD4_stress	Protein homeostasis.ubiquitin-proteasome system.ubiquitin-fold protein conjugation.ubiquitin conjugation (ubiquitylation).ubiquitin-ligase E3 activities.U-Box E3 ligase activities.group-II ligase	12	43	0.01450720661414504
+UP	AD4_stress	Protein modification.phosphorylation.TKL protein kinase superfamily.G-Lectin protein kinase families.protein kinase (SD-1)	15	34	7.586993888613518e-6
+UP	AD4_stress	Protein modification.phosphorylation.TKL protein kinase superfamily.protein kinase (DUF26)	13	37	7.283009933928241e-4
+UP	AD4_stress	Protein modification.phosphorylation.TKL protein kinase superfamily.protein kinase (LRR-XII)	18	65	5.210556876465585e-4
+UP	AD4_stress	Protein modification.phosphorylation.TKL protein kinase superfamily.protein kinase (LysM)	8	19	0.009646785041452137
+UP	AD4_stress	Protein modification.phosphorylation.TKL protein kinase superfamily.protein kinase (RKF3)	5	8	0.021734242580817156
+UP	AD4_stress	Protein modification.phosphorylation.TKL protein kinase superfamily.protein kinase (WAK/WAKL)	12	45	0.021354284308837325
+UP	AD4_stress	protein serine/threonine kinase activity	62	375	1.0147226303915567e-5
+UP	AD4_stress	recognition of pollen	35	108	4.3045303853877645e-10
+UP	AD4_stress	Redox homeostasis.glutathione-based redox regulation.glutathione S-transferase activities.class tau glutathione S-transferase	11	32	0.00434120964769356
+UP	AD4_stress	regulation of defense response	50	351	0.006808941537991603
+UP	AD4_stress	regulation of immune response	43	287	0.007064657391204415
+UP	AD4_stress	regulation of response to biotic stimulus	38	266	0.03344373522061306
+UP	AD4_stress	regulation of response to external stimulus	41	277	0.011985790647295491
+UP	AD4_stress	response to bacterium	84	642	7.955044348151435e-4
+UP	AD4_stress	response to chitin	40	160	3.861769646470964e-8
+UP	AD4_stress	response to ethylene	41	299	0.045613031127705955
+UP	AD4_stress	response to fatty acid	40	270	0.014160716381070923
+UP	AD4_stress	response to fungus	82	532	2.316826679607138e-6
+UP	AD4_stress	response to jasmonic acid	38	262	0.026139322356983224
+UP	AD4_stress	response to nitrogen compound	57	319	2.8720257248255043e-6
+UP	AD4_stress	response to organonitrogen compound	49	249	1.4519675321775987e-6
+UP	AD4_stress	response to salicylic acid	39	219	3.9984856872230044e-4
+UP	AD4_stress	response to wounding	44	299	0.008604381971309511
+UP	AD4_stress	RNA biosynthesis.transcriptional regulation.WRKY transcription factor activity.transcription factor (WRKY)	35	118	4.311028243163021e-9
+UP	AD4_stress	S-locus glycoprotein domain	27	75	7.562516516906742e-9
+UP	AD4_stress	S-receptor-like serine/threonine-protein kinase	33	77	9.118477702380875e-13
+UP	AD4_stress	Serine-threonine/tyrosine-protein kinase, catalytic domain	96	523	1.6140784881109126e-11
+UP	AD4_stress	signaling receptor activity	27	117	1.3088220697596883e-4
+UP	AD4_stress	Solute transport.carrier-mediated transport.MFS superfamily.SP family.polyol/monosaccharide transporter (PLT)	6	10	0.007843296319147973
+UP	AD4_stress	Solute transport.channels.ligand-gated cation channel (GLR)	9	24	0.009646785041452137
+UP	AD4_stress	START-like domain superfamily	24	128	0.010385963845661908
+UP	AD4_stress	systemic acquired resistance	22	111	0.009242729725768537
+UP	AD4_stress	tetrapyrrole binding	68	500	0.001713327519215849
+UP	AD4_stress	U box domain	25	90	9.470296676984058e-6
+UP	AD4_stress	VQ	17	44	8.485811636103999e-6
+UP	AD4_stress	Wall-associated receptor kinase, C-terminal	12	29	2.7601374528672657e-4
+UP	AD4_stress	Wall-associated receptor kinase, galacturonan-binding domain	35	107	3.7749063779651266e-10
+UP	AD4_stress	WRKY domain	35	118	4.311028243163021e-9
+UP	AD4_stress	WRKY transcription factor, plant	35	117	4.006875865096446e-9
+UP	AD4_stress	Zinc finger, RING/FYVE/PHD-type	96	844	0.023899934492605707
+DOWN	AD4_stress	5'-3' RNA polymerase activity	24	122	4.502988400192025e-4
+DOWN	AD4_stress	anchored component of membrane	38	190	7.179861053032268e-7
+DOWN	AD4_stress	apoplast	46	367	0.00611734566595302
+DOWN	AD4_stress	ATP biosynthetic process	23	85	2.8689362172118994e-6
+DOWN	AD4_stress	ATP metabolic process	33	202	4.960338872019648e-4
+DOWN	AD4_stress	ATP synthase, F0 complex, subunit C, bacterial/chloroplast	4	6	0.03500985466358249
+DOWN	AD4_stress	ATP synthesis coupled proton transport	23	85	2.8689362172118994e-6
+DOWN	AD4_stress	Bifunctional inhibitor/plant lipid transfer protein/seed storage helical domain	19	89	0.0011735036280311362
+DOWN	AD4_stress	Bifunctional inhibitor/plant lipid transfer protein/seed storage helical domain superfamily	19	95	0.0029358089218911904
+DOWN	AD4_stress	cation transmembrane transport	39	318	0.029818681513133088
+DOWN	AD4_stress	cell wall	71	606	8.692594667539847e-4
+DOWN	AD4_stress	Cell wall organisation.cell wall proteins.hydroxyproline-rich glycoprotein activities.arabinogalactan-protein activities.Fasciclin-type arabinogalactan protein (FLA)	10	22	1.6830775973666418e-4
+DOWN	AD4_stress	Cell wall organisation.cellulose.cellulose synthase complex (CSC).CSC components.cellulose synthase (CesA)	8	16	7.408470050232139e-4
+DOWN	AD4_stress	cellular respiration	24	153	0.014287175390784371
+DOWN	AD4_stress	Cellulose synthase	10	41	0.0377161086676366
+DOWN	AD4_stress	Cellulose synthase, RING-type zinc finger	8	16	7.408470050232139e-4
+DOWN	AD4_stress	chlorophyll binding	12	30	7.508411296377066e-5
+DOWN	AD4_stress	chloroplast envelope	130	757	1.057953742289704e-19
+DOWN	AD4_stress	chloroplast nucleoid	14	51	9.518095339418125e-4
+DOWN	AD4_stress	chloroplast organization	31	227	0.020702446284589233
+DOWN	AD4_stress	chloroplast stroma	174	863	1.3092756217871632e-35
+DOWN	AD4_stress	chloroplast stromal thylakoid	6	14	0.023611866319449438
+DOWN	AD4_stress	chloroplast thylakoid	115	531	1.0133963008992359e-25
+DOWN	AD4_stress	chloroplast thylakoid lumen	6	14	0.023611866319449438
+DOWN	AD4_stress	chloroplast thylakoid membrane	90	421	1.3921233818733771e-19
+DOWN	AD4_stress	Citrate carrier CitT-related	4	6	0.03500985466358249
+DOWN	AD4_stress	Cytochrome b/b6, C-terminal domain superfamily	4	6	0.03500985466358249
+DOWN	AD4_stress	cytosolic ribosome	44	373	0.029818681513133088
+DOWN	AD4_stress	DNA-directed 5'-3' RNA polymerase activity	24	115	1.6991443907027969e-4
+DOWN	AD4_stress	DNA-directed RNA polymerase, subunit 2	8	22	0.00887461802096928
+DOWN	AD4_stress	electron transfer activity	53	172	2.6038449241069244e-18
+DOWN	AD4_stress	electron transport chain	49	197	6.746544520238514e-13
+DOWN	AD4_stress	electron transporter, transferring electrons within the cyclic electron transport pathway of photosynthesis activity	14	24	2.4765855737365327e-8
+DOWN	AD4_stress	external encapsulating structure	77	639	1.6830775973666418e-4
+DOWN	AD4_stress	F/V-ATP synthase subunit C superfamily	8	18	0.0018491136018437687
+DOWN	AD4_stress	FAS1 domain	10	25	5.724817621580179e-4
+DOWN	AD4_stress	FAS1 domain superfamily	10	26	8.149532698392644e-4
+DOWN	AD4_stress	Fasciclin-like arabinogalactan protein 15/16/17/18	3	3	0.0377161086676366
+DOWN	AD4_stress	Ferredoxin [2Fe-2S], plant	6	8	5.561555665361642e-4
+DOWN	AD4_stress	generation of precursor metabolites and energy	95	519	3.9740388441513724e-16
+DOWN	AD4_stress	Glucose-methanol-choline oxidoreductase, C-terminal	6	13	0.01554459377506161
+DOWN	AD4_stress	Glucose-methanol-choline oxidoreductase, N-terminal	6	13	0.01554459377506161
+DOWN	AD4_stress	Glycoside hydrolase family 9	7	21	0.038196074039409875
+DOWN	AD4_stress	inorganic cation transmembrane transport	39	314	0.023611866319449438
+DOWN	AD4_stress	inorganic ion transmembrane transport	43	339	0.008062216218615527
+DOWN	AD4_stress	ion transmembrane transport	56	444	9.791784048231815e-4
+DOWN	AD4_stress	large ribosomal subunit	44	243	9.74500806780227e-7
+DOWN	AD4_stress	membrane protein complex	85	654	2.446551625536897e-6
+DOWN	AD4_stress	mitochondrial ATP synthesis coupled proton transport	4	4	0.003615694460359209
+DOWN	AD4_stress	mitochondrial large ribosomal subunit	8	12	5.6548255061178065e-5
+DOWN	AD4_stress	mitochondrial matrix	13	51	0.004097433182665575
+DOWN	AD4_stress	mitochondrial protein-containing complex	29	209	0.023611866319449438
+DOWN	AD4_stress	mitochondrial ribosome	11	17	6.274677885233744e-7
+DOWN	AD4_stress	mitochondrial small ribosomal subunit	4	5	0.01472987318839491
+DOWN	AD4_stress	NAD(P)H dehydrogenase (quinone) activity	13	45	0.0010758058357396095
+DOWN	AD4_stress	NADH dehydrogenase (quinone) activity	13	35	6.81284007722227e-5
+DOWN	AD4_stress	NADH dehydrogenase activity	15	50	1.6991443907027969e-4
+DOWN	AD4_stress	nucleoid	15	59	0.0011735036280311362
+DOWN	AD4_stress	nucleoside binding	8	22	0.00887461802096928
+DOWN	AD4_stress	nucleoside triphosphate biosynthetic process	24	102	1.9844978198257308e-5
+DOWN	AD4_stress	nucleoside triphosphate metabolic process	24	109	6.81284007722227e-5
+DOWN	AD4_stress	Nucleotide-diphospho-sugar transferases	33	204	5.927174873403209e-4
+DOWN	AD4_stress	organellar large ribosomal subunit	18	34	4.422425647178636e-10
+DOWN	AD4_stress	organellar ribosome	30	61	1.9284809428753255e-16
+DOWN	AD4_stress	organellar small ribosomal subunit	20	35	3.4043493355439563e-12
+DOWN	AD4_stress	oxidoreductase activity, acting on NAD(P)H	23	119	8.59546498470628e-4
+DOWN	AD4_stress	oxidoreductase activity, acting on NAD(P)H, quinone or similar compound as acceptor	14	53	0.0014312634174928152
+DOWN	AD4_stress	oxidoreduction-driven active transmembrane transporter activity	17	47	2.3569462017318526e-6
+DOWN	AD4_stress	photosynthesis	80	364	4.455871676340197e-18
+DOWN	AD4_stress	photosynthesis, light harvesting	14	55	0.0021804232636830744
+DOWN	AD4_stress	photosynthesis, light reaction	60	226	1.6433878610387527e-17
+DOWN	AD4_stress	Photosynthesis.photophosphorylation.ATP synthase complex.membrane CF0 subcomplex.subunit b	4	6	0.03500985466358249
+DOWN	AD4_stress	Photosynthesis.photophosphorylation.linear electron flow.ferredoxin electron carrier activities.NADP-reduction-targeted ferredoxin (Fd)	5	7	0.004275594559928995
+DOWN	AD4_stress	photosynthetic electron transport chain	35	122	8.31268115460331e-11
+DOWN	AD4_stress	photosynthetic electron transport in photosystem II	11	24	4.9498686701256994e-5
+DOWN	AD4_stress	photosynthetic membrane	111	500	1.0133963008992359e-25
+DOWN	AD4_stress	Photosynthetic reaction centre, L/M	8	14	2.26392797739001e-4
+DOWN	AD4_stress	photosystem	29	115	2.471259657262532e-7
+DOWN	AD4_stress	Photosystem antenna protein-like	7	15	0.004140560032736496
+DOWN	AD4_stress	Photosystem antenna protein-like superfamily	7	15	0.004140560032736496
+DOWN	AD4_stress	photosystem II	16	68	0.0016424657740186667
+DOWN	AD4_stress	Photosystem II protein D1/D2 superfamily	8	14	2.26392797739001e-4
+DOWN	AD4_stress	photosystem II repair	6	14	0.023611866319449438
+DOWN	AD4_stress	plant-type cell wall	28	195	0.018170019788010354
+DOWN	AD4_stress	plastid large ribosomal subunit	10	22	1.6830775973666418e-4
+DOWN	AD4_stress	plastid membrane	106	581	6.370163365998819e-18
+DOWN	AD4_stress	plastid nucleoid	15	58	9.749230366149645e-4
+DOWN	AD4_stress	plastid organization	46	316	1.8782938003259036e-4
+DOWN	AD4_stress	plastid ribosome	26	53	4.749825182353674e-14
+DOWN	AD4_stress	plastid small ribosomal subunit	16	30	6.846226513563101e-9
+DOWN	AD4_stress	plastid thylakoid	115	536	1.8226164837146765e-25
+DOWN	AD4_stress	plastid thylakoid membrane	91	429	1.3921233818733771e-19
+DOWN	AD4_stress	plastoglobule	21	96	3.363842391116881e-4
+DOWN	AD4_stress	protein domain specific binding	20	97	0.0011735036280311362
+DOWN	AD4_stress	Protein TIC214	10	16	4.5938235962928375e-6
+DOWN	AD4_stress	proton channel activity	14	40	5.6811139140440254e-5
+DOWN	AD4_stress	proton transmembrane transport	33	170	1.3295991534314094e-5
+DOWN	AD4_stress	proton transmembrane transporter activity	36	228	4.1097179492846967e-4
+DOWN	AD4_stress	proton-transporting ATP synthase activity, rotational mechanism	13	38	1.7308268887632e-4
+DOWN	AD4_stress	proton-transporting ATP synthase complex	20	80	7.518448168846348e-5
+DOWN	AD4_stress	proton-transporting ATP synthase complex, coupling factor F(o)	12	44	0.004056052277539163
+DOWN	AD4_stress	proton-transporting two-sector ATPase complex	27	121	1.1545115686750803e-5
+DOWN	AD4_stress	proton-transporting two-sector ATPase complex, proton-transporting domain	18	69	1.473289323265535e-4
+DOWN	AD4_stress	purine nucleoside triphosphate biosynthetic process	24	93	3.5662658734190546e-6
+DOWN	AD4_stress	purine nucleotide biosynthetic process	27	162	0.002100420373059037
+DOWN	AD4_stress	purine nucleotide metabolic process	37	264	0.00345998340970525
+DOWN	AD4_stress	purine ribonucleoside triphosphate biosynthetic process	24	93	3.5662658734190546e-6
+DOWN	AD4_stress	purine ribonucleotide biosynthetic process	27	153	8.211703337630184e-4
+DOWN	AD4_stress	purine ribonucleotide metabolic process	35	248	0.004542458459947654
+DOWN	AD4_stress	purine-containing compound biosynthetic process	27	171	0.005022924215993452
+DOWN	AD4_stress	purine-containing compound metabolic process	37	290	0.02082674080245285
+DOWN	AD4_stress	ribonucleoprotein complex	81	546	1.2398205925086173e-8
+DOWN	AD4_stress	ribonucleoside triphosphate biosynthetic process	24	100	1.4479165694606266e-5
+DOWN	AD4_stress	ribonucleotide biosynthetic process	27	168	0.003909031665818953
+DOWN	AD4_stress	ribonucleotide metabolic process	35	264	0.015208179037623943
+DOWN	AD4_stress	Ribosomal protein L10e/L16	5	10	0.034211418093998754
+DOWN	AD4_stress	Ribosomal protein L10e/L16 superfamily	5	10	0.034211418093998754
+DOWN	AD4_stress	Ribosomal protein L14 superfamily	6	14	0.023611866319449438
+DOWN	AD4_stress	Ribosomal protein L14P	6	14	0.023611866319449438
+DOWN	AD4_stress	Ribosomal protein L16	4	5	0.01472987318839491
+DOWN	AD4_stress	Ribosomal protein L34	3	3	0.0377161086676366
+DOWN	AD4_stress	Ribosomal protein S12/S23	9	13	6.762898406576287e-6
+DOWN	AD4_stress	Ribosomal protein S5/S7	9	14	1.5368460481941212e-5
+DOWN	AD4_stress	Ribosomal protein S7 domain	9	14	1.5368460481941212e-5
+DOWN	AD4_stress	Ribosomal protein S7 domain superfamily	9	14	1.5368460481941212e-5
+DOWN	AD4_stress	ribosomal subunit	75	400	5.112863581232215e-13
+DOWN	AD4_stress	rRNA binding	16	57	1.8782938003259036e-4
+DOWN	AD4_stress	small ribosomal subunit	39	167	3.996496430456549e-9
+DOWN	AD4_stress	stromule	12	56	0.03692984087604764
+DOWN	AD4_stress	structural constituent of ribosome	116	673	9.19695836940701e-18
+DOWN	AD4_stress	structural molecule activity	127	779	1.5690220109881778e-17
+DOWN	AD4_stress	thylakoid lumen	16	64	8.189074787256722e-4
+DOWN	AD4_stress	thylakoid membrane	100	465	5.293533458110703e-22
+DOWN	AD4_stress	Trichome birefringence-like family	13	65	0.0412091675444026
+DOWN	AD4_stress	UDP-glycosyltransferase activity	43	369	0.041108943498869635
+DOWN	AD4_stress	V-ATPase proteolipid subunit C-like domain	8	16	7.408470050232139e-4
+ELD_P2	AD4_stress	Alcohol dehydrogenase, N-terminal	19	59	0.00809105691056166
+ELD_P2	AD4_stress	amine metabolic process	33	135	0.0058131199525840215
+ELD_P2	AD4_stress	AP2/ERF domain superfamily	61	220	3.289057047429973e-8
+ELD_P2	AD4_stress	Calcium-binding protein KIC/PBP1/KRP1	7	11	0.028554188217705792
+ELD_P2	AD4_stress	cellular response to ethylene stimulus	39	181	0.016628710230729624
+ELD_P2	AD4_stress	DNA-binding domain superfamily	62	237	1.6554008905290593e-7
+ELD_P2	AD4_stress	ethylene-activated signaling pathway	36	165	0.024445982843848715
+ELD_P2	AD4_stress	Ethylene-responsive transcription factor	20	58	0.0017456329685780374
+ELD_P2	AD4_stress	GroES-like superfamily	22	73	0.0058131199525840215
+ELD_P2	AD4_stress	heme binding	79	467	0.02628120756400243
+ELD_P2	AD4_stress	phenylalanine ammonia-lyase activity	5	6	0.04913119359543249
+ELD_P2	AD4_stress	phenylpropanoid metabolic process	39	191	0.04170928106210082
+ELD_P2	AD4_stress	Polyketide synthase, enoylreductase domain	15	44	0.02628120756400243
+ELD_P2	AD4_stress	Protein of unknown function DUF247, plant	19	45	1.868643236551058e-4
+ELD_P2	AD4_stress	response to chitin	46	160	1.461655760609951e-6
+ELD_P2	AD4_stress	response to fungus	87	532	0.03375136931736189
+ELD_P2	AD4_stress	response to nitrogen compound	65	319	6.113720958171072e-4
+ELD_P2	AD4_stress	response to organonitrogen compound	55	249	3.7033384800628355e-4
+ELD_P2	AD4_stress	response to wounding	67	299	1.6647700127043917e-5
+ELD_P2	AD4_stress	RNA biosynthesis.transcriptional regulation.AP2/ERF  transcription factor superfamily.transcription factor (DREB)	20	71	0.029308217091120605
+ELD_P2	AD4_stress	RNA biosynthesis.transcriptional regulation.AP2/ERF  transcription factor superfamily.transcription factor (ERF)	32	111	3.368398031616307e-4
+ELD_P2	AD4_stress	RNA biosynthesis.transcriptional regulation.WRKY transcription factor activity.transcription factor (WRKY)	32	118	8.462505824247066e-4
+ELD_P2	AD4_stress	secondary metabolic process	64	349	0.014706664714781669
+ELD_P2	AD4_stress	TIFY/JAZ family	9	19	0.04170928106210082
+ELD_P2	AD4_stress	WRKY domain	32	118	8.462505824247066e-4
+ELD_P2	AD4_stress	WRKY transcription factor, plant	32	117	8.397727361580208e-4

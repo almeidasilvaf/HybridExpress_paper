@@ -1,0 +1,119 @@
+class	group	term	genes	all	padj
+UP	Heading	beta-glucan biosynthetic process	5	86	0.01630563389024617
+UP	Heading	beta-glucan metabolic process	5	111	0.0436658496870233
+UP	Heading	carbohydrate biosynthetic process	11	350	6.862910371919239e-4
+UP	Heading	cell wall assembly	3	19	0.032311467784422176
+UP	Heading	cell wall biogenesis	9	235	0.001356200858581154
+UP	Heading	Cell wall organisation.cellulose.cellulose-hemicellulose network assembly.regulatory protein (COB)	3	9	0.006482522621711783
+UP	Heading	cell wall organization	9	339	0.00793628235575832
+UP	Heading	cellular carbohydrate biosynthetic process	8	252	0.007915409128373397
+UP	Heading	cellular carbohydrate metabolic process	10	463	0.01272552312614522
+UP	Heading	cellular glucan metabolic process	8	237	0.00643320538792365
+UP	Heading	cellular polysaccharide biosynthetic process	7	201	0.01272552312614522
+UP	Heading	cellular polysaccharide metabolic process	9	313	0.00643320538792365
+UP	Heading	cellulose biosynthetic process	5	70	0.008184306377100799
+UP	Heading	cellulose metabolic process	5	95	0.02418921969760433
+UP	Heading	cellulose microfibril organization	3	14	0.015827083452581395
+UP	Heading	COBRA, plant	3	10	0.007915409128373397
+UP	Heading	Early nodulin 93 ENOD93 protein	4	7	1.2290898071201488e-4
+UP	Heading	external encapsulating structure organization	9	380	0.014749272745274149
+UP	Heading	extracellular matrix organization	3	19	0.032311467784422176
+UP	Heading	generation of precursor metabolites and energy	9	420	0.025776920227207234
+UP	Heading	glucan biosynthetic process	7	149	0.0053352038508413645
+UP	Heading	glucan metabolic process	8	238	0.00643320538792365
+UP	Heading	glucosyltransferase activity	6	138	0.014608903926694877
+UP	Heading	plant-type cell wall biogenesis	8	174	0.001356200858581154
+UP	Heading	plant-type cell wall organization or biogenesis	10	261	6.350406545305791e-4
+UP	Heading	polysaccharide biosynthetic process	8	234	0.00643320538792365
+UP	Heading	polysaccharide metabolic process	9	397	0.018080324817737477
+UP	Heading	response to anoxia	4	25	0.006014077790168602
+UP	Heading	UDP-glucosyltransferase activity	5	115	0.04987102064403909
+DOWN	Heading	cellular modified amino acid metabolic process	8	127	3.2321753863410503e-4
+DOWN	Heading	flavone biosynthetic process	3	12	0.028127208270527712
+DOWN	Heading	flavone metabolic process	3	13	0.032693930255518956
+DOWN	Heading	flavonol biosynthetic process	3	11	0.02309068075117478
+DOWN	Heading	glutathione metabolic process	8	85	4.652341088764239e-5
+DOWN	Heading	Glutathione S-transferase Omega/Tau-like	6	33	4.652341088764239e-5
+DOWN	Heading	Glutathione S-transferase, C-terminal domain superfamily	6	72	0.0018892163607934082
+DOWN	Heading	Glutathione S-transferase, N-terminal	6	60	7.124444579255701e-4
+DOWN	Heading	Glutathione S-transferases Tau, C-terminal alpha helical domain, plant	6	36	4.853903886156036e-5
+DOWN	Heading	glutathione transferase activity	8	68	1.5656210808207683e-5
+DOWN	Heading	MYB-like transcription factor EOBI/EOBII-like, plant	3	14	0.036980743395589266
+DOWN	Heading	Redox homeostasis.glutathione-based redox regulation.glutathione S-transferase activities.class tau glutathione S-transferase	6	35	4.853903886156036e-5
+DOWN	Heading	RNA biosynthesis.transcriptional regulation.MYB  transcription factor superfamily.transcription factor (REVEILLE)	3	8	0.008707953938579408
+DOWN	Heading	SANT/Myb domain	6	127	0.032693930255518956
+DOWN	Heading	transferase activity, transferring alkyl or aryl (other than methyl) groups	9	152	1.0373716771605433e-4
+ADD	Heading	ADP binding	10	316	0.002831335579646537
+ELD_P1	Heading	ADP binding	40	316	0.00200280849796335
+ELD_P1	Heading	Aquaporin transporter	9	22	0.002898186101064048
+ELD_P1	Heading	Aquaporin-like	9	24	0.004487572583426551
+ELD_P1	Heading	channel activity	20	138	0.045219081973967394
+ELD_P1	Heading	defense response to bacterium	58	462	2.629724430889986e-5
+ELD_P1	Heading	Diacylglycerol kinase	5	7	0.012500004076153544
+ELD_P1	Heading	diacylglycerol kinase activity	5	8	0.02122397934295895
+ELD_P1	Heading	Diacylglycerol kinase, accessory domain	5	6	0.004487572583426551
+ELD_P1	Heading	Diacylglycerol kinase, plant	4	4	0.012500004076153544
+ELD_P1	Heading	Disease resistance protein, plants	34	284	0.016273492522424764
+ELD_P1	Heading	fluid transport	9	30	0.02122397934295895
+ELD_P1	Heading	Lipid metabolism.glycerolipid biosynthesis.phosphatidate.diacylglycerol kinase	5	6	0.004487572583426551
+ELD_P1	Heading	Major intrinsic protein	9	24	0.004487572583426551
+ELD_P1	Heading	molecular transducer activity	20	136	0.0404612948767902
+ELD_P1	Heading	protein kinase C-activating G protein-coupled receptor signaling pathway	5	8	0.02122397934295895
+ELD_P1	Heading	response to bacterium	66	561	2.629724430889986e-5
+ELD_P1	Heading	signaling receptor activity	20	123	0.01316057989762699
+ELD_P1	Heading	Solute transport.channels.MIP family.plasma membrane intrinsic protein (PIP)	5	8	0.02122397934295895
+ELD_P1	Heading	Solute-binding protein  family 3/N-terminal domain of MltF	6	14	0.04355781720950044
+ELD_P1	Heading	water channel activity	9	19	0.0012486921985903603
+ELD_P1	Heading	water transmembrane transporter activity	9	20	0.001620532101323874
+ELD_P2	Heading	ADP binding	17	316	0.003503166046107148
+ELD_P2	Heading	Chlorophyll A-B binding protein	4	15	0.03511551132635236
+ELD_P2	Heading	Chlorophyll A-B binding protein, plant and chromista	4	10	0.00730277874170772
+ELD_P2	Heading	Chlorophyll a/b binding domain superfamily	4	16	0.044368186065700796
+ELD_P2	Heading	chlorophyll binding	4	15	0.03511551132635236
+ELD_P2	Heading	chloroplast thylakoid	20	399	0.0017514242398175203
+ELD_P2	Heading	chloroplast thylakoid membrane	20	310	8.901153510335677e-5
+ELD_P2	Heading	Disease resistance protein, plants	16	284	0.003503166046107148
+ELD_P2	Heading	photosynthesis	16	200	8.901153510335677e-5
+ELD_P2	Heading	photosynthesis, light harvesting	5	24	0.016003392828556635
+ELD_P2	Heading	photosynthesis, light harvesting in photosystem I	5	14	0.0014121870802998107
+ELD_P2	Heading	photosynthesis, light reaction	9	109	0.020800780970395834
+ELD_P2	Heading	photosynthetic membrane	21	351	9.415576595894118e-5
+ELD_P2	Heading	photosystem	14	61	2.223400749474167e-9
+ELD_P2	Heading	photosystem I	10	23	2.4127464982069984e-9
+ELD_P2	Heading	photosystem I reaction center	4	5	3.311421617550954e-4
+ELD_P2	Heading	photosystem II	8	50	7.451543388494419e-4
+ELD_P2	Heading	plastid membrane	20	473	0.0149240330619643
+ELD_P2	Heading	plastid thylakoid	20	401	0.0017557221707364958
+ELD_P2	Heading	plastid thylakoid membrane	20	314	8.901153510335677e-5
+ELD_P2	Heading	plastoglobule	9	58	2.576974001397579e-4
+ELD_P2	Heading	protein domain specific binding	11	76	5.752123757903676e-5
+ELD_P2	Heading	Rx, N-terminal	13	189	0.003503166046107148
+ELD_P2	Heading	thylakoid membrane	20	347	2.822634704819529e-4
+DOWN	Tillering	CASP-like protein 1U	3	4	0.035315828880197055
+ELD_P2	Tillering	ADP binding	21	320	2.3322839146010563e-5
+ELD_P2	Tillering	Apoptotic protease-activating factors, helical domain	13	154	3.092076931811777e-4
+ELD_P2	Tillering	carbon-oxygen lyase activity, acting on phosphates	6	31	0.003119622121499985
+ELD_P2	Tillering	Chlorophyll A-B binding protein	4	18	0.04723060367536519
+ELD_P2	Tillering	chloroplast stroma	28	741	0.0018975639978113625
+ELD_P2	Tillering	chloroplast thylakoid	18	431	0.022014045493087483
+ELD_P2	Tillering	chloroplast thylakoid membrane	15	335	0.04114809959473207
+ELD_P2	Tillering	Disease resistance protein, plants	22	289	1.8217959284124457e-6
+ELD_P2	Tillering	diterpenoid biosynthetic process	9	50	6.93617538166014e-5
+ELD_P2	Tillering	diterpenoid metabolic process	9	61	2.332147385232009e-4
+ELD_P2	Tillering	gibberellin biosynthetic process	6	32	0.003571701235144471
+ELD_P2	Tillering	gibberellin metabolic process	6	39	0.009593198939809701
+ELD_P2	Tillering	isoprenoid biosynthetic process	14	167	1.605020290828286e-4
+ELD_P2	Tillering	isoprenoid metabolic process	14	204	0.0012315351742885298
+ELD_P2	Tillering	NB-ARC	17	229	6.93617538166014e-5
+ELD_P2	Tillering	photosynthesis	13	218	0.008216527619418523
+ELD_P2	Tillering	plastid stroma	28	747	0.0020657790166949603
+ELD_P2	Tillering	plastid thylakoid	18	433	0.02239913355060445
+ELD_P2	Tillering	plastid thylakoid membrane	15	339	0.045148489750939304
+ELD_P2	Tillering	Rx, N-terminal	15	189	1.544987147047144e-4
+ELD_P2	Tillering	terpene synthase activity	6	26	0.0012728807525639678
+ELD_P2	Tillering	Terpene synthase, N-terminal domain	5	25	0.01278683680974875
+ELD_P2	Tillering	terpenoid biosynthetic process	14	133	2.3322839146010563e-5
+ELD_P2	Tillering	Terpenoid cyclases/protein prenyltransferase alpha-alpha toroid	6	34	0.00489076848462615
+ELD_P2	Tillering	terpenoid metabolic process	14	167	1.605020290828286e-4
+ELD_P2	Tillering	Virus X resistance protein-like, coiled-coil domain	12	126	2.65357566779699e-4
+ELD_P2	Tillering	Winged helix-like DNA-binding domain superfamily	16	313	0.006271110686679438
