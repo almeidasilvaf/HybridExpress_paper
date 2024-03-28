@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Code and data for “HybridExpress: an R/Bioconductor package for comparative transcriptomic analyses of hybrids and their progenitors” - 2&nbsp; Benchmark 2: transcriptomic analyses of heterosis in rice root traits</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/appendices.html" rel="next">
+<link href="../chapters/chapter_01.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="../site_libs/datatables-binding-0.31/datatables.js"></script>
+<script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="../site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/chapter_02.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Benchmark 2: transcriptomic analyses of heterosis in rice root traits</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Code and data for “HybridExpress: an R/Bioconductor package for comparative transcriptomic analyses of hybrids and their progenitors”</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/chapter_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Benchmark 1: allopolyploid and diploid cotton species under salt stress</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/chapter_02.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Benchmark 2: transcriptomic analyses of heterosis in rice root traits</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/appendices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Appendix: Data acquisition</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#data-description-and-experimental-design" id="toc-data-description-and-experimental-design" class="nav-link active" data-scroll-target="#data-description-and-experimental-design"><span class="header-section-number">2.1</span> Data description and experimental design</a></li>
+  <li><a href="#data-processing" id="toc-data-processing" class="nav-link" data-scroll-target="#data-processing"><span class="header-section-number">2.2</span> Data processing</a></li>
+  <li><a href="#exploratory-data-analyses" id="toc-exploratory-data-analyses" class="nav-link" data-scroll-target="#exploratory-data-analyses"><span class="header-section-number">2.3</span> Exploratory data analyses</a></li>
+  <li><a href="#identifying-differentially-expressed-genes-in-triplets" id="toc-identifying-differentially-expressed-genes-in-triplets" class="nav-link" data-scroll-target="#identifying-differentially-expressed-genes-in-triplets"><span class="header-section-number">2.4</span> Identifying differentially expressed genes in triplets</a></li>
+  <li><a href="#classifying-genes-into-expression-groups" id="toc-classifying-genes-into-expression-groups" class="nav-link" data-scroll-target="#classifying-genes-into-expression-groups"><span class="header-section-number">2.5</span> Classifying genes into expression groups</a></li>
+  <li><a href="#overrepresentation-analyses" id="toc-overrepresentation-analyses" class="nav-link" data-scroll-target="#overrepresentation-analyses"><span class="header-section-number">2.6</span> Overrepresentation analyses</a></li>
+  <li><a href="#saving-important-objects" id="toc-saving-important-objects" class="nav-link" data-scroll-target="#saving-important-objects">Saving important objects</a></li>
+  <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info">Session info</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Benchmark 2: transcriptomic analyses of heterosis in rice root traits</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Here, we will use <strong>HybridExpress</strong> on data from <span class="citation" data-cites="zhai2013transcriptome">Zhai et al. (<a href="#ref-zhai2013transcriptome" role="doc-biblioref">2013</a>)</span>. In this study, authors sequenced the transcriptomes of the super-hybrid rice variety Xieyou 9308 and its parents at tillering and heading stages to understand the molecular basis of heterosis (i.e., superior performance of hybrids compared to parents) in root traits.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(HybridExpress)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SummarizedExperiment)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ComplexHeatmap)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># for reproducibility</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="data-description-and-experimental-design" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="data-description-and-experimental-design"><span class="header-section-number">2.1</span> Data description and experimental design</h2>
+<p>We will start by loading the data set, which is stored in a <code>SummarizedExperiment</code> object with a count matrix and sample metadata.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"se_rice.rda"</span>))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>se_rice</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>class: SummarizedExperiment 
+dim: 42081 12 
+metadata(0):
+assays(1): counts
+rownames(42081): Os01t0100100-01 Os01t0100200-01 ... Os12t0641500-03
+  Os12t0641600-01
+rowData names(0):
+colnames(12): R1 R2 ... F3 F4
+colData names(3): Line Stage Generation</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Taking a look at the assay</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">assay</span>(se_rice))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 R1  R2  R3  R4  X1  X2  X3  X4  F1  F2  F3  F4
+Os01t0100100-01 397 685 247 332 372 348 489 414 257 420 225 262
+Os01t0100200-01   7  21  14   8   9   2  10  15   3   9   8  12
+Os01t0100400-01  90 195  81  54 141  56 114  91 110 345  52  68
+Os01t0100500-01 436 571 324 315 418 353 509 516 280 371 289 276
+Os01t0100600-01 264 443 191 300 211 249 345 360 215 195 206 162
+Os01t0100650-00  12   3   3   2  12  13  39   2   0   2   0  14</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Taking a look at the sample metadata</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(se_rice) <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           Line     Stage Generation
+R1        R9308 Tillering         P1
+R2        R9308 Tillering         P1
+R3        R9308   Heading         P1
+R4        R9308   Heading         P1
+X1 Xieqingzao B Tillering         P2
+X2 Xieqingzao B Tillering         P2
+X3 Xieqingzao B   Heading         P2
+X4 Xieqingzao B   Heading         P2
+F1  Xieyou 9308 Tillering         F1
+F2  Xieyou 9308 Tillering         F1
+F3  Xieyou 9308   Heading         F1
+F4  Xieyou 9308   Heading         F1</code></pre>
+</div>
+</div>
+<p>As we can see in the sample metadata, for each stage (tillering and heading), two replicates were obtained for each generation (parents and hybrid). Line Xieyou 9308 represents the hybrid, while lines R9308 and Xieqingzao B represent the parents 1 and 2, respectively. Given this experimental design, we will perform comparative analyses separately for each stage. Thus, our triplets will be:</p>
+<ol type="1">
+<li>R9308 &lt;-&gt; Xieyou 9308 &lt;-&gt; Xieqingzao B, heading stage</li>
+<li>R9308 &lt;-&gt; Xieyou 9308 &lt;-&gt; Xieqingzao B, tillering</li>
+</ol>
+<p>Let’s subset the data accordingly:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get triplets for each stage</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>se_h <span class="ot">&lt;-</span> se_rice[, se_rice<span class="sc">$</span>Stage <span class="sc">==</span> <span class="st">"Heading"</span>]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>se_t <span class="ot">&lt;-</span> se_rice[, se_rice<span class="sc">$</span>Stage <span class="sc">==</span> <span class="st">"Tillering"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-processing" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="data-processing"><span class="header-section-number">2.2</span> Data processing</h2>
+<p>Here, we will first remove non-expressed genes (sum of counts &lt;10 across all samples). Then, we will add midparent expression values to each set, and normalize count data by library size.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove non-expressed genes</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>se_h <span class="ot">&lt;-</span> se_h[<span class="fu">rowSums</span>(<span class="fu">assay</span>(se_h)) <span class="sc">&gt;=</span> <span class="dv">10</span>, ]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>se_t <span class="ot">&lt;-</span> se_t[<span class="fu">rowSums</span>(<span class="fu">assay</span>(se_t)) <span class="sc">&gt;=</span> <span class="dv">10</span>, ]</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Add midparent expression</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>se_h <span class="ot">&lt;-</span> <span class="fu">add_midparent_expression</span>(se_h)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>se_t <span class="ot">&lt;-</span> <span class="fu">add_midparent_expression</span>(se_t)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize data by library size</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>se_h <span class="ot">&lt;-</span> <span class="fu">add_size_factors</span>(se_h)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>se_t <span class="ot">&lt;-</span> <span class="fu">add_size_factors</span>(se_t)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exploratory-data-analyses" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="exploratory-data-analyses"><span class="header-section-number">2.3</span> Exploratory data analyses</h2>
+<p>Now, we will perform exploratory data analyses to check if samples group together as expected. We will first explore sample clustering with PCA plots.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot PCA for each stage separately</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>p_pca_h <span class="ot">&lt;-</span> <span class="fu">pca_plot</span>(se_h, <span class="at">color_by =</span> <span class="st">"Generation"</span>, <span class="at">add_mean =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"PCA of samples - Heading stage"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>p_pca_t <span class="ot">&lt;-</span> <span class="fu">pca_plot</span>(se_t, <span class="at">color_by =</span> <span class="st">"Generation"</span>, <span class="at">add_mean =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"PCA of samples - Tillering stage"</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine plots</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>p_pca_combined <span class="ot">&lt;-</span> patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    p_pca_h <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>, <span class="at">legend.box =</span> <span class="st">"vertical"</span>), </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    p_pca_t <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>, <span class="at">legend.box =</span> <span class="st">"vertical"</span>),</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">1</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">"collect"</span>) <span class="sc">&amp;</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>p_pca_combined</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chapter_02_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now, let’s visualize a heatmap of sample correlations.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Heatmap of sample correlations</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>p_hmh <span class="ot">&lt;-</span> <span class="fu">plot_samplecor</span>(se_h, <span class="at">coldata_cols =</span> <span class="st">"Generation"</span>, <span class="at">show_rownames =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>p_hmh<span class="sc">@</span>column_title <span class="ot">&lt;-</span> <span class="st">"Heading"</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>p_hmt <span class="ot">&lt;-</span> <span class="fu">plot_samplecor</span>(se_t, <span class="at">coldata_cols =</span> <span class="st">"Generation"</span>, <span class="at">show_rownames =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>p_hmt<span class="sc">@</span>column_title <span class="ot">&lt;-</span> <span class="st">"Tillering"</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine plots - one per row</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>p_hm_combined <span class="ot">&lt;-</span> patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    ggplotify<span class="sc">::</span><span class="fu">as.ggplot</span>(p_hmh), </span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    ggplotify<span class="sc">::</span><span class="fu">as.ggplot</span>(p_hmt), </span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">2</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>p_hm_combined</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chapter_02_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In the heading stage, samples group very well by line, as demonstrated by both the PCA plot and the heatmap of sample correlations. In the tillering stage, though, there is a lot of within-group variation for the hybrid samples, which is an issue that could probably be mitigated by including more replicates. This is something we need to keep in mind when interpreting results in the following sections.</p>
+</section>
+<section id="identifying-differentially-expressed-genes-in-triplets" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="identifying-differentially-expressed-genes-in-triplets"><span class="header-section-number">2.4</span> Identifying differentially expressed genes in triplets</h2>
+<p>Here, we will identify differentially expressed genes (DEGs) between pairwise combinations of lines in a triplet in the heading and tillering stages.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get DEGs</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>deg_h <span class="ot">&lt;-</span> <span class="fu">get_deg_list</span>(se_h, <span class="at">lfcThreshold =</span> <span class="dv">1</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>deg_t <span class="ot">&lt;-</span> <span class="fu">get_deg_list</span>(se_t, <span class="at">lfcThreshold =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, we will visualize the frequencies of DEGs with an expression triangle.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot expression triangle</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>p_triangle_h <span class="ot">&lt;-</span> <span class="fu">get_deg_counts</span>(deg_h) <span class="sc">|&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot_expression_triangle</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">box_labels =</span> <span class="fu">c</span>(<span class="st">"R9308"</span>, <span class="st">"Xieqingzao B"</span>, <span class="st">"Xieyou 9308"</span>, <span class="st">"Midparent"</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Heading"</span>) <span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>p_triangle_t <span class="ot">&lt;-</span> <span class="fu">get_deg_counts</span>(deg_t) <span class="sc">|&gt;</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot_expression_triangle</span>(</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">box_labels =</span> <span class="fu">c</span>(<span class="st">"R9308"</span>, <span class="st">"Xieqingzao B"</span>, <span class="st">"Xieyou 9308"</span>, <span class="st">"Midparent"</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Tillering"</span>) <span class="sc">+</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine plots</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>p_triangle_all <span class="ot">&lt;-</span> <span class="fu">wrap_plots</span>(</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    p_triangle_h,</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    p_triangle_t,</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">1</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot_annotation</span>(<span class="at">tag_levels =</span> <span class="st">"A"</span>) <span class="sc">&amp;</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.tag =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>))</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>p_triangle_all</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chapter_02_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="4500"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The triangle plot shows a clear imbalance in the number of DEGs in the hybrid relative both parents, with much more DEGs relative to the Xieqingzao B line in the heading stage, and much more DEGs relative to the R9308 line in the tillering stage. This results suggest a developmental stage-mediated shift in expression-level dominance, with a bias towards parent R9308 in the heading stage, and a bias towards parent Xieqingzao B in the tillering stage. However, considering the large within-group variance for hybrid samples in the tillering stage, it is not clear whether such shift bias is due to true biological differences or an artifact resulting from such large variances.</p>
+<p>Next, to better understand the differences and similarities between stages, we will explore the overlap of DEGs between stages.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a list of DEGs for each contrast and create a combination matrix</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>deg_sets <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">R9308, heading</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rownames</span>(deg_h<span class="sc">$</span>F1_vs_P1),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Xieqingzao B, heading</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rownames</span>(deg_h<span class="sc">$</span>F1_vs_P2),</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">R9308, tillering</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rownames</span>(deg_t<span class="sc">$</span>F1_vs_P1),</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Xieqingzao B, tillering</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rownames</span>(deg_t<span class="sc">$</span>F1_vs_P2)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> ComplexHeatmap<span class="sc">::</span><span class="fu">make_comb_mat</span>(deg_sets)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot UpSet</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>p_upset <span class="ot">&lt;-</span> ComplexHeatmap<span class="sc">::</span><span class="fu">UpSet</span>(</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    m,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">comb_col =</span> ggsci<span class="sc">::</span><span class="fu">pal_jama</span>()(<span class="dv">7</span>)[<span class="fu">comb_degree</span>(m)],</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">top_annotation =</span> <span class="fu">upset_top_annotation</span>(m, <span class="at">add_numbers =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">set_order =</span> <span class="fu">names</span>(deg_sets)</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>p_upset</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chapter_02_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The figure shows that, overall, most of the DEGs between the hybrid and parents are parent- and stage-specific (e.g., only differentially expressed relative to R9308 in the heading stage). However, we also observed a large overlap in DEGs relative to both parents in each stage (N = 286 and 280 for the heading and tillering stages, respectively), and a similar but smaller overlap exists for DEGs relative to the same parent in different stages (N = 186 and 217 for lines R9308 and Xieqingziao B, respectively).</p>
+</section>
+<section id="classifying-genes-into-expression-groups" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="classifying-genes-into-expression-groups"><span class="header-section-number">2.5</span> Classifying genes into expression groups</h2>
+<p>To understand the expression patterns of hybrids relative to their progenitors, we will classify genes onto expression-based categories and classes as in <span class="citation" data-cites="rapp2009genomic">Rapp, Udall, and Wendel (<a href="#ref-rapp2009genomic" role="doc-biblioref">2009</a>)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Classify genes in expression partitions (classes and categories)</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>partition_h <span class="ot">&lt;-</span> <span class="fu">expression_partitioning</span>(deg_h)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>partition_t <span class="ot">&lt;-</span> <span class="fu">expression_partitioning</span>(deg_t)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, let’s visualize results:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get frequency of genes per class</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>p_pfreq_h <span class="ot">&lt;-</span> <span class="fu">plot_partition_frequencies</span>(partition_h, <span class="at">group_by =</span> <span class="st">"Class"</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>p_pfreq_t <span class="ot">&lt;-</span> <span class="fu">plot_partition_frequencies</span>(partition_t, <span class="at">group_by =</span> <span class="st">"Class"</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine plots</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>p_freq_combined <span class="ot">&lt;-</span> <span class="fu">wrap_plots</span>(</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    p_pfreq_h[[<span class="dv">1</span>]],</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    p_pfreq_h[[<span class="dv">2</span>]] <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Heading"</span>, <span class="at">x =</span> <span class="cn">NULL</span>), </span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    p_pfreq_t[[<span class="dv">2</span>]] <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"Tillering"</span>, <span class="at">x =</span> <span class="cn">NULL</span>), </span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">1</span>, </span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">widths =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>p_freq_combined</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chapter_02_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The figure shows that most genes (67.51%) display expression-level dominance (ELD) towards parent 1 (R9308 line) in the heading stage, which is in line with what we observed in the expression triangle plot. However, in the tillering stage, most genes (41.24%) display ELD towards parent 2 (Xieqingzao B), but large fractions of the genes also display ELD towards parent 1 (25.78%) and transgressive down-regulation (26.04%), again suggesting a dramatic shift in expression patterns in temporal scale.</p>
+</section>
+<section id="overrepresentation-analyses" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="overrepresentation-analyses"><span class="header-section-number">2.6</span> Overrepresentation analyses</h2>
+<p>Now, we will perform overrepresentation analyses of GO terms among genes in each expression class in each stage.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load GO annotation</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"rice_functions.rda"</span>))</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>rice_functions <span class="ot">&lt;-</span> <span class="fu">lapply</span>(rice_functions, as.data.frame)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform ORA</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Heading</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>genes_h <span class="ot">&lt;-</span> <span class="fu">split</span>(partition_h<span class="sc">$</span>Gene, partition_h<span class="sc">$</span>Class)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>ora_h <span class="ot">&lt;-</span> <span class="fu">lapply</span>(</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    genes_h, ora,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">annotation =</span> <span class="fu">bind_rows</span>(rice_functions), </span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">background =</span> <span class="fu">rownames</span>(se_h),</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_setsize =</span> <span class="dv">2</span>, <span class="at">max_setsize =</span> <span class="dv">1000</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Tillering</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>genes_t <span class="ot">&lt;-</span> <span class="fu">split</span>(partition_t<span class="sc">$</span>Gene, partition_t<span class="sc">$</span>Class)</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>ora_t <span class="ot">&lt;-</span> <span class="fu">lapply</span>(</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    genes_t, ora,</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">annotation =</span> <span class="fu">bind_rows</span>(rice_functions), </span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">background =</span> <span class="fu">rownames</span>(se_t),</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_setsize =</span> <span class="dv">2</span>, <span class="at">max_setsize =</span> <span class="dv">1000</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Combining results</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>rice_enrichment_all <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bind_rows</span>(ora_h, <span class="at">.id =</span> <span class="st">"Class"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">group =</span> <span class="st">"Heading"</span>),</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bind_rows</span>(ora_t, <span class="at">.id =</span> <span class="st">"Class"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">group =</span> <span class="st">"Tillering"</span>)</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="at">class =</span> Class, group, term, genes, all, padj)</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Show results as an interactive table</span></span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(</span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>    rice_enrichment_all,</span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">selection =</span> <span class="st">"single"</span>,</span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">rownames =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">options =</span> <span class="fu">list</span>(</span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>        <span class="at">lengthMenu =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">25</span>, <span class="dv">50</span>),</span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>        <span class="at">pageLength =</span> <span class="dv">10</span></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>    DT<span class="sc">::</span><span class="fu">formatSignif</span>(<span class="at">columns =</span> <span class="st">"padj"</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-2ae4f30d7598595affc4" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-2ae4f30d7598595affc4">{"x":{"filter":"none","vertical":false,"data":[["UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","ADD","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","DOWN","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2"],["Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Heading","Tillering","Tillering","Tillering","Tillering","Tillering","Tillering","Tillering","Tillering","Tillering","Tillering","Tillering","Tillering","Tillering","Tillering","Tillering","Tillering","Tillering","Tillering","Tillering","Tillering","Tillering","Tillering","Tillering","Tillering","Tillering","Tillering","Tillering","Tillering"],["beta-glucan biosynthetic process","beta-glucan metabolic process","carbohydrate biosynthetic process","cell wall assembly","cell wall biogenesis","Cell wall organisation.cellulose.cellulose-hemicellulose network assembly.regulatory protein (COB)","cell wall organization","cellular carbohydrate biosynthetic process","cellular carbohydrate metabolic process","cellular glucan metabolic process","cellular polysaccharide biosynthetic process","cellular polysaccharide metabolic process","cellulose biosynthetic process","cellulose metabolic process","cellulose microfibril organization","Cellulose synthase","cellulose synthase (UDP-forming) activity","cellulose synthase activity","COBRA, plant","Early nodulin 93 ENOD93 protein","external encapsulating structure organization","extracellular matrix organization","generation of precursor metabolites and energy","glucan biosynthetic process","glucan metabolic process","glucosyltransferase activity","plant-type cell wall biogenesis","plant-type cell wall organization or biogenesis","polysaccharide biosynthetic process","polysaccharide metabolic process","response to anoxia","UDP-glucosyltransferase activity","cellular modified amino acid metabolic process","flavone biosynthetic process","flavone metabolic process","flavonol biosynthetic process","glutathione metabolic process","Glutathione S-transferase Omega/Tau-like","Glutathione S-transferase, C-terminal domain superfamily","Glutathione S-transferase, N-terminal","Glutathione S-transferases Tau, C-terminal alpha helical domain, plant","glutathione transferase activity","MYB-like transcription factor EOBI/EOBII-like, plant","Redox homeostasis.glutathione-based redox regulation.glutathione S-transferase activities.class tau glutathione S-transferase","RNA biosynthesis.transcriptional regulation.MYB  transcription factor superfamily.transcription factor (REVEILLE)","SANT/Myb domain","transferase activity, transferring alkyl or aryl (other than methyl) groups","ADP binding","ADP binding","Aquaporin transporter","Aquaporin-like","channel activity","defense response to bacterium","Diacylglycerol kinase","diacylglycerol kinase activity","Diacylglycerol kinase, accessory domain","Diacylglycerol kinase, plant","Disease resistance protein, plants","fluid transport","inorganic ion homeostasis","Lipid metabolism.glycerolipid biosynthesis.phosphatidate.diacylglycerol kinase","Major intrinsic protein","molecular transducer activity","protein kinase C-activating G protein-coupled receptor signaling pathway","response to bacterium","response to hydrogen peroxide","signaling receptor activity","Solute transport.channels.MIP family.plasma membrane intrinsic protein (PIP)","Solute-binding protein  family 3/N-terminal domain of MltF","water channel activity","water transmembrane transporter activity","ADP binding","Chlorophyll A-B binding protein","Chlorophyll A-B binding protein, plant and chromista","Chlorophyll a/b binding domain superfamily","chlorophyll binding","chloroplast thylakoid","chloroplast thylakoid membrane","Disease resistance protein, plants","photosynthesis","photosynthesis, light harvesting","photosynthesis, light harvesting in photosystem I","photosynthesis, light reaction","photosynthetic membrane","photosystem","photosystem I","photosystem I reaction center","photosystem II","plastid membrane","plastid thylakoid","plastid thylakoid membrane","plastoglobule","protein domain specific binding","Rx, N-terminal","thylakoid membrane","CASP-like protein 1U","ADP binding","Apoptotic protease-activating factors, helical domain","carbon-oxygen lyase activity, acting on phosphates","Chlorophyll A-B binding protein","chloroplast stroma","chloroplast thylakoid","chloroplast thylakoid membrane","Disease resistance protein, plants","diterpenoid biosynthetic process","diterpenoid metabolic process","gibberellin biosynthetic process","gibberellin metabolic process","isoprenoid biosynthetic process","isoprenoid metabolic process","NB-ARC","photosynthesis","plastid stroma","plastid thylakoid","plastid thylakoid membrane","Rx, N-terminal","terpene synthase activity","Terpene synthase, N-terminal domain","terpenoid biosynthetic process","Terpenoid cyclases/protein prenyltransferase alpha-alpha toroid","terpenoid metabolic process","Virus X resistance protein-like, coiled-coil domain","Winged helix-like DNA-binding domain superfamily"],[5,5,11,3,9,3,9,8,10,8,7,9,5,5,3,3,3,3,3,4,9,3,9,7,8,6,8,10,8,9,4,5,8,3,3,3,8,6,6,6,6,8,3,6,3,6,9,10,40,9,9,20,58,5,5,5,4,34,9,26,5,9,20,5,66,14,20,5,6,9,9,17,4,4,4,4,20,20,16,16,5,5,9,21,14,10,4,8,20,20,20,9,11,13,20,3,21,13,6,4,28,18,15,22,9,9,6,6,14,14,17,13,28,18,15,15,6,5,14,6,14,12,16],[86,111,350,19,235,9,339,252,463,237,201,313,70,95,14,24,24,24,10,7,380,19,420,149,238,138,174,261,234,397,25,115,127,12,13,11,85,33,72,60,36,68,14,35,8,127,152,316,316,22,24,138,462,7,8,6,4,284,30,211,6,24,136,8,561,79,123,8,14,19,20,316,15,10,16,15,399,310,284,200,24,14,109,351,61,23,5,50,473,401,314,58,76,189,347,4,320,154,31,18,741,431,335,289,50,61,32,39,167,204,229,218,747,433,339,189,26,25,133,34,167,126,313],[0.01311731654563596,0.03512766056408715,0.0005520973203417959,0.02599345439958147,0.001091016521112611,0.005214964460480449,0.00638446371093247,0.006367671923947674,0.01023724169069624,0.00517529045754941,0.01023724169069624,0.00517529045754941,0.00658399042794143,0.01945938771231776,0.012732339327568,0.04516972807631885,0.04516972807631885,0.04516972807631885,0.006367671923947674,9.887600918510644e-05,0.01186527802107797,0.02599345439958147,0.02073663768411636,0.004291986329267787,0.00517529045754941,0.01175235617830664,0.001091016521112611,0.0005108681662359887,0.00517529045754941,0.01454499380266655,0.0048381168518024,0.04011950523635423,0.00026001729193129,0.02262736284360248,0.02630113218346718,0.01857565125686812,3.742646937270822e-05,3.742646937270822e-05,0.001519808993291912,0.0005731368396161525,3.904797212139539e-05,1.259487821564026e-05,0.02974972457237951,3.904797212139539e-05,0.007005246716933307,0.02630113218346718,8.345295102530159e-05,0.002277711206760363,0.001611189925206785,0.002331490131062034,0.003610096393341424,0.03637718203095482,2.115522034896831e-05,0.01005581944205975,0.01707395476149919,0.003610096393341424,0.01005581944205975,0.01309145993075297,0.01707395476149919,0.04864366989738893,0.003610096393341424,0.003610096393341424,0.03254970743962672,0.01707395476149919,2.115522034896831e-05,0.04864366989738893,0.01058722976385312,0.01707395476149919,0.03504075218539945,0.001004529535449332,0.0013036618317639,0.002818175499831343,0.02824921010922283,0.005874832040416614,0.03569266580476898,0.02824921010922283,0.00140896001431315,7.160669067040422e-05,0.002818175499831343,7.160669067040422e-05,0.01287417410137672,0.001136055493373424,0.01673350635870333,7.574504585308088e-05,1.788648735459653e-09,1.940970818698914e-09,0.0002663923761925083,0.0005994508035587103,0.01200586663045498,0.001412417550569328,7.160669067040422e-05,0.0002073086145177507,4.627383924474734e-05,0.002818175499831343,0.0002270711654942995,0.03531582888019705,2.332283914601056e-05,0.0003092076931811777,0.003119622121499985,0.04723060367536519,0.001897563997811363,0.02201404549308748,0.04114809959473207,1.821795928412446e-06,6.93617538166014e-05,0.0002332147385232009,0.003571701235144471,0.009593198939809701,0.0001605020290828286,0.00123153517428853,6.93617538166014e-05,0.008216527619418523,0.00206577901669496,0.02239913355060445,0.0451484897509393,0.0001544987147047144,0.001272880752563968,0.01278683680974875,2.332283914601056e-05,0.00489076848462615,0.0001605020290828286,0.000265357566779699,0.006271110686679438]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>class<\/th>\n      <th>group<\/th>\n      <th>term<\/th>\n      <th>genes<\/th>\n      <th>all<\/th>\n      <th>padj<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"lengthMenu":[5,10,25,50],"pageLength":10,"columnDefs":[{"targets":5,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatSignif(data, 3, 3, \",\", \".\", null);\n  }"},{"className":"dt-right","targets":[3,4,5]},{"name":"class","targets":0},{"name":"group","targets":1},{"name":"term","targets":2},{"name":"genes","targets":3},{"name":"all","targets":4},{"name":"padj","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.columnDefs.0.render"],"jsHooks":[]}</script>
+</div>
+</div>
+<p>In summary, this is what we found for each class:</p>
+<ol type="1">
+<li><p><strong>ADD:</strong> a single term (ADP binding) at heading stage.</p></li>
+<li><p><strong>DOWN:</strong> flavone biosynthesis, glutathione S-transferase, MYB transcription factors, CASP-like protein 1U at heading stage. At tillering stage, the only term was CASP-like protein 1U.</p></li>
+<li><p><strong>UP:</strong> at the heading stage, genes were associated with cell wall organization, COBRA, early nodulins, response to anoxia, and beta-glucan biosynthesis. No terms were found at the tillering stage.</p></li>
+<li><p><strong>ELD_P1:</strong> at the heading stage, genes were associated with aquaporins, and diacylglycerol kinases. No terms were found at the tillering stage.</p></li>
+<li><p><strong>ELD_P2:</strong> at the heading and tillering stages, genes were associated with photosynthesis. There were also tillering stage-specific terms, including apoptose-activating factors, gibberellin biosynthesis, terpene synthases, and isoprenoid biosynthesis.</p></li>
+</ol>
+</section>
+<section id="saving-important-objects" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="saving-important-objects">Saving important objects</h2>
+<p>Lastly, we will save important objects to files, so that they can be reused later.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plots</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>p_freq_combined_b2 <span class="ot">&lt;-</span> p_freq_combined</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    p_freq_combined_b2, <span class="at">compress =</span> <span class="st">"xz"</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"products"</span>, <span class="st">"plots"</span>, <span class="st">"p_freq_combined_b2.rda"</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>p_upset_b2 <span class="ot">&lt;-</span> p_upset</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    p_upset_b2, <span class="at">compress =</span> <span class="st">"xz"</span>,</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"products"</span>, <span class="st">"plots"</span>, <span class="st">"p_upset_b2.rda"</span>)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>p_pca_b2 <span class="ot">&lt;-</span> p_pca_combined</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    p_pca_b2, <span class="at">compress =</span> <span class="st">"xz"</span>,</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"products"</span>, <span class="st">"plots"</span>, <span class="st">"p_pca_b2.rda"</span>)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>p_triangle_b2 <span class="ot">&lt;-</span> p_triangle_all</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>    p_triangle_b2, <span class="at">compress =</span> <span class="st">"xz"</span>,</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"products"</span>, <span class="st">"plots"</span>, <span class="st">"p_triangle_b2.rda"</span>)</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Objects</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>partition_tables_b2 <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">Heading =</span> partition_h,</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">Tillering =</span> partition_t</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(</span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>    partition_tables_b2, <span class="at">compress =</span> <span class="st">"xz"</span>,</span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"products"</span>, <span class="st">"result_files"</span>, <span class="st">"partition_tables_b2.rda"</span>)</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(</span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>    rice_enrichment_all, <span class="at">compress =</span> <span class="st">"xz"</span>,</span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"products"</span>, <span class="st">"result_files"</span>, <span class="st">"rice_enrichment_all.rda"</span>)</span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="session-info" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="session-info">Session info</h2>
+<p>This document was created under the following conditions:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>─ Session info ───────────────────────────────────────────────────────────────
+ setting  value
+ version  R version 4.3.2 (2023-10-31)
+ os       Ubuntu 22.04.3 LTS
+ system   x86_64, linux-gnu
+ ui       X11
+ language (EN)
+ collate  en_US.UTF-8
+ ctype    en_US.UTF-8
+ tz       Europe/Brussels
+ date     2024-03-28
+ pandoc   3.1.1 @ /usr/lib/rstudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)
+
+─ Packages ───────────────────────────────────────────────────────────────────
+ package              * version   date (UTC) lib source
+ abind                  1.4-5     2016-07-21 [1] CRAN (R 4.3.2)
+ Biobase              * 2.62.0    2023-10-24 [1] Bioconductor
+ BiocGenerics         * 0.48.1    2023-11-01 [1] Bioconductor
+ BiocParallel           1.37.0    2024-01-19 [1] Github (Bioconductor/BiocParallel@79a1b2d)
+ bitops                 1.0-7     2021-04-24 [1] CRAN (R 4.3.2)
+ bslib                  0.6.1     2023-11-28 [1] CRAN (R 4.3.2)
+ cachem                 1.0.8     2023-05-01 [1] CRAN (R 4.3.2)
+ Cairo                  1.6-2     2023-11-28 [1] CRAN (R 4.3.2)
+ circlize               0.4.15    2022-05-10 [1] CRAN (R 4.3.2)
+ cli                    3.6.2     2023-12-11 [1] CRAN (R 4.3.2)
+ clue                   0.3-65    2023-09-23 [1] CRAN (R 4.3.2)
+ cluster                2.1.5     2023-11-27 [4] CRAN (R 4.3.2)
+ codetools              0.2-19    2023-02-01 [4] CRAN (R 4.2.2)
+ colorspace             2.1-0     2023-01-23 [1] CRAN (R 4.3.2)
+ ComplexHeatmap       * 2.18.0    2023-10-24 [1] Bioconductor
+ crayon                 1.5.2     2022-09-29 [1] CRAN (R 4.3.2)
+ crosstalk              1.2.1     2023-11-23 [1] CRAN (R 4.3.2)
+ DelayedArray           0.28.0    2023-10-24 [1] Bioconductor
+ DESeq2                 1.42.0    2023-10-24 [1] Bioconductor
+ digest                 0.6.34    2024-01-11 [1] CRAN (R 4.3.2)
+ doParallel             1.0.17    2022-02-07 [1] CRAN (R 4.3.2)
+ dplyr                * 1.1.4     2023-11-17 [1] CRAN (R 4.3.2)
+ DT                     0.31      2023-12-09 [1] CRAN (R 4.3.2)
+ ellipsis               0.3.2     2021-04-29 [1] CRAN (R 4.3.2)
+ evaluate               0.23      2023-11-01 [1] CRAN (R 4.3.2)
+ fansi                  1.0.6     2023-12-08 [1] CRAN (R 4.3.2)
+ farver                 2.1.1     2022-07-06 [1] CRAN (R 4.3.2)
+ fastmap                1.1.1     2023-02-24 [1] CRAN (R 4.3.2)
+ forcats              * 1.0.0     2023-01-29 [1] CRAN (R 4.3.2)
+ foreach                1.5.2     2022-02-02 [1] CRAN (R 4.3.2)
+ fs                     1.6.3     2023-07-20 [1] CRAN (R 4.3.2)
+ generics               0.1.3     2022-07-05 [1] CRAN (R 4.3.2)
+ GenomeInfoDb         * 1.38.6    2024-02-08 [1] Bioconductor 3.18 (R 4.3.2)
+ GenomeInfoDbData       1.2.11    2023-12-21 [1] Bioconductor
+ GenomicRanges        * 1.54.1    2023-10-29 [1] Bioconductor
+ GetoptLong             1.0.5     2020-12-15 [1] CRAN (R 4.3.2)
+ ggplot2              * 3.5.0     2024-02-23 [1] CRAN (R 4.3.2)
+ ggplotify              0.1.2     2023-08-09 [1] CRAN (R 4.3.2)
+ ggsci                  3.0.0     2023-03-08 [1] CRAN (R 4.3.2)
+ GlobalOptions          0.1.2     2020-06-10 [1] CRAN (R 4.3.2)
+ glue                   1.7.0     2024-01-09 [1] CRAN (R 4.3.2)
+ gridGraphics           0.5-1     2020-12-13 [1] CRAN (R 4.3.2)
+ gtable                 0.3.4     2023-08-21 [1] CRAN (R 4.3.2)
+ here                 * 1.0.1     2020-12-13 [1] CRAN (R 4.3.2)
+ hms                    1.1.3     2023-03-21 [1] CRAN (R 4.3.2)
+ htmltools              0.5.7     2023-11-03 [1] CRAN (R 4.3.2)
+ htmlwidgets            1.6.4     2023-12-06 [1] CRAN (R 4.3.2)
+ HybridExpress        * 0.99.0    2024-02-15 [1] Bioconductor
+ IRanges              * 2.36.0    2023-10-24 [1] Bioconductor
+ iterators              1.0.14    2022-02-05 [1] CRAN (R 4.3.2)
+ jquerylib              0.1.4     2021-04-26 [1] CRAN (R 4.3.2)
+ jsonlite               1.8.8     2023-12-04 [1] CRAN (R 4.3.2)
+ knitr                  1.45      2023-10-30 [1] CRAN (R 4.3.2)
+ labeling               0.4.3     2023-08-29 [1] CRAN (R 4.3.2)
+ lattice                0.22-5    2023-10-24 [4] CRAN (R 4.3.1)
+ lifecycle              1.0.4     2023-11-07 [1] CRAN (R 4.3.2)
+ locfit                 1.5-9.8   2023-06-11 [1] CRAN (R 4.3.2)
+ lubridate            * 1.9.3     2023-09-27 [1] CRAN (R 4.3.2)
+ magick                 2.8.2     2023-12-20 [1] CRAN (R 4.3.2)
+ magrittr               2.0.3     2022-03-30 [1] CRAN (R 4.3.2)
+ Matrix                 1.6-3     2023-11-14 [4] CRAN (R 4.3.2)
+ MatrixGenerics       * 1.14.0    2023-10-24 [1] Bioconductor
+ matrixStats          * 1.2.0     2023-12-11 [1] CRAN (R 4.3.2)
+ memoise                2.0.1     2021-11-26 [1] CRAN (R 4.3.2)
+ munsell                0.5.0     2018-06-12 [1] CRAN (R 4.3.2)
+ patchwork            * 1.2.0     2024-01-08 [1] CRAN (R 4.3.2)
+ pillar                 1.9.0     2023-03-22 [1] CRAN (R 4.3.2)
+ pkgconfig              2.0.3     2019-09-22 [1] CRAN (R 4.3.2)
+ png                    0.1-8     2022-11-29 [1] CRAN (R 4.3.2)
+ purrr                * 1.0.2     2023-08-10 [1] CRAN (R 4.3.2)
+ R6                     2.5.1     2021-08-19 [1] CRAN (R 4.3.2)
+ RColorBrewer           1.1-3     2022-04-03 [1] CRAN (R 4.3.2)
+ Rcpp                   1.0.12    2024-01-09 [1] CRAN (R 4.3.2)
+ RCurl                  1.98-1.14 2024-01-09 [1] CRAN (R 4.3.2)
+ readr                * 2.1.5     2024-01-10 [1] CRAN (R 4.3.2)
+ rjson                  0.2.21    2022-01-09 [1] CRAN (R 4.3.2)
+ rlang                  1.1.3     2024-01-10 [1] CRAN (R 4.3.2)
+ rmarkdown              2.25      2023-09-18 [1] CRAN (R 4.3.2)
+ rprojroot              2.0.4     2023-11-05 [1] CRAN (R 4.3.2)
+ rstudioapi             0.15.0    2023-07-07 [1] CRAN (R 4.3.2)
+ S4Arrays               1.2.0     2023-10-24 [1] Bioconductor
+ S4Vectors            * 0.40.2    2023-11-23 [1] Bioconductor 3.18 (R 4.3.2)
+ sass                   0.4.8     2023-12-06 [1] CRAN (R 4.3.2)
+ scales                 1.3.0     2023-11-28 [1] CRAN (R 4.3.2)
+ sessioninfo            1.2.2     2021-12-06 [1] CRAN (R 4.3.2)
+ shape                  1.4.6     2021-05-19 [1] CRAN (R 4.3.2)
+ SparseArray            1.2.4     2024-02-11 [1] Bioconductor 3.18 (R 4.3.2)
+ stringi                1.8.3     2023-12-11 [1] CRAN (R 4.3.2)
+ stringr              * 1.5.1     2023-11-14 [1] CRAN (R 4.3.2)
+ SummarizedExperiment * 1.32.0    2023-10-24 [1] Bioconductor
+ tibble               * 3.2.1     2023-03-20 [1] CRAN (R 4.3.2)
+ tidyr                * 1.3.1     2024-01-24 [1] CRAN (R 4.3.2)
+ tidyselect             1.2.0     2022-10-10 [1] CRAN (R 4.3.2)
+ tidyverse            * 2.0.0     2023-02-22 [1] CRAN (R 4.3.2)
+ timechange             0.3.0     2024-01-18 [1] CRAN (R 4.3.2)
+ tzdb                   0.4.0     2023-05-12 [1] CRAN (R 4.3.2)
+ utf8                   1.2.4     2023-10-22 [1] CRAN (R 4.3.2)
+ vctrs                  0.6.5     2023-12-01 [1] CRAN (R 4.3.2)
+ withr                  3.0.0     2024-01-16 [1] CRAN (R 4.3.2)
+ xfun                   0.42      2024-02-08 [1] CRAN (R 4.3.2)
+ XVector                0.42.0    2023-10-24 [1] Bioconductor
+ yaml                   2.3.8     2023-12-11 [1] CRAN (R 4.3.2)
+ yulab.utils            0.1.4     2024-01-28 [1] CRAN (R 4.3.2)
+ zlibbioc               1.48.0    2023-10-24 [1] Bioconductor
+
+ [1] /home/faalm/R/x86_64-pc-linux-gnu-library/4.3
+ [2] /usr/local/lib/R/site-library
+ [3] /usr/lib/R/site-library
+ [4] /usr/lib/R/library
+
+──────────────────────────────────────────────────────────────────────────────</code></pre>
+</div>
+</div>
+</section>
+<section id="references" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-rapp2009genomic" class="csl-entry" role="listitem">
+Rapp, Ryan A, Joshua A Udall, and Jonathan F Wendel. 2009. <span>“Genomic Expression Dominance in Allopolyploids.”</span> <em>BMC Biology</em> 7 (1): 1–10.
+</div>
+<div id="ref-zhai2013transcriptome" class="csl-entry" role="listitem">
+Zhai, Rongrong, Yue Feng, Huimin Wang, Xiaodeng Zhan, Xihong Shen, Weiming Wu, Yingxin Zhang, et al. 2013. <span>“Transcriptome Analysis of Rice Root Heterosis by RNA-Seq.”</span> <em>BMC Genomics</em> 14 (1): 1–14.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/chapter_01.html" class="pagination-link  aria-label=" &lt;span="" 1:="" allopolyploid="" and="" diploid="" cotton="" species="" under="" salt="" stress&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Benchmark 1: allopolyploid and diploid cotton species under salt stress</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/appendices.html" class="pagination-link" aria-label="Appendix: Data acquisition">
+        <span class="nav-page-text">Appendix: Data acquisition</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

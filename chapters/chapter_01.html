@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Code and data for “HybridExpress: an R/Bioconductor package for comparative transcriptomic analyses of hybrids and their progenitors” - 1&nbsp; Benchmark 1: allopolyploid and diploid cotton species under salt stress</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/chapter_02.html" rel="next">
+<link href="../index.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="../site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="../site_libs/datatables-binding-0.31/datatables.js"></script>
+<script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="../site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="../site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="../site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="../site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/chapter_01.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Benchmark 1: allopolyploid and diploid cotton species under salt stress</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Code and data for “HybridExpress: an R/Bioconductor package for comparative transcriptomic analyses of hybrids and their progenitors”</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/chapter_01.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Benchmark 1: allopolyploid and diploid cotton species under salt stress</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/chapter_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Benchmark 2: transcriptomic analyses of heterosis in rice root traits</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/appendices.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Appendix: Data acquisition</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#data-description-and-experimental-design" id="toc-data-description-and-experimental-design" class="nav-link active" data-scroll-target="#data-description-and-experimental-design"><span class="header-section-number">1.1</span> Data description and experimental design</a></li>
+  <li><a href="#data-processing" id="toc-data-processing" class="nav-link" data-scroll-target="#data-processing"><span class="header-section-number">1.2</span> Data processing</a></li>
+  <li><a href="#exploratory-data-analyses" id="toc-exploratory-data-analyses" class="nav-link" data-scroll-target="#exploratory-data-analyses"><span class="header-section-number">1.3</span> Exploratory data analyses</a></li>
+  <li><a href="#identifying-differentially-expressed-genes-between-species-pairs" id="toc-identifying-differentially-expressed-genes-between-species-pairs" class="nav-link" data-scroll-target="#identifying-differentially-expressed-genes-between-species-pairs"><span class="header-section-number">1.4</span> Identifying differentially expressed genes between species pairs</a></li>
+  <li><a href="#classifying-genes-into-expression-groups" id="toc-classifying-genes-into-expression-groups" class="nav-link" data-scroll-target="#classifying-genes-into-expression-groups"><span class="header-section-number">1.5</span> Classifying genes into expression groups</a></li>
+  <li><a href="#overrepresentation-analyses" id="toc-overrepresentation-analyses" class="nav-link" data-scroll-target="#overrepresentation-analyses"><span class="header-section-number">1.6</span> Overrepresentation analyses</a></li>
+  <li><a href="#saving-important-objects" id="toc-saving-important-objects" class="nav-link" data-scroll-target="#saving-important-objects">Saving important objects</a></li>
+  <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info">Session info</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Benchmark 1: allopolyploid and diploid cotton species under salt stress</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Here, we will use <strong>HybridExpress</strong> on data from <span class="citation" data-cites="dong2022parental">Dong et al. (<a href="#ref-dong2022parental" role="doc-biblioref">2022</a>)</span>. In this study, authors compared global transcriptomic responses to modest salinity stress in two allotetraploid cotton species (<em>Gossypium hirsutum</em> and <em>G. mustelinum</em>, AD-genome) relative to their model diploid progenitors (A-genome and D-genome).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading required packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(HybridExpress)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SummarizedExperiment)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ComplexHeatmap)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co"># for reproducibility</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="data-description-and-experimental-design" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="data-description-and-experimental-design"><span class="header-section-number">1.1</span> Data description and experimental design</h2>
+<p>First of all, let’s load the data set we will use here and get to know it. The count matrix and sample metadata are stored in a <code>SummarizedExperiment</code> object in <code>data/se_cotton.rda</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"se_cotton.rda"</span>))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>se_cotton</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>class: SummarizedExperiment 
+dim: 37505 24 
+metadata(0):
+assays(1): counts
+rownames(37505): Gorai.001G000100 Gorai.001G000200 ... Gorai.N028100
+  Gorai.N028200
+rowData names(0):
+colnames(24): A2_CK1 A2_CK2 ... AD4_Salt2 AD4_Salt3
+colData names(6): species_name species ... sample rep</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Taking a look at the assay</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">assay</span>(se_cotton))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 A2_CK1 A2_CK2 A2_CK3 A2_Salt1 A2_Salt2 A2_Salt3 D5_CK1 D5_CK2
+Gorai.001G000100    150    158    146       72       67      123      0     28
+Gorai.001G000200      0      0      0        0        0        0      1      1
+Gorai.001G000300     93    101    107       38       47       59      0     24
+Gorai.001G000400      9      8      6        7        9       12      2     46
+Gorai.001G000500     80     84     99       50       50       71     87     69
+Gorai.001G000600      0      0      0        0        0        0      0      0
+                 D5_CK3 D5_Salt1 D5_Salt2 D5_Salt3 AD1_CK1 AD1_CK2 AD1_CK3
+Gorai.001G000100      0        1        0        0      10       7       8
+Gorai.001G000200      2        5        3        4      10       4       9
+Gorai.001G000300      3        2        2        5      16      14      11
+Gorai.001G000400      1        2        2        1      19      19      17
+Gorai.001G000500    132      201      154      154     100     102      71
+Gorai.001G000600      0        0        0        0       0       0       0
+                 AD1_Salt1 AD1_Salt2 AD1_Salt3 AD4_CK1 AD4_CK2 AD4_CK3
+Gorai.001G000100         6         3        11       8      11       7
+Gorai.001G000200         2         7         5       0       0       1
+Gorai.001G000300         7         9         7       9       4      11
+Gorai.001G000400        15        33        18      43      47      41
+Gorai.001G000500        86        87       104     103      94      93
+Gorai.001G000600         0         0         0       0       0       0
+                 AD4_Salt1 AD4_Salt2 AD4_Salt3
+Gorai.001G000100        16         7        19
+Gorai.001G000200         1         0         1
+Gorai.001G000300         7        10         8
+Gorai.001G000400        47        42        50
+Gorai.001G000500       141       109       112
+Gorai.001G000600         0         0         0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Taking a look at the sample metadata</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(se_cotton) <span class="sc">|&gt;</span> <span class="fu">as.data.frame</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           species_name species ploidy condition      sample rep
+A2_CK1        Garboreum      A2     di   Control  A2_Control   1
+A2_CK2        Garboreum      A2     di   Control  A2_Control   2
+A2_CK3        Garboreum      A2     di   Control  A2_Control   3
+A2_Salt1      Garboreum      A2     di      Salt     A2_Salt   1
+A2_Salt2      Garboreum      A2     di      Salt     A2_Salt   2
+A2_Salt3      Garboreum      A2     di      Salt     A2_Salt   3
+D5_CK1       Graimondii      D5     di   Control  D5_Control   1
+D5_CK2       Graimondii      D5     di   Control  D5_Control   2
+D5_CK3       Graimondii      D5     di   Control  D5_Control   3
+D5_Salt1     Graimondii      D5     di      Salt     D5_Salt   1
+D5_Salt2     Graimondii      D5     di      Salt     D5_Salt   2
+D5_Salt3     Graimondii      D5     di      Salt     D5_Salt   3
+AD1_CK1   Ghirsutum_TM1     AD1   allo   Control AD1_Control   1
+AD1_CK2   Ghirsutum_TM1     AD1   allo   Control AD1_Control   2
+AD1_CK3   Ghirsutum_TM1     AD1   allo   Control AD1_Control   3
+AD1_Salt1 Ghirsutum_TM1     AD1   allo      Salt    AD1_Salt   1
+AD1_Salt2 Ghirsutum_TM1     AD1   allo      Salt    AD1_Salt   2
+AD1_Salt3 Ghirsutum_TM1     AD1   allo      Salt    AD1_Salt   3
+AD4_CK1     Gmustelinum     AD4   allo   Control AD4_Control   1
+AD4_CK2     Gmustelinum     AD4   allo   Control AD4_Control   2
+AD4_CK3     Gmustelinum     AD4   allo   Control AD4_Control   3
+AD4_Salt1   Gmustelinum     AD4   allo      Salt    AD4_Salt   1
+AD4_Salt2   Gmustelinum     AD4   allo      Salt    AD4_Salt   2
+AD4_Salt3   Gmustelinum     AD4   allo      Salt    AD4_Salt   3</code></pre>
+</div>
+</div>
+<p>Here, we have two hybrid triplets: AD1 (allotetraploid) and its parents A2 and D5 (diploids); and AD4 (allotetraploid) and its parents A2 and D5 (diploids). We also have two conditions: salt stress, and control. Given this experimental design, we will perform comparative transcriptomic analyses for the each triplet separately. For each triplet, we will compare the expression of the allotetraploid with its diploid parents for control and stress conditions separately. In summary, the comparisons will be:</p>
+<ol type="1">
+<li>A2 &lt;-&gt; AD1 &lt;-&gt; D5, control</li>
+<li>A2 &lt;-&gt; AD4 &lt;-&gt; D5, control</li>
+<li>A2 &lt;-&gt; AD1 &lt;-&gt; D5, salt stress</li>
+<li>A2 &lt;-&gt; AD4 &lt;-&gt; D5, salt stress</li>
+</ol>
+<p>That said, let’s create subsets of our data set accordingly:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get triplets for each allotetraploid species</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>se_ad1 <span class="ot">&lt;-</span> se_cotton[, se_cotton<span class="sc">$</span>species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"A2"</span>, <span class="st">"D5"</span>, <span class="st">"AD1"</span>)]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>se_ad4 <span class="ot">&lt;-</span> se_cotton[, se_cotton<span class="sc">$</span>species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"A2"</span>, <span class="st">"D5"</span>, <span class="st">"AD4"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-processing" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="data-processing"><span class="header-section-number">1.2</span> Data processing</h2>
+<p>Here, we will first remove non-expressed genes (sum of counts &lt;10 across all samples). Then, we will add midparent expression values to each set, and normalize count data by library size.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove non-expressed genes</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>se_ad1 <span class="ot">&lt;-</span> se_ad1[<span class="fu">rowSums</span>(<span class="fu">assay</span>(se_ad1)) <span class="sc">&gt;=</span> <span class="dv">10</span>, ]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>se_ad4 <span class="ot">&lt;-</span> se_ad4[<span class="fu">rowSums</span>(<span class="fu">assay</span>(se_ad4)) <span class="sc">&gt;=</span> <span class="dv">10</span>, ]</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Add midparent expression</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="do">## AD1</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>se_ad1 <span class="ot">&lt;-</span> <span class="fu">add_midparent_expression</span>(</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    se_ad1,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">coldata_column =</span> <span class="st">"species"</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">parent1 =</span> <span class="st">"A2"</span>,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">parent2 =</span> <span class="st">"D5"</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="do">## AD4</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>se_ad4 <span class="ot">&lt;-</span> <span class="fu">add_midparent_expression</span>(</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    se_ad4,</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">coldata_column =</span> <span class="st">"species"</span>,</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">parent1 =</span> <span class="st">"A2"</span>,</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">parent2 =</span> <span class="st">"D5"</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize data by library size</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>se_ad1 <span class="ot">&lt;-</span> <span class="fu">add_size_factors</span>(se_ad1)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>se_ad4 <span class="ot">&lt;-</span> <span class="fu">add_size_factors</span>(se_ad4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exploratory-data-analyses" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="exploratory-data-analyses"><span class="header-section-number">1.3</span> Exploratory data analyses</h2>
+<p>Now, we will perform exploratory data analyses to check if samples group together as expected. We will first explore sample clustering with PCA plots.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot PCA</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="do">## AD1</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>se_ad1<span class="sc">$</span>species[<span class="fu">is.na</span>(se_ad1<span class="sc">$</span>species)] <span class="ot">&lt;-</span> <span class="st">"midparent"</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>se_ad1<span class="sc">$</span>species[<span class="fu">is.na</span>(se_ad1<span class="sc">$</span>species)] <span class="ot">&lt;-</span> <span class="st">"midparent"</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>se_ad1<span class="sc">$</span>condition[<span class="fu">is.na</span>(se_ad1<span class="sc">$</span>condition)] <span class="ot">&lt;-</span> <span class="st">"-"</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>se_ad1<span class="sc">$</span>condition[<span class="fu">is.na</span>(se_ad1<span class="sc">$</span>condition)] <span class="ot">&lt;-</span> <span class="st">"-"</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>p_pca1 <span class="ot">&lt;-</span> <span class="fu">pca_plot</span>(</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    se_ad1, <span class="at">color_by =</span> <span class="st">"species"</span>, <span class="at">shape_by =</span> <span class="st">"condition"</span>, <span class="at">add_mean =</span> <span class="cn">TRUE</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span> <span class="fu">labs</span>(</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"PCA of samples - AD1"</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Species"</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">shape =</span> <span class="st">"Treatment"</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="do">## AD4</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>se_ad4<span class="sc">$</span>species[<span class="fu">is.na</span>(se_ad4<span class="sc">$</span>species)] <span class="ot">&lt;-</span> <span class="st">"midparent"</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>se_ad4<span class="sc">$</span>species[<span class="fu">is.na</span>(se_ad4<span class="sc">$</span>species)] <span class="ot">&lt;-</span> <span class="st">"midparent"</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>se_ad4<span class="sc">$</span>condition[<span class="fu">is.na</span>(se_ad4<span class="sc">$</span>condition)] <span class="ot">&lt;-</span> <span class="st">"-"</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>se_ad4<span class="sc">$</span>condition[<span class="fu">is.na</span>(se_ad4<span class="sc">$</span>condition)] <span class="ot">&lt;-</span> <span class="st">"-"</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>p_pca2 <span class="ot">&lt;-</span> <span class="fu">pca_plot</span>(</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    se_ad4, <span class="at">color_by =</span> <span class="st">"species"</span>, <span class="at">shape_by =</span> <span class="st">"condition"</span>, <span class="at">add_mean =</span> <span class="cn">TRUE</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"PCA of samples - AD4"</span>,</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"Species"</span>,</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">shape =</span> <span class="st">"Treatment"</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Combining plots</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>p_pca_combined <span class="ot">&lt;-</span> patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>    p_pca1 <span class="sc">+</span> </span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>, <span class="at">legend.box =</span> <span class="st">"vertical"</span>), </span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>    p_pca2 <span class="sc">+</span> </span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>, <span class="at">legend.box =</span> <span class="st">"vertical"</span>),</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">1</span></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>p_pca_combined</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chapter_01_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now, let’s visualize a heatmap of sample correlations.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Heatmap of sample correlations</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="do">## AD1</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>p_hm1 <span class="ot">&lt;-</span> <span class="fu">plot_samplecor</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    se_ad1, <span class="at">coldata_cols =</span> <span class="fu">c</span>(<span class="st">"species"</span>, <span class="st">"condition"</span>),</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_rownames =</span> <span class="cn">FALSE</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>p_hm1<span class="sc">@</span>column_title <span class="ot">&lt;-</span> <span class="st">"AD1"</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="do">## AD4</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>p_hm2 <span class="ot">&lt;-</span> <span class="fu">plot_samplecor</span>(</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    se_ad4, <span class="at">coldata_cols =</span> <span class="fu">c</span>(<span class="st">"species"</span>, <span class="st">"condition"</span>),</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_rownames =</span> <span class="cn">FALSE</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>p_hm2<span class="sc">@</span>column_title <span class="ot">&lt;-</span> <span class="st">"AD4"</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine plots - one per row</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    ggplotify<span class="sc">::</span><span class="fu">as.ggplot</span>(p_hm1), </span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    ggplotify<span class="sc">::</span><span class="fu">as.ggplot</span>(p_hm2), </span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">2</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chapter_01_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Both plots show that one sample - D5_CK2 - is an outlier. Let’s remove this sample.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove sample D5_CK2 and midparent values</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>fse_ad1 <span class="ot">&lt;-</span> se_ad1[, <span class="fu">colnames</span>(se_ad1) <span class="sc">!=</span> <span class="st">"D5_CK2"</span> <span class="sc">&amp;</span> se_ad1<span class="sc">$</span>species <span class="sc">!=</span> <span class="st">"midparent"</span>]</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>fse_ad4 <span class="ot">&lt;-</span> se_ad4[, <span class="fu">colnames</span>(se_ad4) <span class="sc">!=</span> <span class="st">"D5_CK2"</span> <span class="sc">&amp;</span> se_ad4<span class="sc">$</span>species <span class="sc">!=</span> <span class="st">"midparent"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="identifying-differentially-expressed-genes-between-species-pairs" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="identifying-differentially-expressed-genes-between-species-pairs"><span class="header-section-number">1.4</span> Identifying differentially expressed genes between species pairs</h2>
+<p>Here, we will identify differentially expressed genes (DEGs) between pairwise combinations of species in a triplet. For each hybrid, we will do this separately for stress and control samples. We will also recompute midparent values specifically for control and stress samples.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get DEGs</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="do">## AD1</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>deg_ad1_control <span class="ot">&lt;-</span> <span class="fu">add_midparent_expression</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    fse_ad1[, fse_ad1<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">"Control"</span>],</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">coldata_column =</span> <span class="st">"species"</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">parent1 =</span> <span class="st">"A2"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">parent2 =</span> <span class="st">"D5"</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_size_factors</span>() <span class="sc">|&gt;</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">get_deg_list</span>(</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">coldata_column =</span> <span class="st">"species"</span>,</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">parent1 =</span> <span class="st">"A2"</span>,</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">parent2 =</span> <span class="st">"D5"</span>,</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">offspring =</span> <span class="st">"AD1"</span>,</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">lfcThreshold =</span> <span class="dv">1</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>deg_ad1_stress <span class="ot">&lt;-</span> <span class="fu">add_midparent_expression</span>(</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    fse_ad1[, fse_ad1<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">"Salt"</span>],</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">coldata_column =</span> <span class="st">"species"</span>,</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">parent1 =</span> <span class="st">"A2"</span>,</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">parent2 =</span> <span class="st">"D5"</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_size_factors</span>() <span class="sc">|&gt;</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">get_deg_list</span>(</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">coldata_column =</span> <span class="st">"species"</span>,</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">parent1 =</span> <span class="st">"A2"</span>,</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">parent2 =</span> <span class="st">"D5"</span>,</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">offspring =</span> <span class="st">"AD1"</span>,</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">lfcThreshold =</span> <span class="dv">1</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="do">## AD4</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>deg_ad4_control <span class="ot">&lt;-</span> <span class="fu">add_midparent_expression</span>(</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>    fse_ad4[, fse_ad4<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">"Control"</span>],</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">coldata_column =</span> <span class="st">"species"</span>,</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">parent1 =</span> <span class="st">"A2"</span>,</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">parent2 =</span> <span class="st">"D5"</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_size_factors</span>() <span class="sc">|&gt;</span></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">get_deg_list</span>(</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>        <span class="at">coldata_column =</span> <span class="st">"species"</span>,</span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>        <span class="at">parent1 =</span> <span class="st">"A2"</span>,</span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>        <span class="at">parent2 =</span> <span class="st">"D5"</span>,</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>        <span class="at">offspring =</span> <span class="st">"AD4"</span>,</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>        <span class="at">lfcThreshold =</span> <span class="dv">1</span></span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>deg_ad4_stress <span class="ot">&lt;-</span> <span class="fu">add_midparent_expression</span>(</span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>    fse_ad4[, fse_ad4<span class="sc">$</span>condition <span class="sc">==</span> <span class="st">"Salt"</span>],</span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">coldata_column =</span> <span class="st">"species"</span>,</span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">parent1 =</span> <span class="st">"A2"</span>,</span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">parent2 =</span> <span class="st">"D5"</span></span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_size_factors</span>() <span class="sc">|&gt;</span></span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">get_deg_list</span>(</span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>        <span class="at">coldata_column =</span> <span class="st">"species"</span>,</span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>        <span class="at">parent1 =</span> <span class="st">"A2"</span>,</span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>        <span class="at">parent2 =</span> <span class="st">"D5"</span>,</span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>        <span class="at">offspring =</span> <span class="st">"AD4"</span>,</span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>        <span class="at">lfcThreshold =</span> <span class="dv">1</span></span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, we will visualize the frequencies of DEGs with an expression triangle.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot expression triangle</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="do">## AD1</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>p_triangle_ad1_control <span class="ot">&lt;-</span> <span class="fu">get_deg_counts</span>(deg_ad1_control) <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot_expression_triangle</span>(</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">box_labels =</span> <span class="fu">c</span>(<span class="st">"A2"</span>, <span class="st">"D5"</span>, <span class="st">"AD1"</span>, <span class="st">"Midparent"</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Control"</span>) <span class="sc">+</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>p_triangle_ad1_stress <span class="ot">&lt;-</span> <span class="fu">get_deg_counts</span>(deg_ad1_stress) <span class="sc">|&gt;</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot_expression_triangle</span>(</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">box_labels =</span> <span class="fu">c</span>(<span class="st">"A2"</span>, <span class="st">"D5"</span>, <span class="st">"AD1"</span>, <span class="st">"Midparent"</span>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Stress"</span>) <span class="sc">+</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="do">## AD4</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>p_triangle_ad4_control <span class="ot">&lt;-</span> <span class="fu">get_deg_counts</span>(deg_ad4_control) <span class="sc">|&gt;</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot_expression_triangle</span>(</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">box_labels =</span> <span class="fu">c</span>(<span class="st">"A2"</span>, <span class="st">"D5"</span>, <span class="st">"AD4"</span>, <span class="st">"Midparent"</span>),</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"dodgerblue3"</span>, <span class="st">"firebrick"</span>, <span class="st">"darkgoldenrod"</span>, <span class="st">"darkgoldenrod3"</span>)</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Control"</span>) <span class="sc">+</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>p_triangle_ad4_stress <span class="ot">&lt;-</span> <span class="fu">get_deg_counts</span>(deg_ad4_stress) <span class="sc">|&gt;</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot_expression_triangle</span>(</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">box_labels =</span> <span class="fu">c</span>(<span class="st">"A2"</span>, <span class="st">"D5"</span>, <span class="st">"AD4"</span>, <span class="st">"Midparent"</span>),</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"dodgerblue3"</span>, <span class="st">"firebrick"</span>, <span class="st">"darkgoldenrod"</span>, <span class="st">"darkgoldenrod3"</span>)</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Stress"</span>) <span class="sc">+</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine plots</span></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>p_triangle_all <span class="ot">&lt;-</span> <span class="fu">wrap_plots</span>(</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>    p_triangle_ad1_control,</span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>    p_triangle_ad1_stress,</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>    p_triangle_ad4_control,</span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>    p_triangle_ad4_stress,</span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">2</span></span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot_annotation</span>(<span class="at">tag_levels =</span> <span class="st">"A"</span>) <span class="sc">&amp;</span></span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.tag =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>))</span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>p_triangle_all</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chapter_01_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="3900"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The figure shows two interesting patterns:</p>
+<ol type="1">
+<li><p>In both hybrids and conditions, the number of differentially expressed genes is greater for the hybrids and the D subgenome as compared to the hybrids and the A subgenome. However, such difference is greatly reduced under salt stress.</p></li>
+<li><p>Overall, salt stress induces an increase in the number of differentially expressed genes relative to both progenitor species.</p></li>
+</ol>
+<p>Next, to better understand the effect of salt stress on subgenome expression bias, we will check if the differentially expressed genes between the hybrids and the parents are the same in control and stress conditions.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># UpSet plot for AD1 </span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ad1 <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">A, control</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rownames</span>(deg_ad1_control<span class="sc">$</span>F1_vs_P1),</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">D, control</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rownames</span>(deg_ad1_control<span class="sc">$</span>F1_vs_P2),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">A, stress</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rownames</span>(deg_ad1_stress<span class="sc">$</span>F1_vs_P1),</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">D, stress</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rownames</span>(deg_ad1_stress<span class="sc">$</span>F1_vs_P2)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>m_ad1 <span class="ot">&lt;-</span> ComplexHeatmap<span class="sc">::</span><span class="fu">make_comb_mat</span>(ad1)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>p_upset_ad1 <span class="ot">&lt;-</span> ComplexHeatmap<span class="sc">::</span><span class="fu">UpSet</span>(</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    m_ad1, <span class="at">row_title =</span> <span class="st">"AD1"</span>,</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">comb_col =</span> ggsci<span class="sc">::</span><span class="fu">pal_jama</span>()(<span class="dv">7</span>)[<span class="fu">comb_degree</span>(m_ad1)],</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">top_annotation =</span> <span class="fu">upset_top_annotation</span>(m_ad1, <span class="at">add_numbers =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">set_order =</span> <span class="fu">c</span>(<span class="st">"A, control"</span>, <span class="st">"A, stress"</span>, <span class="st">"D, control"</span>, <span class="st">"D, stress"</span>)</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co"># UpSet plot for AD4 </span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>ad4 <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">A, control</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rownames</span>(deg_ad4_control<span class="sc">$</span>F1_vs_P1),</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">D, control</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rownames</span>(deg_ad4_control<span class="sc">$</span>F1_vs_P2),</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">A, stress</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rownames</span>(deg_ad4_stress<span class="sc">$</span>F1_vs_P1),</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">D, stress</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rownames</span>(deg_ad4_stress<span class="sc">$</span>F1_vs_P2)</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>m_ad4 <span class="ot">&lt;-</span> ComplexHeatmap<span class="sc">::</span><span class="fu">make_comb_mat</span>(ad4)</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>p_upset_ad4 <span class="ot">&lt;-</span> ComplexHeatmap<span class="sc">::</span><span class="fu">UpSet</span>(</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>    m_ad4, <span class="at">row_title =</span> <span class="st">"AD4"</span>,</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">comb_col =</span> ggsci<span class="sc">::</span><span class="fu">pal_jama</span>()(<span class="dv">7</span>)[<span class="fu">comb_degree</span>(m_ad4)],</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">top_annotation =</span> <span class="fu">upset_top_annotation</span>(m_ad4, <span class="at">add_numbers =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">set_order =</span> <span class="fu">c</span>(<span class="st">"A, control"</span>, <span class="st">"A, stress"</span>, <span class="st">"D, control"</span>, <span class="st">"D, stress"</span>)</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine UpSet plots into a single, side-by-side plot</span></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>p_upset_all <span class="ot">&lt;-</span> <span class="fu">wrap_plots</span>(</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>    ggplotify<span class="sc">::</span><span class="fu">as.ggplot</span>(p_upset_ad1), </span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>    ggplotify<span class="sc">::</span><span class="fu">as.ggplot</span>(p_upset_ad4),</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">1</span></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot_annotation</span>(</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Shared DEGs across conditions and hybrids"</span></span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">&amp;</span></span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>p_upset_all</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chapter_01_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Interestingly, a large number of genes are differentially expressed between the hybrid and the parental genomes for both species (N = 2203 and 2703 for AD1 and AD4, respectively). For DEGs relative to the D subgenome, most of them are shared between control and stress conditions, while for DEGs relative to the A subgenome, most genes are only differentially expressed under salt stress.</p>
+</section>
+<section id="classifying-genes-into-expression-groups" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="classifying-genes-into-expression-groups"><span class="header-section-number">1.5</span> Classifying genes into expression groups</h2>
+<p>To understand the expression patterns of hybrids relative to their progenitors, we will classify genes onto expression-based categories and classes as in <span class="citation" data-cites="rapp2009genomic">Rapp, Udall, and Wendel (<a href="#ref-rapp2009genomic" role="doc-biblioref">2009</a>)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Classify genes in expression partitions (classes and categories)</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>partition_ad1_control <span class="ot">&lt;-</span> <span class="fu">expression_partitioning</span>(deg_ad1_control)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>partition_ad4_control <span class="ot">&lt;-</span> <span class="fu">expression_partitioning</span>(deg_ad4_control)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>partition_ad1_stress <span class="ot">&lt;-</span> <span class="fu">expression_partitioning</span>(deg_ad1_stress)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>partition_ad4_stress <span class="ot">&lt;-</span> <span class="fu">expression_partitioning</span>(deg_ad4_stress)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, let’s visualize results:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># AD1</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>p_pfreq_ad1_c <span class="ot">&lt;-</span> <span class="fu">plot_partition_frequencies</span>(</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    partition_ad1_control, <span class="at">group_by =</span> <span class="st">"Class"</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"A2"</span>, <span class="st">"AD1"</span>, <span class="st">"D5"</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>p_pfreq_ad1_s <span class="ot">&lt;-</span> <span class="fu">plot_partition_frequencies</span>(</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    partition_ad1_stress, <span class="at">group_by =</span> <span class="st">"Class"</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"A2"</span>, <span class="st">"AD1"</span>, <span class="st">"D5"</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># AD4</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>p_pfreq_ad4_c <span class="ot">&lt;-</span> <span class="fu">plot_partition_frequencies</span>(</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    partition_ad4_control, <span class="at">group_by =</span> <span class="st">"Class"</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"A2"</span>, <span class="st">"AD4"</span>, <span class="st">"D5"</span>)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>p_pfreq_ad4_s <span class="ot">&lt;-</span> <span class="fu">plot_partition_frequencies</span>(</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    partition_ad4_stress, <span class="at">group_by =</span> <span class="st">"Class"</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"A2"</span>, <span class="st">"AD4"</span>, <span class="st">"D5"</span>)</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine plots</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Layout: scheme + ((AD1_control + AD1_stress) / (AD4_control + AD4_stress))</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>p_freq_combined <span class="ot">&lt;-</span> <span class="fu">wrap_plots</span>(</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    p_pfreq_ad1_c[[<span class="dv">1</span>]],</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">wrap_plots</span>(</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>        p_pfreq_ad1_c[[<span class="dv">2</span>]] <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"AD1, control"</span>, <span class="at">x =</span> <span class="cn">NULL</span>), </span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>        p_pfreq_ad1_s[[<span class="dv">2</span>]] <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"AD1, stress"</span>, <span class="at">x =</span> <span class="cn">NULL</span>),</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>        p_pfreq_ad4_c[[<span class="dv">2</span>]] <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"AD4, control"</span>, <span class="at">x =</span> <span class="cn">NULL</span>), </span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>        p_pfreq_ad4_s[[<span class="dv">2</span>]] <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"AD4, stress"</span>, <span class="at">x =</span> <span class="cn">NULL</span>),</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">ncol =</span> <span class="dv">2</span>,</span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">widths =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>) <span class="sc">&amp;</span></span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="st">"pt"</span>))</span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>p_freq_combined</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chapter_01_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="864"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The figure shows that most genes display expression-level dominance towards the parent 1 (A2) in control and stress conditions, both for the AD1 and AD2 allopolyploids. However, for both species, such expression-level dominance is reduced under salt stress.</p>
+</section>
+<section id="overrepresentation-analyses" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="overrepresentation-analyses"><span class="header-section-number">1.6</span> Overrepresentation analyses</h2>
+<p>Now, we will perform overrepresentation analyses of GO terms among genes in each expression class in each condition and species.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load GO annotation</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"cotton_functions.rda"</span>))</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>cotton_functions <span class="ot">&lt;-</span> <span class="fu">lapply</span>(cotton_functions, as.data.frame)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform ORA</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="do">## AD1, control</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>genes_ad1_c <span class="ot">&lt;-</span> <span class="fu">split</span>(partition_ad1_control<span class="sc">$</span>Gene, partition_ad1_control<span class="sc">$</span>Class)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>ora_ad1_c <span class="ot">&lt;-</span> <span class="fu">lapply</span>(</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    genes_ad1_c, ora,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">annotation =</span> <span class="fu">bind_rows</span>(cotton_functions), </span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">background =</span> <span class="fu">rownames</span>(se_ad1),</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_setsize =</span> <span class="dv">1</span>, <span class="at">max_setsize =</span> <span class="dv">1000</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="do">## AD1, stress</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>genes_ad1_s <span class="ot">&lt;-</span> <span class="fu">split</span>(partition_ad1_stress<span class="sc">$</span>Gene, partition_ad1_stress<span class="sc">$</span>Class)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>ora_ad1_s <span class="ot">&lt;-</span> <span class="fu">lapply</span>(</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    genes_ad1_s, ora,</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">annotation =</span> <span class="fu">bind_rows</span>(cotton_functions), </span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">background =</span> <span class="fu">rownames</span>(se_ad1),</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_setsize =</span> <span class="dv">1</span>, <span class="at">max_setsize =</span> <span class="dv">1000</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="do">## AD4, control</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>genes_ad4_c <span class="ot">&lt;-</span> <span class="fu">split</span>(partition_ad4_control<span class="sc">$</span>Gene, partition_ad4_control<span class="sc">$</span>Class)</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>ora_ad4_c <span class="ot">&lt;-</span> <span class="fu">lapply</span>(</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>    genes_ad4_c, ora,</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">annotation =</span> <span class="fu">bind_rows</span>(cotton_functions), </span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">background =</span> <span class="fu">rownames</span>(se_ad4),</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_setsize =</span> <span class="dv">1</span>, <span class="at">max_setsize =</span> <span class="dv">1000</span></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a><span class="do">## AD4, stress</span></span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>genes_ad4_s <span class="ot">&lt;-</span> <span class="fu">split</span>(partition_ad4_stress<span class="sc">$</span>Gene, partition_ad4_stress<span class="sc">$</span>Class)</span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>ora_ad4_s <span class="ot">&lt;-</span> <span class="fu">lapply</span>(</span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>    genes_ad4_s, ora,</span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">annotation =</span> <span class="fu">bind_rows</span>(cotton_functions), </span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">background =</span> <span class="fu">rownames</span>(se_ad4),</span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_setsize =</span> <span class="dv">1</span>, <span class="at">max_setsize =</span> <span class="dv">1000</span></span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Combining results</span></span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>cotton_enrichment_all <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bind_rows</span>(ora_ad1_c, <span class="at">.id =</span> <span class="st">"Class"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">group =</span> <span class="st">"AD1_control"</span>),</span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bind_rows</span>(ora_ad1_s, <span class="at">.id =</span> <span class="st">"Class"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">group =</span> <span class="st">"AD1_stress"</span>),</span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bind_rows</span>(ora_ad4_c, <span class="at">.id =</span> <span class="st">"Class"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">group =</span> <span class="st">"AD4_control"</span>),</span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">bind_rows</span>(ora_ad4_s, <span class="at">.id =</span> <span class="st">"Class"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">group =</span> <span class="st">"AD4_stress"</span>)</span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="at">class =</span> Class, group, term, genes, all, padj)</span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Show results as an interactive table</span></span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a>DT<span class="sc">::</span><span class="fu">datatable</span>(</span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a>    cotton_enrichment_all,</span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">selection =</span> <span class="st">"single"</span>,</span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>    <span class="at">rownames =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">options =</span> <span class="fu">list</span>(</span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>        <span class="at">lengthMenu =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">25</span>, <span class="dv">50</span>),</span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a>        <span class="at">pageLength =</span> <span class="dv">10</span></span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>    DT<span class="sc">::</span><span class="fu">formatSignif</span>(<span class="at">columns =</span> <span class="st">"padj"</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-3486349adfa5d821dc44" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-3486349adfa5d821dc44">{"x":{"filter":"none","vertical":false,"data":[["UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","ADD","ADD","ADD","ADD","ADD","ADD","ADD","ADD","ADD","ADD","ADD","ADD","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","ADD","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","ADD","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P1","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","UP","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2","ELD_P2"],["AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_control","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD1_stress","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_control","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress","AD4_stress"],["Bet v I/Major latex protein","endonuclease activity","endonuclease activity, active with either ribo- or deoxyribonucleic acids and producing 5'-phosphomonoesters","endoribonuclease activity","endoribonuclease activity, producing 5'-phosphomonoesters","Glycoside hydrolase family 18, catalytic domain","hAT-like transposase, RNase-H fold","HAT, C-terminal dimerisation domain","L10-interacting MYB domain-containing protein","Myb/SANT-like domain","nuclease activity","ribonuclease activity","Ribonuclease H domain","Ribonuclease H-like domain, plant type","Ribonuclease H-like superfamily","RNA-DNA hybrid ribonuclease activity","SNase-like, OB-fold superfamily","Uncharacterized protein At4g02000-like","Zinc knuckle CX2CX4HX4C","active transmembrane transporter activity","ADP binding","aerobic respiration","Apoptotic protease-activating factors, helical domain","ATP biosynthetic process","ATP metabolic process","ATP synthesis coupled proton transport","ATPase, F1/V1/A1 complex, alpha/beta subunit, N-terminal domain superfamily","carbohydrate derivative biosynthetic process","cation channel activity","cation transmembrane transport","cation transmembrane transporter activity","cation transport","cellular respiration","channel activity","chlorophyll binding","chloroplast thylakoid","chloroplast thylakoid membrane","Cytochrome b/b6, C-terminal","Disease resistance protein, plants","DNA-directed RNA polymerases I and III subunit AC19","electron transfer activity","electron transport chain","electron transporter, transferring electrons within the cyclic electron transport pathway of photosynthesis activity","energy derivation by oxidation of organic compounds","generation of precursor metabolites and energy","inorganic cation transmembrane transport","inorganic cation transmembrane transporter activity","inorganic ion transmembrane transport","ion channel activity","ion transmembrane transport","large ribosomal subunit","membrane protein complex","mitochondrial ATP synthesis coupled proton transport","mitochondrial large ribosomal subunit","mitochondrial matrix","mitochondrial protein-containing complex","mitochondrial ribosome","mitochondrial small ribosomal subunit","NAD(P)H dehydrogenase (quinone) activity","NADH dehydrogenase (quinone) activity","NADH dehydrogenase activity","NB-ARC","nucleobase-containing small molecule metabolic process","nucleoside phosphate biosynthetic process","nucleoside phosphate metabolic process","nucleoside triphosphate biosynthetic process","nucleoside triphosphate metabolic process","nucleotide biosynthetic process","nucleotide metabolic process","organellar large ribosomal subunit","organellar ribosome","organellar small ribosomal subunit","organophosphate biosynthetic process","oxidative phosphorylation","oxidoreductase activity, acting on NAD(P)H","oxidoreductase activity, acting on NAD(P)H, quinone or similar compound as acceptor","oxidoreduction-driven active transmembrane transporter activity","photosynthesis","photosynthesis, light reaction","Photosynthesis.photophosphorylation.ATP synthase complex.membrane CF0 subcomplex.subunit b","photosynthetic electron transport chain","photosynthetic electron transport in photosystem II","photosynthetic membrane","Photosynthetic reaction centre, L/M","photosystem","Photosystem antenna protein-like","Photosystem antenna protein-like superfamily","Photosystem I PsaA","Photosystem II protein D1/D2 superfamily","plastid ribosome","plastid small ribosomal subunit","plastid thylakoid","plastid thylakoid membrane","primary active transmembrane transporter activity","proton channel activity","proton transmembrane transport","proton transmembrane transporter activity","proton-transporting ATP synthase activity, rotational mechanism","proton-transporting ATP synthase complex","proton-transporting ATP synthase complex, catalytic core F(1)","proton-transporting ATP synthase complex, coupling factor F(o)","proton-transporting two-sector ATPase complex","proton-transporting two-sector ATPase complex, catalytic domain","proton-transporting two-sector ATPase complex, proton-transporting domain","purine nucleoside triphosphate biosynthetic process","purine nucleotide biosynthetic process","purine nucleotide metabolic process","purine ribonucleoside triphosphate biosynthetic process","purine ribonucleotide biosynthetic process","purine ribonucleotide metabolic process","purine-containing compound biosynthetic process","purine-containing compound metabolic process","ribonucleoprotein complex","ribonucleoside triphosphate biosynthetic process","ribonucleotide biosynthetic process","ribonucleotide metabolic process","Ribosomal protein S5/S7","Ribosomal protein S7 domain","Ribosomal protein S7 domain superfamily","ribosomal subunit","small ribosomal subunit","structural constituent of ribosome","structural molecule activity","tetrapyrrole binding","thylakoid membrane","ADP binding","Cytochrome P450 superfamily","heme binding","hydrolase activity, hydrolyzing N-glycosyl compounds","iron ion binding","monooxygenase activity","NAD+ nucleosidase activity","oxidoreductase activity, acting on paired donors, with incorporation or reduction of molecular oxygen","secondary metabolite biosynthetic process","tetrapyrrole binding","UDP-glucuronosyl/UDP-glucosyltransferase","UDP-glycosyltransferase activity","apoplast","carboxylic acid biosynthetic process","cellular amino acid catabolic process","chlorophyll metabolic process","chloroplast envelope","chloroplast organization","chloroplast stroma","chloroplast thylakoid","chloroplast thylakoid membrane","chloroplast thylakoid membrane protein complex","circadian rhythm","DNA-directed RNA polymerase, insert domain superfamily","extracellular region","generation of precursor metabolites and energy","glycine catabolic process","glycine metabolic process","Haloacid dehalogenase-like hydrolase","monocarboxylic acid metabolic process","NAD(P)-binding domain superfamily","organic acid biosynthetic process","Phosphoglycolate phosphatase-like, domain 2","Phosphotransferase KptA/Tpt1","photosynthesis","photosynthesis, light reaction","photosynthetic membrane","photosystem II","photosystem II oxygen evolving complex","pigment biosynthetic process","pigment metabolic process","plastid membrane","plastid membrane organization","plastid organization","plastid thylakoid","plastid thylakoid membrane","plastoglobule","porphyrin-containing compound biosynthetic process","porphyrin-containing compound metabolic process","protein domain specific binding","response to bacterium","response to cold","response to wounding","RNA 2'-phosphotransferase, C-terminal domain","RNA modification","serine family amino acid metabolic process","small molecule biosynthetic process","small molecule catabolic process","stromule","tetrapyrrole biosynthetic process","tetrapyrrole metabolic process","thylakoid lumen","thylakoid membrane","ABC transporter-like, ATP-binding domain","ABC-transporter, N-terminal domain","ABC-type transporter activity","abscisic acid binding","alcohol binding","amino sugar catabolic process","ATP-binding cassette transporter, PDR-like subfamily G, domain 1","ATP-binding cassette transporter, PDR-like subfamily G, domain 2","Berberine/berberine-like","Bet v I type allergen","Bet v I/Major latex protein","Bulb-type lectin domain","Bulb-type lectin domain superfamily","carbohydrate binding","cell recognition","chitin binding","Cytochrome P450 superfamily","endonuclease activity, active with either ribo- or deoxyribonucleic acids and producing 5'-phosphomonoesters","endoribonuclease activity","endoribonuclease activity, producing 5'-phosphomonoesters","Enzyme classification.EC_1 oxidoreductases.EC_1.1 oxidoreductase acting on CH-OH group of donor","Enzyme classification.EC_1 oxidoreductases.EC_1.14 oxidoreductase acting on paired donor with incorporation or reduction of molecular oxygen","Enzyme classification.EC_2 transferases.EC_2.7 transferase transferring phosphorus-containing group","FAD linked oxidase, N-terminal","FAD-binding, type PCMH-like superfamily","FAD-binding, type PCMH, subdomain 1","FAD-binding, type PCMH, subdomain 2","flavin adenine dinucleotide binding","glucosamine-containing compound metabolic process","glutathione metabolic process","Glutathione S-transferase Omega/Tau-like","Glutathione S-transferase, C-terminal","Glutathione S-transferase, C-terminal domain superfamily","Glutathione S-transferase, N-terminal","Glutathione S-transferases Tau, C-terminal alpha helical domain, plant","glutathione transferase activity","Glycoside hydrolase family 18, catalytic domain","Glycoside hydrolase, family 19","Glycoside hydrolase, family 19, catalytic","Gnk2-homologous domain","Gnk2-homologous domain superfamily","heme binding","hormone binding","iron ion binding","Isopenicillin N synthase-like superfamily","Isopenicillin N synthase-like, Fe(2+) 2OG dioxygenase domain","isoprenoid binding","L10-interacting MYB domain-containing protein","Lysozyme-like domain superfamily","molecular transducer activity","monocarboxylic acid binding","monooxygenase activity","Myb/SANT-like domain","Non-haem dioxygenase N-terminal domain","oxidoreductase activity, acting on paired donors, with incorporation or reduction of molecular oxygen","PAN/Apple domain","phosphatase inhibitor activity","Plant PDR ABC transporter associated","pollen-pistil interaction","polysaccharide binding","positive regulation of DNA-binding transcription factor activity","Protein modification.phosphorylation.TKL protein kinase superfamily.G-Lectin protein kinase families.protein kinase (SD-1)","Protein modification.phosphorylation.TKL protein kinase superfamily.protein kinase (DUF26)","Protein modification.phosphorylation.TKL protein kinase superfamily.protein kinase (LRR-XII)","protein serine/threonine kinase activity","recognition of pollen","Redox homeostasis.glutathione-based redox regulation.glutathione S-transferase activities.class tau glutathione S-transferase","response to salicylic acid","ribonuclease activity","Ribonuclease H domain","RNA-DNA hybrid ribonuclease activity","S-locus glycoprotein domain","S-receptor-like serine/threonine-protein kinase","Serine-threonine/tyrosine-protein kinase, catalytic domain","signaling receptor activity","START-like domain superfamily","tetrapyrrole binding","VQ","Wall-associated receptor kinase, galacturonan-binding domain","Zinc knuckle CX2CX4HX4C","5'-3' RNA polymerase activity","aerobic respiration","anchored component of membrane","apoplast","ATP biosynthetic process","ATP metabolic process","ATP synthase, F0 complex, subunit b/b', bacterial/chloroplast","ATP synthesis coupled proton transport","carbohydrate derivative biosynthetic process","cation channel activity","cation transmembrane transport","cation transmembrane transporter activity","cation transport","Cell wall organisation.cell wall proteins.hydroxyproline-rich glycoprotein activities.arabinogalactan-protein activities.Fasciclin-type arabinogalactan protein (FLA)","cellular component assembly","cellular protein-containing complex assembly","cellular respiration","Chlorophyll A-B binding protein","Chlorophyll A-B binding protein, plant and chromista","Chlorophyll a/b binding domain superfamily","chlorophyll binding","chloroplast envelope","chloroplast nucleoid","chloroplast organization","chloroplast stroma","chloroplast thylakoid","chloroplast thylakoid membrane","cytochrome complex assembly","cytoplasmic chromosome","Di-haem cytochrome, transmembrane","DNA-directed 5'-3' RNA polymerase activity","DNA-directed RNA polymerase, alpha subunit","DNA-directed RNA polymerase, subunit 2","electron transfer activity","electron transport chain","electron transporter, transferring electrons within the cyclic electron transport pathway of photosynthesis activity","energy derivation by oxidation of organic compounds","FAS1 domain","FAS1 domain superfamily","Fasciclin-like arabinogalactan protein 15/16/17/18","galacturonan metabolic process","generation of precursor metabolites and energy","inorganic cation transmembrane transport","inorganic cation transmembrane transporter activity","inorganic ion transmembrane transport","ion transmembrane transport","large ribosomal subunit","membrane protein complex","microtubule cytoskeleton","mitochondrial ATP synthesis coupled proton transport","mitochondrial large ribosomal subunit","mitochondrial matrix","mitochondrial protein-containing complex","mitochondrial ribosome","mitochondrial small ribosomal subunit","NAD(P)H dehydrogenase (quinone) activity","NAD(P)H dehydrogenase complex (plastoquinone)","NAD(P)H dehydrogenase complex assembly","NADH dehydrogenase (quinone) activity","NADH dehydrogenase activity","NB-ARC","nucleoid","nucleoside binding","nucleoside phosphate biosynthetic process","nucleoside phosphate metabolic process","nucleoside triphosphate biosynthetic process","nucleoside triphosphate metabolic process","nucleotide biosynthetic process","nucleotide metabolic process","nucleotidyltransferase activity","organellar large ribosomal subunit","organellar ribosome","organellar small ribosomal subunit","organophosphate biosynthetic process","oxidative phosphorylation","oxidoreductase activity, acting on NAD(P)H","oxidoreductase activity, acting on NAD(P)H, quinone or similar compound as acceptor","oxidoreduction-driven active transmembrane transporter activity","pectin metabolic process","photosynthesis","photosynthesis, light harvesting","photosynthesis, light harvesting in photosystem I","photosynthesis, light harvesting in photosystem II","photosynthesis, light reaction","Photosynthesis.photophosphorylation.ATP synthase complex.membrane CF0 subcomplex.subunit b","photosynthetic electron transport chain","photosynthetic electron transport in photosystem I","photosynthetic electron transport in photosystem II","photosynthetic membrane","Photosynthetic reaction centre, L/M","photosystem","photosystem I","photosystem II","Photosystem II protein D1/D2 superfamily","plastid chromosome","plastid large ribosomal subunit","plastid membrane","plastid nucleoid","plastid organization","plastid ribosome","plastid small ribosomal subunit","plastid thylakoid","plastid thylakoid membrane","plastoglobule","protein domain specific binding","Protein modification.phosphorylation.TKL protein kinase superfamily.receptor-like protein kinase (RLCK-V)","Protein TIC214","protein-containing complex assembly","proton channel activity","proton transmembrane transport","proton transmembrane transporter activity","proton-transporting ATP synthase activity, rotational mechanism","proton-transporting ATP synthase complex","proton-transporting ATP synthase complex, catalytic core F(1)","proton-transporting ATP synthase complex, coupling factor F(o)","proton-transporting two-sector ATPase complex","proton-transporting two-sector ATPase complex, proton-transporting domain","purine nucleoside triphosphate biosynthetic process","purine nucleotide biosynthetic process","purine nucleotide metabolic process","purine ribonucleoside triphosphate biosynthetic process","purine ribonucleotide biosynthetic process","purine ribonucleotide metabolic process","purine-containing compound biosynthetic process","purine-containing compound metabolic process","respiratory electron transport chain","ribonucleoprotein complex","ribonucleoside triphosphate biosynthetic process","ribonucleotide biosynthetic process","ribonucleotide metabolic process","Ribosomal protein S2, bacteria/mitochondria/plastid","Ribosomal protein S5/S7","Ribosomal protein S6","Ribosomal protein S6 superfamily","Ribosomal protein S7 domain","Ribosomal protein S7 domain superfamily","ribosomal subunit","Ribulose bisphosphate carboxylase, large subunit, C-terminal","Ribulose bisphosphate carboxylase, large subunit, C-terminal domain superfamily","ribulose-bisphosphate carboxylase activity","small ribosomal subunit","structural constituent of ribosome","structural molecule activity","thylakoid lumen","thylakoid membrane","NAD+ nucleosidase activity","Alcohol dehydrogenase, N-terminal","amine metabolic process","ammonia-lyase activity","AP2/ERF domain superfamily","aromatic amino acid family metabolic process","Aromatic amino acid lyase","cellular amine metabolic process","cellular biogenic amine metabolic process","coumarin biosynthetic process","coumarin metabolic process","Cytochrome P450 superfamily","Enzyme classification.EC_2 transferases.EC_2.7 transferase transferring phosphorus-containing group","Ethylene-responsive transcription factor","heme binding","monooxygenase activity","NAD(P)-binding domain superfamily","oxidoreductase activity, acting on paired donors, with incorporation or reduction of molecular oxygen","Phenylalanine ammonia-lyase","phenylalanine ammonia-lyase activity","Phenylalanine ammonia-lyase, shielding domain superfamily","phenylpropanoid biosynthetic process","phenylpropanoid metabolic process","Protein of unknown function DUF247, plant","regulation of defense response","response to chitin","response to nitrogen compound","response to organonitrogen compound","response to water deprivation","response to wounding","RNA biosynthesis.transcriptional regulation.WRKY transcription factor activity.transcription factor (WRKY)","secondary metabolite biosynthetic process","tetrapyrrole binding","UDP-glucuronosyl/UDP-glucosyltransferase","WRKY domain","WRKY transcription factor, plant","abscisic acid binding","ADP binding","Apoptotic protease-activating factors, helical domain","Bet v I type allergen","Bet v I/Major latex protein","Bulb-type lectin domain","Bulb-type lectin domain superfamily","carbon-oxygen lyase activity, acting on phosphates","Cathepsin propeptide inhibitor domain (I29)","cysteine-type peptidase activity","Cytochrome P450 superfamily","Enzyme classification.EC_1 oxidoreductases.EC_1.14 oxidoreductase acting on paired donor with incorporation or reduction of molecular oxygen","Enzyme classification.EC_2 transferases.EC_2.7 transferase transferring phosphorus-containing group","Glycoside hydrolase family 18, catalytic domain","heme binding","iron ion binding","Isopenicillin N synthase-like superfamily","Isopenicillin N synthase-like, Fe(2+) 2OG dioxygenase domain","L10-interacting MYB domain-containing protein","Leucine-rich repeat-containing N-terminal, plant-type","Malectin domain","monooxygenase activity","NB-ARC","Non-haem dioxygenase N-terminal domain","oxidoreductase activity, acting on paired donors, with incorporation or reduction of molecular oxygen","Papain-like cysteine endopeptidase","Peptidase C1A, papain C-terminal","polysaccharide binding","Protein homeostasis.proteolysis.cysteine-type peptidase activities.C1-class protease (Papain)","Protein modification.phosphorylation.TKL protein kinase superfamily.LRR-VIII protein kinase families.protein kinase (LRR-VIII-2)","Protein modification.phosphorylation.TKL protein kinase superfamily.protein kinase (LRR-XII)","recognition of pollen","RNA biosynthesis.transcriptional regulation.WRKY transcription factor activity.transcription factor (WRKY)","S-receptor-like serine/threonine-protein kinase","Secondary metabolism.terpenoids.terpene biosynthesis.mono-/sesquiterpene-/diterpene synthase","Serine-threonine/tyrosine-protein kinase, catalytic domain","START-like domain superfamily","terpene synthase activity","Terpene synthase, metal-binding domain","Terpene synthase, N-terminal domain","Terpene synthase, N-terminal domain superfamily","tetrapyrrole binding","Wall-associated receptor kinase, galacturonan-binding domain","WRKY domain","WRKY transcription factor, plant","Zinc knuckle CX2CX4HX4C","ADP binding","Apoptotic protease-activating factors, helical domain","cell wall organization or biogenesis","chlorophyll binding","Disease resistance protein, plants","electron transfer activity","electron transport chain","electron transporter, transferring electrons within the cyclic electron transport pathway of photosynthesis activity","Enzyme classification.EC_2 transferases.EC_2.4 glycosyltransferase","etioplast","external encapsulating structure","generation of precursor metabolites and energy","membrane protein complex","mitochondrial large ribosomal subunit","mitochondrial ribosome","mitochondrial small ribosomal subunit","NB-ARC","organellar large ribosomal subunit","organellar ribosome","organellar small ribosomal subunit","oxidoreduction-driven active transmembrane transporter activity","photosynthesis","photosynthesis, light reaction","Photosynthesis.photophosphorylation.linear electron flow.ferredoxin electron carrier activities.NADP-reduction-targeted ferredoxin (Fd)","photosynthetic electron transport chain","photosystem","Photosystem antenna protein-like","Photosystem antenna protein-like superfamily","plastid ribosome","plastid small ribosomal subunit","ribonucleoprotein complex","Ribosomal protein S5/S7","Ribosomal protein S7 domain","Ribosomal protein S7 domain superfamily","ribosomal subunit","small ribosomal subunit","structural constituent of ribosome","structural molecule activity","UDP-glucuronosyl/UDP-glucosyltransferase","apoplast","carbohydrate biosynthetic process","cellular carbohydrate metabolic process","cellular glucan metabolic process","cellular polysaccharide metabolic process","chloroplast envelope","chloroplast organization","chloroplast stroma","chloroplast thylakoid","chloroplast thylakoid membrane","circadian rhythm","DYW domain","extracellular region","glycine metabolic process","hydrogen peroxide biosynthetic process","photosynthetic membrane","plastid membrane","plastid organization","plastid thylakoid","plastid thylakoid membrane","polysaccharide metabolic process","PORR family","pyrimidine-containing compound biosynthetic process","pyrimidine-containing compound metabolic process","reactive oxygen species biosynthetic process","response to acid chemical","response to cadmium ion","response to cold","response to water","response to water deprivation","ribonucleoprotein complex biogenesis","ribosome biogenesis","RNA modification","small molecule biosynthetic process","stromule","thylakoid membrane","ADP binding","Apoptotic protease-activating factors, helical domain","Cytochrome P450 superfamily","Enzyme classification.EC_1 oxidoreductases.EC_1.14 oxidoreductase acting on paired donor with incorporation or reduction of molecular oxygen","heme binding","iron ion binding","monooxygenase activity","Protein of unknown function DUF247, plant","tetrapyrrole binding","ABC-type transporter activity","abscisic acid binding","ADP binding","alcohol binding","Alcohol dehydrogenase, N-terminal","amino sugar catabolic process","Apoptotic protease-activating factors, helical domain","ATP-binding cassette transporter, PDR-like subfamily G, domain 2","Berberine/berberine-like","Bet v I type allergen","Bet v I/Major latex protein","Bulb-type lectin domain","Bulb-type lectin domain superfamily","carbohydrate binding","carbohydrate derivative catabolic process","cell recognition","cell wall macromolecule catabolic process","chitin binding","Chitin-binding, type 1","chitinase activity","Cytochrome P450 superfamily","defense response to bacterium","defense response to fungus","Disease resistance protein, plants","endochitinase activity","Endochitinase-like superfamily","Enzyme classification.EC_1 oxidoreductases.EC_1.1 oxidoreductase acting on CH-OH group of donor","Enzyme classification.EC_1 oxidoreductases.EC_1.14 oxidoreductase acting on paired donor with incorporation or reduction of molecular oxygen","Enzyme classification.EC_2 transferases.EC_2.7 transferase transferring phosphorus-containing group","enzyme inhibitor activity","ethylene-activated signaling pathway","FAD linked oxidase, N-terminal","FAD-binding, type PCMH, subdomain 1","glucosamine-containing compound metabolic process","glutathione metabolic process","Glutathione S-transferase Omega/Tau-like","Glutathione S-transferase, N-terminal","Glutathione S-transferases Tau, C-terminal alpha helical domain, plant","glutathione transferase activity","Glycoside hydrolase, family 19","Glycoside hydrolase, family 19, catalytic","Gnk2-homologous domain","Gnk2-homologous domain superfamily","GroES-like superfamily","heme binding","hormone binding","immune response-regulating signaling pathway","innate immune response","Ionotropic glutamate receptor","IQ domain-containing protein IQM","iron ion binding","Isopenicillin N synthase-like superfamily","Isopenicillin N synthase-like, Fe(2+) 2OG dioxygenase domain","isoprenoid binding","L10-interacting MYB domain-containing protein","Leucine-rich repeat-containing N-terminal, plant-type","ligand-gated channel activity","Lysozyme-like domain superfamily","molecular transducer activity","monocarboxylic acid binding","monooxygenase activity","Multi-process regulation.calcium-dependent signalling.calcium sensor (CML)","Myb/SANT-like domain","NAC domain","NAC domain superfamily","NB-ARC","Non-haem dioxygenase N-terminal domain","oxidoreductase activity, acting on paired donors, with incorporation or reduction of molecular oxygen","PAN/Apple domain","Papain-like cysteine endopeptidase","pattern recognition receptor signaling pathway","Periplasmic binding protein-like I","PGG domain","phosphatase inhibitor activity","Phytohormone action.signalling peptides.NCRP (non-cysteine-rich-peptide) category.PIP/PIPL-peptide activity.PIP/PIPL-precursor polypeptide","Plant PDR ABC transporter associated","plant-type hypersensitive response","pollen-pistil interaction","Polyketide synthase, enoylreductase domain","polysaccharide binding","positive regulation of DNA-binding transcription factor activity","programmed cell death induced by symbiont","Protein homeostasis.ubiquitin-proteasome system.ubiquitin-fold protein conjugation.ubiquitin conjugation (ubiquitylation).ubiquitin-ligase E3 activities.U-Box E3 ligase activities.group-II ligase","Protein modification.phosphorylation.TKL protein kinase superfamily.G-Lectin protein kinase families.protein kinase (SD-1)","Protein modification.phosphorylation.TKL protein kinase superfamily.protein kinase (DUF26)","Protein modification.phosphorylation.TKL protein kinase superfamily.protein kinase (LRR-XII)","Protein modification.phosphorylation.TKL protein kinase superfamily.protein kinase (LysM)","Protein modification.phosphorylation.TKL protein kinase superfamily.protein kinase (RKF3)","Protein modification.phosphorylation.TKL protein kinase superfamily.protein kinase (WAK/WAKL)","protein serine/threonine kinase activity","recognition of pollen","Redox homeostasis.glutathione-based redox regulation.glutathione S-transferase activities.class tau glutathione S-transferase","regulation of defense response","regulation of immune response","regulation of response to biotic stimulus","regulation of response to external stimulus","response to bacterium","response to chitin","response to ethylene","response to fatty acid","response to fungus","response to jasmonic acid","response to nitrogen compound","response to organonitrogen compound","response to salicylic acid","response to wounding","RNA biosynthesis.transcriptional regulation.WRKY transcription factor activity.transcription factor (WRKY)","S-locus glycoprotein domain","S-receptor-like serine/threonine-protein kinase","Serine-threonine/tyrosine-protein kinase, catalytic domain","signaling receptor activity","Solute transport.carrier-mediated transport.MFS superfamily.SP family.polyol/monosaccharide transporter (PLT)","Solute transport.channels.ligand-gated cation channel (GLR)","START-like domain superfamily","systemic acquired resistance","tetrapyrrole binding","U box domain","VQ","Wall-associated receptor kinase, C-terminal","Wall-associated receptor kinase, galacturonan-binding domain","WRKY domain","WRKY transcription factor, plant","Zinc finger, RING/FYVE/PHD-type","5'-3' RNA polymerase activity","anchored component of membrane","apoplast","ATP biosynthetic process","ATP metabolic process","ATP synthase, F0 complex, subunit C, bacterial/chloroplast","ATP synthesis coupled proton transport","Bifunctional inhibitor/plant lipid transfer protein/seed storage helical domain","Bifunctional inhibitor/plant lipid transfer protein/seed storage helical domain superfamily","cation transmembrane transport","cell wall","Cell wall organisation.cell wall proteins.hydroxyproline-rich glycoprotein activities.arabinogalactan-protein activities.Fasciclin-type arabinogalactan protein (FLA)","Cell wall organisation.cellulose.cellulose synthase complex (CSC).CSC components.cellulose synthase (CesA)","cellular respiration","Cellulose synthase","Cellulose synthase, RING-type zinc finger","chlorophyll binding","chloroplast envelope","chloroplast nucleoid","chloroplast organization","chloroplast stroma","chloroplast stromal thylakoid","chloroplast thylakoid","chloroplast thylakoid lumen","chloroplast thylakoid membrane","Citrate carrier CitT-related","Cytochrome b/b6, C-terminal domain superfamily","cytosolic ribosome","DNA-directed 5'-3' RNA polymerase activity","DNA-directed RNA polymerase, subunit 2","electron transfer activity","electron transport chain","electron transporter, transferring electrons within the cyclic electron transport pathway of photosynthesis activity","external encapsulating structure","F/V-ATP synthase subunit C superfamily","FAS1 domain","FAS1 domain superfamily","Fasciclin-like arabinogalactan protein 15/16/17/18","Ferredoxin [2Fe-2S], plant","generation of precursor metabolites and energy","Glucose-methanol-choline oxidoreductase, C-terminal","Glucose-methanol-choline oxidoreductase, N-terminal","Glycoside hydrolase family 9","inorganic cation transmembrane transport","inorganic ion transmembrane transport","ion transmembrane transport","large ribosomal subunit","membrane protein complex","mitochondrial ATP synthesis coupled proton transport","mitochondrial large ribosomal subunit","mitochondrial matrix","mitochondrial protein-containing complex","mitochondrial ribosome","mitochondrial small ribosomal subunit","NAD(P)H dehydrogenase (quinone) activity","NADH dehydrogenase (quinone) activity","NADH dehydrogenase activity","nucleoid","nucleoside binding","nucleoside triphosphate biosynthetic process","nucleoside triphosphate metabolic process","Nucleotide-diphospho-sugar transferases","organellar large ribosomal subunit","organellar ribosome","organellar small ribosomal subunit","oxidoreductase activity, acting on NAD(P)H","oxidoreductase activity, acting on NAD(P)H, quinone or similar compound as acceptor","oxidoreduction-driven active transmembrane transporter activity","photosynthesis","photosynthesis, light harvesting","photosynthesis, light reaction","Photosynthesis.photophosphorylation.ATP synthase complex.membrane CF0 subcomplex.subunit b","Photosynthesis.photophosphorylation.linear electron flow.ferredoxin electron carrier activities.NADP-reduction-targeted ferredoxin (Fd)","photosynthetic electron transport chain","photosynthetic electron transport in photosystem II","photosynthetic membrane","Photosynthetic reaction centre, L/M","photosystem","Photosystem antenna protein-like","Photosystem antenna protein-like superfamily","photosystem II","Photosystem II protein D1/D2 superfamily","photosystem II repair","plant-type cell wall","plastid large ribosomal subunit","plastid membrane","plastid nucleoid","plastid organization","plastid ribosome","plastid small ribosomal subunit","plastid thylakoid","plastid thylakoid membrane","plastoglobule","protein domain specific binding","Protein TIC214","proton channel activity","proton transmembrane transport","proton transmembrane transporter activity","proton-transporting ATP synthase activity, rotational mechanism","proton-transporting ATP synthase complex","proton-transporting ATP synthase complex, coupling factor F(o)","proton-transporting two-sector ATPase complex","proton-transporting two-sector ATPase complex, proton-transporting domain","purine nucleoside triphosphate biosynthetic process","purine nucleotide biosynthetic process","purine nucleotide metabolic process","purine ribonucleoside triphosphate biosynthetic process","purine ribonucleotide biosynthetic process","purine ribonucleotide metabolic process","purine-containing compound biosynthetic process","purine-containing compound metabolic process","ribonucleoprotein complex","ribonucleoside triphosphate biosynthetic process","ribonucleotide biosynthetic process","ribonucleotide metabolic process","Ribosomal protein L10e/L16","Ribosomal protein L10e/L16 superfamily","Ribosomal protein L14 superfamily","Ribosomal protein L14P","Ribosomal protein L16","Ribosomal protein L34","Ribosomal protein S12/S23","Ribosomal protein S5/S7","Ribosomal protein S7 domain","Ribosomal protein S7 domain superfamily","ribosomal subunit","rRNA binding","small ribosomal subunit","stromule","structural constituent of ribosome","structural molecule activity","thylakoid lumen","thylakoid membrane","Trichome birefringence-like family","UDP-glycosyltransferase activity","V-ATPase proteolipid subunit C-like domain","Alcohol dehydrogenase, N-terminal","amine metabolic process","AP2/ERF domain superfamily","Calcium-binding protein KIC/PBP1/KRP1","cellular response to ethylene stimulus","DNA-binding domain superfamily","ethylene-activated signaling pathway","Ethylene-responsive transcription factor","GroES-like superfamily","heme binding","phenylalanine ammonia-lyase activity","phenylpropanoid metabolic process","Polyketide synthase, enoylreductase domain","Protein of unknown function DUF247, plant","response to chitin","response to fungus","response to nitrogen compound","response to organonitrogen compound","response to wounding","RNA biosynthesis.transcriptional regulation.AP2/ERF  transcription factor superfamily.transcription factor (DREB)","RNA biosynthesis.transcriptional regulation.AP2/ERF  transcription factor superfamily.transcription factor (ERF)","RNA biosynthesis.transcriptional regulation.WRKY transcription factor activity.transcription factor (WRKY)","secondary metabolic process","TIFY/JAZ family","WRKY domain","WRKY transcription factor, plant"],[10,23,18,22,18,7,8,9,17,19,30,27,14,10,20,16,5,8,7,33,26,13,22,19,26,19,4,34,17,25,38,38,17,24,9,34,28,3,19,3,27,27,8,19,49,25,37,28,22,33,20,58,4,5,9,23,8,4,10,10,11,25,30,22,26,19,19,22,26,8,16,13,29,9,14,11,13,41,28,4,19,6,38,5,18,6,6,4,5,12,9,34,28,23,13,22,27,12,18,8,10,18,8,10,19,22,26,19,22,26,22,26,40,19,22,26,7,7,7,37,22,50,51,30,29,35,38,45,14,41,40,13,44,22,46,24,35,110,140,27,35,259,74,307,210,171,19,72,11,131,135,8,16,11,133,121,146,9,8,112,72,193,26,14,51,66,210,23,107,213,175,36,31,43,39,156,178,86,8,59,26,180,61,31,33,45,34,190,24,8,21,12,12,7,7,9,13,12,18,28,28,39,29,11,44,19,22,19,27,52,35,16,17,16,17,32,7,16,11,10,15,13,13,13,7,7,7,18,18,56,12,53,28,27,12,19,7,24,14,51,21,24,54,17,12,9,29,23,4,14,15,14,46,29,11,33,26,16,17,24,25,62,22,22,57,14,22,7,23,16,28,39,25,37,4,25,47,18,37,51,50,9,67,39,23,9,8,9,9,105,13,32,137,97,80,10,6,4,23,4,7,39,41,10,25,9,9,3,12,80,37,48,40,48,33,77,29,4,6,10,26,9,4,13,7,5,13,16,31,13,7,29,35,26,26,29,35,28,13,24,17,42,12,26,16,16,12,76,13,5,6,48,5,26,9,8,95,6,28,9,18,6,6,7,91,13,41,20,13,97,81,17,23,6,11,46,15,33,36,14,22,8,14,25,16,26,28,34,26,28,33,30,36,13,63,26,28,33,4,7,3,3,7,7,56,4,4,4,29,103,112,15,89,11,18,32,7,43,25,6,22,21,6,7,65,51,16,86,76,81,82,6,5,6,27,40,18,64,43,67,56,103,60,42,38,87,33,42,42,8,42,29,8,16,17,17,12,9,21,40,54,36,7,50,45,24,23,11,43,9,47,32,22,50,11,12,19,10,8,14,16,18,16,10,56,20,12,11,10,10,54,19,18,18,6,37,28,46,12,25,27,29,7,20,5,50,44,55,6,9,4,33,9,17,14,10,36,27,4,21,18,9,9,13,10,45,7,7,7,42,25,53,58,20,113,108,132,80,100,227,68,277,162,124,68,52,132,13,13,137,163,100,164,127,112,10,22,25,17,166,117,170,163,158,78,70,66,173,29,137,54,38,52,53,65,60,58,15,65,25,12,52,12,14,10,39,9,12,11,19,36,36,54,14,35,12,17,8,11,53,66,62,37,4,8,24,64,55,29,27,13,13,10,18,11,15,13,14,9,9,22,22,16,66,13,14,42,9,7,58,38,35,13,17,79,10,9,29,15,60,19,16,26,26,42,34,62,23,11,9,7,18,13,6,9,17,36,12,35,4,17,12,15,13,18,8,5,12,62,35,11,50,43,38,41,84,40,41,40,82,38,57,49,39,44,35,27,33,96,27,6,9,24,22,68,25,17,12,35,35,35,96,24,38,46,23,33,4,23,19,19,39,71,10,8,24,10,8,12,130,14,31,174,6,115,6,90,4,4,44,24,8,53,49,14,77,8,10,10,3,6,95,6,6,7,39,43,56,44,85,4,8,13,29,11,4,13,13,15,15,8,24,24,33,18,30,20,23,14,17,80,14,60,4,5,35,11,111,8,29,7,7,16,8,6,28,10,106,15,46,26,16,115,91,21,20,10,14,33,36,13,20,12,27,18,24,27,37,24,27,35,27,37,81,24,27,35,5,5,6,6,4,3,9,9,9,9,75,16,39,12,116,127,16,100,13,43,8,19,33,61,7,39,62,36,20,22,79,5,39,15,19,46,87,65,55,67,20,32,32,64,9,32,32],[44,170,112,136,109,21,31,41,60,72,271,190,75,49,161,80,9,30,15,548,359,110,244,85,203,85,10,496,119,324,531,527,155,266,30,531,421,4,251,5,172,199,24,186,523,320,497,345,212,451,244,657,4,12,51,210,17,5,45,35,50,286,448,225,342,102,108,223,334,35,62,35,420,51,119,53,47,365,227,6,124,24,500,14,115,15,15,8,14,54,30,536,429,293,40,170,229,38,80,30,44,121,44,69,93,162,265,93,153,249,171,291,544,100,168,265,14,14,14,399,165,673,780,510,465,359,329,477,74,433,400,44,470,177,510,144,371,369,522,72,94,760,227,864,531,421,30,208,17,487,523,9,24,16,541,464,575,12,11,365,227,500,68,28,163,202,583,57,316,536,429,96,87,124,97,646,615,298,11,192,63,711,210,56,93,127,64,465,157,25,139,32,34,19,21,28,29,24,44,94,98,319,107,38,329,112,136,109,112,354,269,52,59,52,59,189,21,89,33,41,81,61,39,51,21,17,17,71,71,477,49,433,178,163,39,60,20,133,64,400,72,161,470,59,39,28,126,129,5,33,37,66,367,104,33,220,190,75,80,73,77,518,117,128,510,43,106,15,121,110,192,369,85,203,6,85,496,119,324,531,527,22,788,375,155,33,27,32,30,760,51,227,864,531,421,34,19,7,114,6,22,172,199,24,186,25,26,3,67,523,320,497,345,451,244,657,266,4,12,51,210,17,5,45,13,12,35,50,286,59,22,225,342,102,108,223,334,228,35,62,35,420,51,119,53,47,64,365,55,11,14,227,6,124,22,24,500,14,115,37,68,14,18,23,583,58,316,54,30,536,429,96,97,14,16,484,40,170,229,38,80,30,44,121,69,93,162,265,93,153,249,171,291,62,544,100,168,265,7,14,3,3,14,14,399,6,6,7,165,673,780,64,465,44,59,136,11,213,96,7,82,74,8,10,329,269,52,477,400,464,470,7,6,7,105,189,45,351,156,316,245,643,298,118,177,510,144,118,117,31,357,243,24,44,95,100,65,37,152,320,349,270,21,467,423,178,163,57,420,32,391,284,162,459,42,46,130,35,27,65,108,118,77,44,523,128,55,51,48,48,500,107,118,117,14,357,243,544,30,250,172,197,24,167,12,639,519,654,12,17,5,284,34,61,35,47,364,226,7,122,115,15,15,53,30,546,14,14,14,400,167,673,779,144,367,409,505,288,373,757,227,863,531,421,208,105,484,24,23,500,581,316,536,429,426,15,52,63,32,672,433,610,659,639,251,215,192,708,56,465,357,243,320,349,467,423,391,45,500,140,31,357,33,59,19,243,28,28,24,44,95,100,316,56,111,36,38,12,22,320,528,413,250,5,12,110,349,270,182,165,51,51,21,88,32,60,38,50,17,17,72,72,73,467,48,58,237,23,17,423,178,163,38,57,420,34,20,133,63,391,92,68,131,131,284,162,459,61,42,24,18,85,38,13,28,81,131,44,130,5,84,43,34,37,65,19,8,45,375,108,32,351,287,266,277,642,160,299,270,532,262,319,249,219,299,118,75,77,523,117,10,24,128,111,500,90,44,29,107,118,117,844,122,190,367,85,202,6,85,89,95,318,606,22,16,153,41,16,30,757,51,227,863,14,531,14,421,6,6,373,115,22,172,197,24,639,18,25,26,3,8,519,13,13,21,314,339,444,243,654,4,12,51,209,17,5,45,35,50,59,22,102,109,204,34,61,35,119,53,47,364,55,226,6,7,122,24,500,14,115,15,15,68,14,14,195,22,581,58,316,53,30,536,429,96,97,16,40,170,228,38,80,44,121,69,93,162,264,93,153,248,171,290,546,100,168,264,10,10,14,14,5,3,13,14,14,14,400,57,167,56,673,779,64,465,65,369,16,59,135,220,11,181,237,165,58,73,467,6,191,44,45,160,532,319,249,299,71,111,118,349,19,118,117],[0.01618018986021305,0.002076255503097346,0.002076255503097346,0.0002668967513705504,0.00199682657369577,0.01812725958380285,0.03023650643155805,0.03754660287145076,2.291980223505897e-06,1.614043861331382e-06,0.002816709536605631,0.0002039112738739411,0.004108812252341928,0.03023650643155805,0.01812725958380285,0.0006632268809396116,0.01812725958380285,0.02620755248482794,0.002076255503097346,0.01541238302447153,0.004856115100363768,0.004133397323818855,0.0008269897778319834,1.204707373717224e-08,3.297924506904628e-07,1.204707373717224e-08,0.02151030168421287,0.001188433618573949,3.046152385740836e-05,0.002630296168810445,0.0001556515163815098,0.0001339904924372378,0.0007950397718607761,0.0003482872261025687,4.453802283395338e-05,0.004182168473089454,0.009881632555597514,0.01597189121667595,0.02734448196108238,0.03756690193099298,5.171558110953553e-09,5.657715224830977e-08,8.477557812085002e-05,0.0006381960385045041,5.171558110953553e-09,0.002239451408736607,9.230214333554265e-05,0.0003835499629310774,0.0001058744301687882,0.0004506864852406692,0.006799324913618613,2.058697527342467e-09,0.0002045065701907063,0.00290355332331145,0.003086467132212156,2.850402533834908e-05,5.256825141231306e-06,0.0008269897778319834,0.0001632167600358826,1.940337485224875e-05,5.759900150886801e-05,0.0003711255075820912,0.005245976584160624,0.0002544912606713697,0.002339295708269851,1.418404217556636e-07,3.297924506904628e-07,0.0002224621022972888,0.001622387852567243,0.001376439496237333,3.559329180667266e-08,2.102193380809748e-08,0.004197653960453808,0.003086467132212156,0.002285931884580087,0.0001022063897115763,5.0598175866606e-07,2.058697527342467e-09,1.804226571204881e-07,0.002241896252424892,2.453896831663655e-06,0.009079246517979873,4.293715511188519e-05,0.006086735463949876,3.858121261406043e-06,0.000603930557594982,0.000603930557594982,0.008004573071169049,0.006086735463949876,1.940337485224875e-05,4.453802283395338e-05,0.004886079675000191,0.01351384630016828,0.004133397323818855,8.053395895454621e-08,3.590885062353824e-06,7.29964536266837e-07,4.409377620377355e-07,2.933435308580824e-08,0.000443826732344239,0.0001351056895989442,8.259205222618008e-06,0.006460081322282108,0.005769776065601155,3.559329180667266e-08,1.690493096169125e-06,3.572757531254842e-05,3.559329180667266e-08,6.625717491817786e-07,1.282781767094932e-05,3.858121261406043e-06,0.0001648709950023603,4.525056275057716e-05,1.061028412022014e-07,2.976763543433844e-06,3.572757531254842e-05,2.207602595901547e-05,2.207602595901547e-05,2.207602595901547e-05,6.895198229637734e-07,2.28019525808983e-06,1.690493096169125e-06,4.147820566954036e-05,0.04415360633727018,0.02151030168421287,0.01965365706795158,0.000450462906034158,0.00623349579398363,0.008908064222024397,0.008908064222024397,0.00623349579398363,0.0002860860833155644,0.008220033961175913,0.01965365706795158,0.008908064222024397,0.0002860860833155644,0.03456229953322207,5.101630028098298e-05,0.0006656189649267137,0.03548536443069714,0.006189418755536105,1.784007440100591e-22,0.0001510563654993998,7.211989493275807e-30,5.081771076776891e-27,1.895033648982006e-23,6.330140187745853e-05,1.725136097909457e-05,0.01348302860682404,0.001183480216615837,0.006189418755536105,0.005392769239603056,0.0002239103595067741,0.00665434522578446,0.04951826870397175,0.009212911204867995,0.00665434522578446,0.01283380797396855,0.041075811301492,7.763855099877714e-06,0.0005811906631149402,1.895033648982006e-23,0.03482065180769221,0.04636036689403291,0.01806554656976329,0.0005330473044254438,2.966212070835687e-21,0.03401195349108545,4.479152149297753e-08,1.301409861135806e-27,3.508670018790092e-24,0.004420082480867694,0.03548536443069714,0.005878058212966529,0.0003348396843962741,0.0394664778768145,9.463527995921188e-08,0.003424830883576461,0.041075811301492,0.009463522744419877,0.009044345283472244,0.001183480216615837,0.03548536443069714,7.39334195609564e-07,0.02590225733424108,0.00223315805089977,5.282012950202312e-07,1.863486779488324e-26,0.01833115862388847,0.02732372122454266,0.04893621056244043,0.0002399806806565009,0.0004241130411851512,0.0271718246988754,0.04893621056244043,0.01269786162193721,8.992329123647486e-06,7.673569165358804e-06,1.661868614572764e-07,4.205874838544619e-08,4.205874838544619e-08,0.02400759796366227,5.990033076716112e-08,0.006236049173237297,0.001831580630996572,0.02394992890208107,0.01625466780148149,0.01729325133647695,3.357171044197281e-06,2.596704798406426e-05,0.01689443679999188,8.642105232742307e-05,8.695061430663162e-05,8.642105232742307e-05,8.695061430663162e-05,0.0003199841589133808,0.04893621056244043,0.03785558081024621,0.001831580630996572,0.0470680277421753,0.04163056106977572,0.02709079326460794,0.0003249111450897502,0.005280340018760695,0.04893621056244043,0.01395384771684797,0.01395384771684797,0.0002625346755347073,0.0002625346755347073,0.004200482886587005,0.01395384771684797,0.002397058505578277,0.004142455334034588,0.002391769689913708,0.001831580630996572,4.813730541368025e-06,0.03785558081024621,0.001848466111846378,0.01357897093383992,0.00147259804181368,4.718892652815902e-06,0.02583220553353222,0.009406674588019349,8.695061430663162e-05,0.001831580630996572,0.01269786162193721,3.077837450784906e-06,0.00315057990706162,0.02061463594711068,6.645196796681786e-06,4.761064109038737e-06,0.01729325133647695,0.004649963212272764,4.205874838544619e-08,0.001831580630996572,0.002251064119556664,0.04893621056244043,0.006241126386720594,0.004155353926029397,4.205874838544619e-08,4.205874838544619e-08,0.001172250909152603,0.002232656185973062,0.007347603454754152,0.01236207323389856,0.0002036475322762211,0.000522535337227249,0.006236049173237297,5.761641379520525e-05,0.04437644530249588,0.0007028155311284902,0.01477124672708708,2.476035786686932e-09,9.003185771236484e-08,0.01837444321795675,2.476035786686932e-09,0.03439392077049369,0.01521650867909289,0.004927996759426958,0.01658624931658216,0.02276706749117318,0.0003246781991889246,0.04492270227552377,0.01899264464427226,0.003096559520215618,0.009148673128544216,0.01171184549011199,0.007138788937452887,0.004242067771365753,8.727724538304677e-15,0.0007041045332576003,0.0003246781991889246,9.713996420182111e-25,1.108162455824572e-21,5.564008411923904e-19,0.002090550862820163,0.04831130514734987,0.03515849598801769,1.975484490495051e-05,0.01837444321795675,0.01837444321795675,3.865552279592186e-11,2.488158954769497e-10,7.370317210286623e-05,0.006649809901832372,0.0009774737495787194,0.001366531707973018,0.02276706749117318,0.03515849598801769,2.390495609864534e-13,0.003878722318696347,0.02090223522665165,0.001958841422637762,0.002664882038163684,0.0005405823054683265,2.859323388992345e-07,0.04891635953165714,0.001941767148362882,0.003622038312929302,0.04891635953165714,0.01678792498731076,2.424168054170811e-05,0.007422578966555349,0.0001718001461718642,0.0005104716868257995,0.03581001753650716,7.320073352709469e-06,2.563220017236247e-06,0.03657991219846252,0.003171377781364048,0.01837444321795675,0.003946182949251753,0.04563650728789423,2.540220284727801e-08,9.003185771236484e-08,0.003481362079418353,0.03199346017051072,0.01130995671536145,7.320073352709469e-06,8.793602772388997e-12,6.73383940981278e-10,0.0234650711818308,0.003246767541484968,7.128333495746687e-07,6.133717063931559e-06,1.000727631357153e-06,0.0234650711818308,2.432689987236111e-20,0.001541285942495028,0.0234650711818308,0.009262671517221946,9.758641379543578e-13,0.0007041045332576003,1.619937532759246e-06,0.0003246781991889246,0.004997717674118977,2.512782420502206e-22,0.009262671517221946,1.626744561266037e-08,0.0204812292663199,7.320073352709469e-06,0.009262671517221946,0.03593691485008777,0.0233534690703568,6.032374240907634e-16,0.002665574317274245,0.0001183784878559102,2.869543930609404e-09,1.000727631357153e-06,1.726805231822788e-21,5.312902494097722e-19,0.003622038312929302,1.060243648951569e-06,0.009262671517221946,3.087356131189185e-08,0.03579697330177044,7.128333495746687e-07,1.425795552820713e-07,6.328264529545223e-06,2.771952636124247e-06,1.35357572440601e-07,0.02276706749117318,1.896035413774457e-05,4.085817987565987e-06,0.0002394350320128718,2.903829730910571e-09,2.495034091820321e-05,0.001099570169898365,2.903829730910571e-09,7.857693619619197e-06,0.0007978577196819479,7.320073352709469e-06,0.00134136319126645,0.004997717674118977,1.068439584728987e-05,1.628346348142954e-08,5.39377119021873e-05,0.002586852809077811,0.03515849598801769,0.0008666779233294119,0.02276706749117318,0.02276706749117318,0.0008666779233294119,0.0008666779233294119,1.032446351183773e-07,0.01837444321795675,0.01837444321795675,0.03515849598801769,1.087248643163656e-05,1.415227051559168e-17,4.009204853567609e-17,0.0004241809803628582,2.249688435790053e-21,0.01649639399722225,0.02725605439923262,0.02484039507148301,0.02725605439923262,0.03979172505432175,0.02725605439923262,0.01380896058117808,0.03390900331733841,0.02725605439923262,0.02725605439923262,0.01994078022866266,0.005168234456012402,0.04605365981449283,0.04947268678544291,0.0061682108322711,0.004191208873553345,0.02351704690358794,0.02276362141778215,0.01380896058117808,0.04541616718500167,0.01380896058117808,0.02276125842411675,0.02725605439923262,0.001297143803591679,0.02725605439923262,4.512033171797079e-05,0.0003830891243451299,0.0003538878053156031,0.04505556325532781,0.005897216012955646,1.146913096386679e-08,0.02761154548435765,0.02626586984186012,0.02725605439923262,1.146913096386679e-08,1.146913096386679e-08,0.04857998074429278,0.001037127372202266,0.01420114686858381,0.01145989973477456,1.918922274875434e-06,0.006117455634231516,0.01007006100144848,0.04164085366649326,0.0336930989185052,0.01766948017266234,0.000588270142242084,7.750707847276516e-09,0.000588270142242084,0.02477243733744488,0.001460832458280914,0.004258822466435414,0.01100778626559727,0.00892229874914386,0.04857998074429278,0.01100778626559727,0.01420114686858381,0.000354775680208354,0.01677363028232866,0.01677363028232866,0.001037127372202266,0.006117455634231516,0.003135474229870623,0.01794850697525056,0.006414663984656841,0.02008520069885806,0.004791304729549951,0.04857998074429278,0.01708805844713994,0.002289778839784737,0.0262158296472668,0.000588270142242084,0.007463455348026404,0.01196627870669702,0.02011336026644101,0.04857998074429278,0.04857998074429278,0.000588270142242084,0.002847129117770891,0.01708805844713994,0.01677363028232866,0.01794850697525056,0.0008924323713713467,0.001949455239782652,0.008653650537164848,6.703473413064736e-06,0.04206269090246115,1.855227012421322e-05,1.880879293151027e-05,0.02364115983326387,0.01984175956843076,0.04198584669877807,0.02270624952541767,0.01150336520665991,0.001894546575848074,0.00326481792342315,1.880879293151027e-05,0.01020799748100069,0.0003537705285237293,0.006667180730567391,4.280162374682206e-06,1.222242758568558e-06,0.01454573533720936,0.002866423131223057,0.001693725369390193,0.04733401465065211,0.0001043453031144733,0.00183256771021585,6.703473413064736e-06,6.703473413064736e-06,0.0003537705285237293,0.0003537705285237293,0.01676373038163767,0.000706688985605672,0.000706688985605672,0.000706688985605672,0.0001944630371731378,0.0001043453031144733,0.01303589643200563,0.02315642081264905,0.02582075557654549,3.745170036141344e-05,0.04130627148254075,0.01715041153640987,0.0494184762387883,0.04130627148254075,2.232440186620509e-10,0.0200612178324301,2.081322168887704e-17,1.012148750409377e-07,7.162250114303665e-05,0.00105679928107639,5.031146925102995e-09,0.00203117042823579,0.0494184762387883,0.04033804810052468,0.001125182677223761,3.755199343844185e-05,3.755199343844185e-05,7.446385149795966e-08,3.911146114947693e-05,0.04130627148254075,0.04033804810052468,0.04130627148254075,0.04335284982931365,0.01053659649725949,0.04033804810052468,0.01053659649725949,3.74743156513673e-05,0.04130627148254075,0.04335284982931365,0.001515164319564077,0.0009359517005299275,0.0002240282444223561,0.04294878938680462,3.911146114947693e-05,3.160341221127092e-05,0.004090157944626549,0.03513071906336835,0.003071544647590999,0.004090157944626549,0.005274244089119125,0.005995717989330291,0.004090157944626549,0.004090157944626549,0.03513071906336835,0.01511172202713323,0.0005615901580009207,0.002836629347112572,0.001057793083574367,0.02275022393148727,0.0001784035453470372,0.003683701902475331,0.02782044509379045,0.0002004151317390715,0.0002354427797171291,1.667764764847912e-07,2.079440659717056e-12,9.260628924240276e-12,2.498247777354773e-05,0.01450720661414504,8.059997039356319e-10,0.002762108967783465,7.300934696727101e-07,0.0002024027335272695,9.916593152931078e-05,8.819455147020697e-05,0.01981106170828701,0.0002349700622630972,0.02226231822911594,0.02611213056769879,0.0002024027335272695,0.00101209496790045,1.38345155346137e-07,5.40769765676291e-08,0.02853861128868425,0.02960833547707057,0.01932541650301514,0.01932541650301514,0.0004562649788018062,0.02224677750308439,0.00434120964769356,0.009242729725768537,0.0009578834795545497,0.004615042938719715,0.0004843114606442933,0.0004843114606442933,9.470296676984058e-06,9.470296676984058e-06,0.02221704056170314,0.0007283009933928241,0.01101115387014769,0.01981106170828701,0.0002024027335272695,0.007077131930112651,0.02611213056769879,0.005281618432662998,7.857901545230679e-06,2.013208733471385e-05,0.0009578834795545497,0.0003563250882827472,6.668954193431599e-10,0.02803437234748059,0.002179574046678687,0.0001701531920110807,0.01458938532941866,0.0001889544526673931,0.01450720661414504,0.0107871898502778,0.00235534564401649,0.00235534564401649,0.01038596384566191,5.281063678153634e-05,0.004611641719759133,6.593124758360718e-08,0.03975263692124489,0.009646785041452137,0.03597747267757541,0.01522823307562911,0.0009578834795545497,0.03344373522061306,0.02782044509379045,0.02358286269617452,2.117587855233197e-08,0.017733245309461,6.130823193409724e-08,0.02611213056769879,0.03344373522061306,0.01450720661414504,7.586993888613518e-06,0.0007283009933928241,0.0005210556876465585,0.009646785041452137,0.02173424258081716,0.02135428430883732,1.014722630391557e-05,4.304530385387764e-10,0.00434120964769356,0.006808941537991603,0.007064657391204415,0.03344373522061306,0.01198579064729549,0.0007955044348151435,3.861769646470964e-08,0.04561303112770596,0.01416071638107092,2.316826679607138e-06,0.02613932235698322,2.872025724825504e-06,1.451967532177599e-06,0.0003998485687223004,0.008604381971309511,4.311028243163021e-09,7.562516516906742e-09,9.118477702380875e-13,1.614078488110913e-11,0.0001308822069759688,0.007843296319147973,0.009646785041452137,0.01038596384566191,0.009242729725768537,0.001713327519215849,9.470296676984058e-06,8.485811636103999e-06,0.0002760137452867266,3.774906377965127e-10,4.311028243163021e-09,4.006875865096446e-09,0.02389993449260571,0.0004502988400192025,7.179861053032268e-07,0.00611734566595302,2.868936217211899e-06,0.0004960338872019648,0.03500985466358249,2.868936217211899e-06,0.001173503628031136,0.00293580892189119,0.02981868151313309,0.0008692594667539847,0.0001683077597366642,0.0007408470050232139,0.01428717539078437,0.0377161086676366,0.0007408470050232139,7.508411296377066e-05,1.057953742289704e-19,0.0009518095339418125,0.02070244628458923,1.309275621787163e-35,0.02361186631944944,1.013396300899236e-25,0.02361186631944944,1.392123381873377e-19,0.03500985466358249,0.03500985466358249,0.02981868151313309,0.0001699144390702797,0.008874618020969279,2.603844924106924e-18,6.746544520238514e-13,2.476585573736533e-08,0.0001683077597366642,0.001849113601843769,0.0005724817621580179,0.0008149532698392644,0.0377161086676366,0.0005561555665361642,3.974038844151372e-16,0.01554459377506161,0.01554459377506161,0.03819607403940987,0.02361186631944944,0.008062216218615527,0.0009791784048231815,9.745008067802269e-07,2.446551625536897e-06,0.003615694460359209,5.654825506117806e-05,0.004097433182665575,0.02361186631944944,6.274677885233744e-07,0.01472987318839491,0.001075805835739609,6.81284007722227e-05,0.0001699144390702797,0.001173503628031136,0.008874618020969279,1.984497819825731e-05,6.81284007722227e-05,0.0005927174873403209,4.422425647178636e-10,1.928480942875325e-16,3.404349335543956e-12,0.000859546498470628,0.001431263417492815,2.356946201731853e-06,4.455871676340197e-18,0.002180423263683074,1.643387861038753e-17,0.03500985466358249,0.004275594559928995,8.31268115460331e-11,4.949868670125699e-05,1.013396300899236e-25,0.000226392797739001,2.471259657262532e-07,0.004140560032736496,0.004140560032736496,0.001642465774018667,0.000226392797739001,0.02361186631944944,0.01817001978801035,0.0001683077597366642,6.370163365998819e-18,0.0009749230366149645,0.0001878293800325904,4.749825182353674e-14,6.846226513563101e-09,1.822616483714676e-25,1.392123381873377e-19,0.0003363842391116881,0.001173503628031136,4.593823596292838e-06,5.681113914044025e-05,1.329599153431409e-05,0.0004109717949284697,0.00017308268887632,7.518448168846348e-05,0.004056052277539163,1.15451156867508e-05,0.0001473289323265535,3.566265873419055e-06,0.002100420373059037,0.00345998340970525,3.566265873419055e-06,0.0008211703337630184,0.004542458459947654,0.005022924215993452,0.02082674080245285,1.239820592508617e-08,1.447916569460627e-05,0.003909031665818953,0.01520817903762394,0.03421141809399875,0.03421141809399875,0.02361186631944944,0.02361186631944944,0.01472987318839491,0.0377161086676366,6.762898406576287e-06,1.536846048194121e-05,1.536846048194121e-05,1.536846048194121e-05,5.112863581232215e-13,0.0001878293800325904,3.996496430456549e-09,0.03692984087604764,9.19695836940701e-18,1.569022010988178e-17,0.0008189074787256722,5.293533458110703e-22,0.0412091675444026,0.04110894349886964,0.0007408470050232139,0.00809105691056166,0.005813119952584021,3.289057047429973e-08,0.02855418821770579,0.01662871023072962,1.655400890529059e-07,0.02444598284384871,0.001745632968578037,0.005813119952584021,0.02628120756400243,0.04913119359543249,0.04170928106210082,0.02628120756400243,0.0001868643236551058,1.461655760609951e-06,0.03375136931736189,0.0006113720958171072,0.0003703338480062836,1.664770012704392e-05,0.02930821709112061,0.0003368398031616307,0.0008462505824247066,0.01470666471478167,0.04170928106210082,0.0008462505824247066,0.0008397727361580208]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>class<\/th>\n      <th>group<\/th>\n      <th>term<\/th>\n      <th>genes<\/th>\n      <th>all<\/th>\n      <th>padj<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"lengthMenu":[5,10,25,50],"pageLength":10,"columnDefs":[{"targets":5,"render":"function(data, type, row, meta) {\n    return type !== 'display' ? data : DTWidget.formatSignif(data, 3, 3, \",\", \".\", null);\n  }"},{"className":"dt-right","targets":[3,4,5]},{"name":"class","targets":0},{"name":"group","targets":1},{"name":"term","targets":2},{"name":"genes","targets":3},{"name":"all","targets":4},{"name":"padj","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.columnDefs.0.render"],"jsHooks":[]}</script>
+</div>
+</div>
+<p>In summary, this is what we found for each class:</p>
+<ol type="1">
+<li><p><strong>ADD:</strong> redox metabolism (cytochrome P450, heme binding, NAD+ nucleosidase activity, oxidoreductase activity, etc). No difference was observed between control and stress conditions.</p></li>
+<li><p><strong>DOWN:</strong> ATP synthesis, aerobic respiration, electron transfer chain, chloroplast thylakoid membrane, organellar ribosome biogenesis, and photosynthesis. Some terms were specific to stress conditions, including cell wall organization, galacturonan metabolism, cellulose synthases, lipid transfer proteins, and glycoside hydrolases family 9.</p></li>
+<li><p><strong>UP:</strong> ribonucleases H domain, cytochrome P450, wall-associated kinases, serine-threonine kinases, peptidases, redox metabolism. Specifically in stress conditions, genes are associated with abscisic acid binding, lectins, glutathione S-transferases, response to salicylic acid, chitinases, leucine-rich repeat (LRR) receptor kinases, pattern recognition receptors, WRKY transcription factors, and systemic acquired resistance.</p></li>
+<li><p><strong>ELD_P1:</strong> in control conditions, genes in this class were associated with chloroplast organization, circadian rhythm, glycine catabolism, photosynthesis, response to wounding, RNA modifications, phosphoglycolate phosphatases, response to water deprivation, ribosome biogenesis, and hydrogen peroxide biosynthesis. In stress conditions, no enrichment was found.</p></li>
+<li><p><strong>ELD_P2:</strong> in control conditions, genes were associated with redox metabolism (heme binding, cytochrome P450, monooxygenase activity, etc). Specifically in stress conditions, genes in this class were associated with alcohol dehydrogenases, coumarin biosynthesis, ERF and WRKY transcription factors, phenylpropanoid biosynthesis, regulation of defense response, and phenylalanine ammonia lyase activity.</p></li>
+</ol>
+</section>
+<section id="saving-important-objects" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="saving-important-objects">Saving important objects</h2>
+<p>Lastly, we will save important objects to files, so that they can be reused later.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plots</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    p_freq_combined, <span class="at">compress =</span> <span class="st">"xz"</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"products"</span>, <span class="st">"plots"</span>, <span class="st">"p_freq_combined.rda"</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    p_upset_all, <span class="at">compress =</span> <span class="st">"xz"</span>,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"products"</span>, <span class="st">"plots"</span>, <span class="st">"p_upset_all.rda"</span>)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    p_pca_combined, <span class="at">compress =</span> <span class="st">"xz"</span>,</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"products"</span>, <span class="st">"plots"</span>, <span class="st">"p_pca_combined.rda"</span>)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    p_triangle_all, <span class="at">compress =</span> <span class="st">"xz"</span>,</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"products"</span>, <span class="st">"plots"</span>, <span class="st">"p_triangle_all.rda"</span>)</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>partition_tables <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">AD1_control =</span> partition_ad1_control,</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">AD1_stress =</span> partition_ad1_stress,</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">AD4_control =</span> partition_ad4_control,</span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">AD4_stress =</span> partition_ad4_stress</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Objects</span></span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>partition_tables <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">AD1_control =</span> partition_ad1_control,</span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">AD1_stress =</span> partition_ad1_stress,</span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">AD4_control =</span> partition_ad4_control,</span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">AD4_stress =</span> partition_ad4_stress</span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(</span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>    partition_tables, <span class="at">compress =</span> <span class="st">"xz"</span>,</span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"products"</span>, <span class="st">"result_files"</span>, <span class="st">"partition_tables.rda"</span>)</span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(</span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>    cotton_enrichment_all, <span class="at">compress =</span> <span class="st">"xz"</span>,</span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"products"</span>, <span class="st">"result_files"</span>, <span class="st">"cotton_enrichment_all.rda"</span>)</span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="session-info" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="session-info">Session info</h2>
+<p>This document was created under the following conditions:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>─ Session info ───────────────────────────────────────────────────────────────
+ setting  value
+ version  R version 4.3.2 (2023-10-31)
+ os       Ubuntu 22.04.3 LTS
+ system   x86_64, linux-gnu
+ ui       X11
+ language (EN)
+ collate  en_US.UTF-8
+ ctype    en_US.UTF-8
+ tz       Europe/Brussels
+ date     2024-03-28
+ pandoc   3.1.1 @ /usr/lib/rstudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)
+
+─ Packages ───────────────────────────────────────────────────────────────────
+ package              * version   date (UTC) lib source
+ abind                  1.4-5     2016-07-21 [1] CRAN (R 4.3.2)
+ Biobase              * 2.62.0    2023-10-24 [1] Bioconductor
+ BiocGenerics         * 0.48.1    2023-11-01 [1] Bioconductor
+ BiocParallel           1.37.0    2024-01-19 [1] Github (Bioconductor/BiocParallel@79a1b2d)
+ bitops                 1.0-7     2021-04-24 [1] CRAN (R 4.3.2)
+ bslib                  0.6.1     2023-11-28 [1] CRAN (R 4.3.2)
+ cachem                 1.0.8     2023-05-01 [1] CRAN (R 4.3.2)
+ Cairo                  1.6-2     2023-11-28 [1] CRAN (R 4.3.2)
+ circlize               0.4.15    2022-05-10 [1] CRAN (R 4.3.2)
+ cli                    3.6.2     2023-12-11 [1] CRAN (R 4.3.2)
+ clue                   0.3-65    2023-09-23 [1] CRAN (R 4.3.2)
+ cluster                2.1.5     2023-11-27 [4] CRAN (R 4.3.2)
+ codetools              0.2-19    2023-02-01 [4] CRAN (R 4.2.2)
+ colorspace             2.1-0     2023-01-23 [1] CRAN (R 4.3.2)
+ ComplexHeatmap       * 2.18.0    2023-10-24 [1] Bioconductor
+ crayon                 1.5.2     2022-09-29 [1] CRAN (R 4.3.2)
+ crosstalk              1.2.1     2023-11-23 [1] CRAN (R 4.3.2)
+ DelayedArray           0.28.0    2023-10-24 [1] Bioconductor
+ DESeq2                 1.42.0    2023-10-24 [1] Bioconductor
+ digest                 0.6.34    2024-01-11 [1] CRAN (R 4.3.2)
+ doParallel             1.0.17    2022-02-07 [1] CRAN (R 4.3.2)
+ dplyr                * 1.1.4     2023-11-17 [1] CRAN (R 4.3.2)
+ DT                     0.31      2023-12-09 [1] CRAN (R 4.3.2)
+ ellipsis               0.3.2     2021-04-29 [1] CRAN (R 4.3.2)
+ evaluate               0.23      2023-11-01 [1] CRAN (R 4.3.2)
+ fansi                  1.0.6     2023-12-08 [1] CRAN (R 4.3.2)
+ farver                 2.1.1     2022-07-06 [1] CRAN (R 4.3.2)
+ fastmap                1.1.1     2023-02-24 [1] CRAN (R 4.3.2)
+ forcats              * 1.0.0     2023-01-29 [1] CRAN (R 4.3.2)
+ foreach                1.5.2     2022-02-02 [1] CRAN (R 4.3.2)
+ fs                     1.6.3     2023-07-20 [1] CRAN (R 4.3.2)
+ generics               0.1.3     2022-07-05 [1] CRAN (R 4.3.2)
+ GenomeInfoDb         * 1.38.6    2024-02-08 [1] Bioconductor 3.18 (R 4.3.2)
+ GenomeInfoDbData       1.2.11    2023-12-21 [1] Bioconductor
+ GenomicRanges        * 1.54.1    2023-10-29 [1] Bioconductor
+ GetoptLong             1.0.5     2020-12-15 [1] CRAN (R 4.3.2)
+ ggplot2              * 3.5.0     2024-02-23 [1] CRAN (R 4.3.2)
+ ggplotify              0.1.2     2023-08-09 [1] CRAN (R 4.3.2)
+ ggsci                  3.0.0     2023-03-08 [1] CRAN (R 4.3.2)
+ GlobalOptions          0.1.2     2020-06-10 [1] CRAN (R 4.3.2)
+ glue                   1.7.0     2024-01-09 [1] CRAN (R 4.3.2)
+ gridGraphics           0.5-1     2020-12-13 [1] CRAN (R 4.3.2)
+ gtable                 0.3.4     2023-08-21 [1] CRAN (R 4.3.2)
+ here                 * 1.0.1     2020-12-13 [1] CRAN (R 4.3.2)
+ hms                    1.1.3     2023-03-21 [1] CRAN (R 4.3.2)
+ htmltools              0.5.7     2023-11-03 [1] CRAN (R 4.3.2)
+ htmlwidgets            1.6.4     2023-12-06 [1] CRAN (R 4.3.2)
+ HybridExpress        * 0.99.0    2024-02-15 [1] Bioconductor
+ IRanges              * 2.36.0    2023-10-24 [1] Bioconductor
+ iterators              1.0.14    2022-02-05 [1] CRAN (R 4.3.2)
+ jquerylib              0.1.4     2021-04-26 [1] CRAN (R 4.3.2)
+ jsonlite               1.8.8     2023-12-04 [1] CRAN (R 4.3.2)
+ knitr                  1.45      2023-10-30 [1] CRAN (R 4.3.2)
+ labeling               0.4.3     2023-08-29 [1] CRAN (R 4.3.2)
+ lattice                0.22-5    2023-10-24 [4] CRAN (R 4.3.1)
+ lifecycle              1.0.4     2023-11-07 [1] CRAN (R 4.3.2)
+ locfit                 1.5-9.8   2023-06-11 [1] CRAN (R 4.3.2)
+ lubridate            * 1.9.3     2023-09-27 [1] CRAN (R 4.3.2)
+ magick                 2.8.2     2023-12-20 [1] CRAN (R 4.3.2)
+ magrittr               2.0.3     2022-03-30 [1] CRAN (R 4.3.2)
+ Matrix                 1.6-3     2023-11-14 [4] CRAN (R 4.3.2)
+ MatrixGenerics       * 1.14.0    2023-10-24 [1] Bioconductor
+ matrixStats          * 1.2.0     2023-12-11 [1] CRAN (R 4.3.2)
+ memoise                2.0.1     2021-11-26 [1] CRAN (R 4.3.2)
+ munsell                0.5.0     2018-06-12 [1] CRAN (R 4.3.2)
+ patchwork            * 1.2.0     2024-01-08 [1] CRAN (R 4.3.2)
+ pillar                 1.9.0     2023-03-22 [1] CRAN (R 4.3.2)
+ pkgconfig              2.0.3     2019-09-22 [1] CRAN (R 4.3.2)
+ png                    0.1-8     2022-11-29 [1] CRAN (R 4.3.2)
+ purrr                * 1.0.2     2023-08-10 [1] CRAN (R 4.3.2)
+ R6                     2.5.1     2021-08-19 [1] CRAN (R 4.3.2)
+ RColorBrewer           1.1-3     2022-04-03 [1] CRAN (R 4.3.2)
+ Rcpp                   1.0.12    2024-01-09 [1] CRAN (R 4.3.2)
+ RCurl                  1.98-1.14 2024-01-09 [1] CRAN (R 4.3.2)
+ readr                * 2.1.5     2024-01-10 [1] CRAN (R 4.3.2)
+ rjson                  0.2.21    2022-01-09 [1] CRAN (R 4.3.2)
+ rlang                  1.1.3     2024-01-10 [1] CRAN (R 4.3.2)
+ rmarkdown              2.25      2023-09-18 [1] CRAN (R 4.3.2)
+ rprojroot              2.0.4     2023-11-05 [1] CRAN (R 4.3.2)
+ rstudioapi             0.15.0    2023-07-07 [1] CRAN (R 4.3.2)
+ S4Arrays               1.2.0     2023-10-24 [1] Bioconductor
+ S4Vectors            * 0.40.2    2023-11-23 [1] Bioconductor 3.18 (R 4.3.2)
+ sass                   0.4.8     2023-12-06 [1] CRAN (R 4.3.2)
+ scales                 1.3.0     2023-11-28 [1] CRAN (R 4.3.2)
+ sessioninfo            1.2.2     2021-12-06 [1] CRAN (R 4.3.2)
+ shape                  1.4.6     2021-05-19 [1] CRAN (R 4.3.2)
+ SparseArray            1.2.4     2024-02-11 [1] Bioconductor 3.18 (R 4.3.2)
+ stringi                1.8.3     2023-12-11 [1] CRAN (R 4.3.2)
+ stringr              * 1.5.1     2023-11-14 [1] CRAN (R 4.3.2)
+ SummarizedExperiment * 1.32.0    2023-10-24 [1] Bioconductor
+ tibble               * 3.2.1     2023-03-20 [1] CRAN (R 4.3.2)
+ tidyr                * 1.3.1     2024-01-24 [1] CRAN (R 4.3.2)
+ tidyselect             1.2.0     2022-10-10 [1] CRAN (R 4.3.2)
+ tidyverse            * 2.0.0     2023-02-22 [1] CRAN (R 4.3.2)
+ timechange             0.3.0     2024-01-18 [1] CRAN (R 4.3.2)
+ tzdb                   0.4.0     2023-05-12 [1] CRAN (R 4.3.2)
+ utf8                   1.2.4     2023-10-22 [1] CRAN (R 4.3.2)
+ vctrs                  0.6.5     2023-12-01 [1] CRAN (R 4.3.2)
+ withr                  3.0.0     2024-01-16 [1] CRAN (R 4.3.2)
+ xfun                   0.42      2024-02-08 [1] CRAN (R 4.3.2)
+ XVector                0.42.0    2023-10-24 [1] Bioconductor
+ yaml                   2.3.8     2023-12-11 [1] CRAN (R 4.3.2)
+ yulab.utils            0.1.4     2024-01-28 [1] CRAN (R 4.3.2)
+ zlibbioc               1.48.0    2023-10-24 [1] Bioconductor
+
+ [1] /home/faalm/R/x86_64-pc-linux-gnu-library/4.3
+ [2] /usr/local/lib/R/site-library
+ [3] /usr/lib/R/site-library
+ [4] /usr/lib/R/library
+
+──────────────────────────────────────────────────────────────────────────────</code></pre>
+</div>
+</div>
+</section>
+<section id="references" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-dong2022parental" class="csl-entry" role="listitem">
+Dong, Yating, Guanjing Hu, Corrinne E Grover, Emma R Miller, Shuijin Zhu, and Jonathan F Wendel. 2022. <span>“Parental Legacy Versus Regulatory Innovation in Salt Stress Responsiveness of Allopolyploid Cotton (Gossypium) Species.”</span> <em>The Plant Journal</em> 111 (3): 872–87.
+</div>
+<div id="ref-rapp2009genomic" class="csl-entry" role="listitem">
+Rapp, Ryan A, Joshua A Udall, and Jonathan F Wendel. 2009. <span>“Genomic Expression Dominance in Allopolyploids.”</span> <em>BMC Biology</em> 7 (1): 1–10.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../index.html" class="pagination-link  aria-label=" preface"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/chapter_02.html" class="pagination-link" aria-label="<span class='chapter-number'>2</span>&nbsp; <span class='chapter-title'>Benchmark 2: transcriptomic analyses of heterosis in rice root traits</span>">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Benchmark 2: transcriptomic analyses of heterosis in rice root traits</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
