@@ -465,6 +465,7 @@ in each expression class in each condition and species.
 ```{r}
 # Load GO annotation
 load(here("data", "cotton_functions.rda"))
+cotton_functions <- lapply(cotton_functions, as.data.frame)
 
 # Perform ORA
 ## AD1, control
@@ -504,72 +505,61 @@ ora_ad4_s <- lapply(
     min_setsize = 1, max_setsize = 1000
 )
 
-# Checking results
-bind_rows(
+# Combining results
+cotton_enrichment_all <- bind_rows(
     bind_rows(ora_ad1_c, .id = "Class") |> mutate(group = "AD1_control"),
     bind_rows(ora_ad1_s, .id = "Class") |> mutate(group = "AD1_stress"),
     bind_rows(ora_ad4_c, .id = "Class") |> mutate(group = "AD4_control"),
     bind_rows(ora_ad4_s, .id = "Class") |> mutate(group = "AD4_stress")
-)
+) |>
+    dplyr::select(class = Class, group, term, genes, all, padj)
+
+
+# Show results as an interactive table
+DT::datatable(
+    cotton_enrichment_all,
+    selection = "single",
+    rownames = FALSE,
+    options = list(
+        lengthMenu = c(5, 10, 25, 50),
+        pageLength = 10
+    )
+) |>
+    DT::formatSignif(columns = "padj", digits = 3)
 ```
 
-We found no enriched terms among expression-based classes. Let's try
-the same for categories.
+In summary, this is what we found for each class:
 
-```{r}
-# Perform ORA
-## AD1, control
-genes_ad1_c <- split(partition_ad1_control$Gene, partition_ad1_control$Category)
-ora_ad1_c <- lapply(
-    genes_ad1_c, ora,
-    annotation = bind_rows(cotton_functions), 
-    background = rownames(se_ad1),
-    min_setsize = 1, max_setsize = 1000
-)
+1. **ADD:** redox metabolism (cytochrome P450, heme binding, NAD+ nucleosidase
+activity, oxidoreductase activity, etc). No difference was observed between
+control and stress conditions.
 
-## AD1, stress
-genes_ad1_s <- split(partition_ad1_stress$Gene, partition_ad1_stress$Category)
-ora_ad1_s <- lapply(
-    genes_ad1_s, ora,
-    annotation = bind_rows(cotton_functions), 
-    background = rownames(se_ad1),
-    min_setsize = 1, max_setsize = 1000
-)
+2. **DOWN:** ATP synthesis, aerobic respiration, electron transfer chain,
+chloroplast thylakoid membrane, organellar ribosome biogenesis, and
+photosynthesis. Some terms were specific to stress conditions, including
+cell wall organization, galacturonan metabolism, cellulose synthases,
+lipid transfer proteins, and glycoside hydrolases family 9.
 
-## AD4, control
-genes_ad4_c <- split(partition_ad4_control$Gene, partition_ad4_control$Category)
-ora_ad4_c <- lapply(
-    genes_ad4_c, ora,
-    annotation = bind_rows(cotton_functions), 
-    background = rownames(se_ad4),
-    min_setsize = 1, max_setsize = 1000
-)
+3. **UP:** ribonucleases H domain, cytochrome P450, wall-associated
+kinases, serine-threonine kinases, peptidases, redox metabolism.
+Specifically in stress conditions, genes are associated with abscisic acid
+binding, lectins, glutathione S-transferases, response to salicylic acid,
+chitinases, leucine-rich repeat (LRR) receptor kinases, pattern recognition
+receptors, WRKY transcription factors, and systemic acquired resistance.
 
+4. **ELD_P1:** in control conditions, genes in this class were associated
+with chloroplast organization, circadian rhythm, glycine catabolism,
+photosynthesis, response to wounding, RNA modifications, phosphoglycolate
+phosphatases, response to water deprivation, ribosome biogenesis, 
+and hydrogen peroxide biosynthesis. In stress conditions, no enrichment was 
+found.
 
-## AD4, stress
-genes_ad4_s <- split(partition_ad4_stress$Gene, partition_ad4_stress$Category)
-ora_ad4_s <- lapply(
-    genes_ad4_s, ora,
-    annotation = bind_rows(cotton_functions), 
-    background = rownames(se_ad4),
-    min_setsize = 1, max_setsize = 1000
-)
+5. **ELD_P2:** in control conditions, genes were associated with redox 
+metabolism (heme binding, cytochrome P450, monooxygenase activity, etc).
+Specifically in stress conditions, genes in this class were associated with
+alcohol dehydrogenases, coumarin biosynthesis, ERF and WRKY transcription 
+factors, phenylpropanoid biosynthesis, regulation of defense response, and phenylalanine ammonia lyase activity.
 
-# Checking results
-bind_rows(
-    bind_rows(ora_ad1_c, .id = "Category") |> mutate(group = "AD1_control"),
-    bind_rows(ora_ad1_s, .id = "Category") |> mutate(group = "AD1_stress"),
-    bind_rows(ora_ad4_c, .id = "Category") |> mutate(group = "AD4_control"),
-    bind_rows(ora_ad4_s, .id = "Category") |> mutate(group = "AD4_stress")
-)
-```
-
-Once again, we did not find any enriched terms. This could be due to biological
-factors (e.g., genes that display expression-level dominance towards one
-of the parents do not necessarily belong to the same pathway or functional
-group), or technical (e.g., a low quality functional annotation for
-*G. raimondii*, especially considering that much of the high-quality
-functional annotation data come from experimental validation).
 
 ## Saving important objects {.unnumbered}
 
@@ -608,9 +598,22 @@ partition_tables <- list(
 )
 
 # Objects
+partition_tables <- list(
+    AD1_control = partition_ad1_control,
+    AD1_stress = partition_ad1_stress,
+    AD4_control = partition_ad4_control,
+    AD4_stress = partition_ad4_stress
+)
+
+
 save(
     partition_tables, compress = "xz",
     file = here("products", "result_files", "partition_tables.rda")
+)
+
+save(
+    cotton_enrichment_all, compress = "xz",
+    file = here("products", "result_files", "cotton_enrichment_all.rda")
 )
 ```
 

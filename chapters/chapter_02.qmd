@@ -288,6 +288,7 @@ in each expression class in each stage.
 ```{r}
 # Load GO annotation
 load(here("data", "rice_functions.rda"))
+rice_functions <- lapply(rice_functions, as.data.frame)
 
 # Perform ORA
 ## Heading
@@ -296,7 +297,7 @@ ora_h <- lapply(
     genes_h, ora,
     annotation = bind_rows(rice_functions), 
     background = rownames(se_h),
-    min_setsize = 1, max_setsize = 1000
+    min_setsize = 2, max_setsize = 1000
 )
 
 ## Tillering
@@ -305,51 +306,50 @@ ora_t <- lapply(
     genes_t, ora,
     annotation = bind_rows(rice_functions), 
     background = rownames(se_t),
-    min_setsize = 1, max_setsize = 1000
+    min_setsize = 2, max_setsize = 1000
 )
 
-# Checking results
-bind_rows(
+# Combining results
+rice_enrichment_all <- bind_rows(
     bind_rows(ora_h, .id = "Class") |> mutate(group = "Heading"),
     bind_rows(ora_t, .id = "Class") |> mutate(group = "Tillering")
-)
+) |>
+    dplyr::select(class = Class, group, term, genes, all, padj)
+
+# Show results as an interactive table
+DT::datatable(
+    rice_enrichment_all,
+    selection = "single",
+    rownames = FALSE,
+    options = list(
+        lengthMenu = c(5, 10, 25, 50),
+        pageLength = 10
+    )
+) |>
+    DT::formatSignif(columns = "padj", digits = 3)
 ```
 
-We found no enriched terms among expression-based classes. Let's try
-the same for categories.
+In summary, this is what we found for each class:
 
-```{r}
-# Perform ORA
-## Heading
-genes_h <- split(partition_h$Gene, partition_h$Category)
-ora_h <- lapply(
-    genes_h, ora,
-    annotation = bind_rows(rice_functions), 
-    background = rownames(se_h),
-    min_setsize = 1, max_setsize = 1000
-)
+1. **ADD:** a single term (ADP binding) at heading stage.
 
-## Tillering
-genes_t <- split(partition_t$Gene, partition_t$Category)
-ora_t <- lapply(
-    genes_t, ora,
-    annotation = bind_rows(rice_functions), 
-    background = rownames(se_t),
-    min_setsize = 1, max_setsize = 1000
-)
+2. **DOWN:** flavone biosynthesis, glutathione S-transferase,
+MYB transcription factors, CASP-like protein 1U at heading stage. At
+tillering stage, the only term was CASP-like protein 1U.
 
-# Checking results
-bind_rows(
-    bind_rows(ora_h, .id = "Category") |> mutate(group = "Heading"),
-    bind_rows(ora_t, .id = "Category") |> mutate(group = "Tillering")
-)
-```
+3. **UP:** at the heading stage, genes were associated with
+cell wall organization, COBRA, early nodulins, response to anoxia,
+and beta-glucan biosynthesis. No terms were found at the tillering stage.
 
-Once again, we did not find any enriched terms. This could be due to biological
-factors (e.g., genes that display expression-level dominance towards one
-of the parents do not necessarily belong to the same pathway or functional
-group), or technical (e.g., a low quality functional annotation for
-rice).
+4. **ELD_P1:** at the heading stage, genes were associated with
+aquaporins, and diacylglycerol kinases. No terms were found at the tillering
+stage.
+
+5. **ELD_P2:** at the heading and tillering stages, genes were associated with
+photosynthesis. There were also tillering stage-specific terms, including
+apoptose-activating factors, gibberellin biosynthesis, terpene synthases, 
+and isoprenoid biosynthesis.
+
 
 ## Saving important objects {.unnumbered}
 
@@ -384,15 +384,20 @@ save(
     file = here("products", "plots", "p_triangle_b2.rda")
 )
 
+# Objects
 partition_tables_b2 <- list(
     Heading = partition_h,
     Tillering = partition_t
 )
 
-# Objects
 save(
     partition_tables_b2, compress = "xz",
     file = here("products", "result_files", "partition_tables_b2.rda")
+)
+
+save(
+    rice_enrichment_all, compress = "xz",
+    file = here("products", "result_files", "rice_enrichment_all.rda")
 )
 ```
 
